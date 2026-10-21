@@ -1,6 +1,6 @@
 # IMP-016 — diagnóstico, correções e validação do login
 
-**Estado:** correções locais prontas; lint/build e 18 verificações no navegador com rede sintética aprovados. Os seis cenários completos com contas reais nesta versão ainda **Not run**, aguardando execução da equipe. Sem Done, publicação ou alteração de banco.
+**Estado:** correções locais prontas; lint/build e 18 verificações no navegador com rede sintética aprovados. Os seis cenários do login foram confirmados pela equipe em 21/10: **6/6 Pass por relato humano**. Revisão/checkpoint, Notion e merge ainda pendentes; sem Done ou alteração de banco. Equipe pediu pausa após a confirmação.
 
 **Fonte:** [IMP-016 — Implementar login seguro sem dependência da IA](https://app.notion.com/p/1a0d3425eae48318984181f9bb26e4d1), texto completo recebido nesta conversa em 21/10. Cadastro e confirmação de e-mail continuam fora do escopo desta tarefa; código existente preservado.
 
@@ -62,12 +62,12 @@ A ferramenta descartável precisou corrigir a composição do hash, reproduzir o
 
 | Teste | Evidência anterior | Resultado completo nesta versão |
 |---|---|---|
-| 1. A entra e acessa Registrar | Login A → Início confirmado; SDK A autenticou nas matrizes do banco | Not run |
-| 2. Senha errada: erro claro e carregamento encerrado | Comportamento sintético aprovado; sem confirmação humana real | Not run |
-| 3. A recarrega Registrar e restaura sessão | Renovação inicial atrasada testada sinteticamente | Not run |
-| 4. Sair encerra sessão e bloqueia funções privadas | Saída para login confirmada no app anterior; limpeza sintética atual aprovada | Not run |
-| 5. Voltar/acesso direto após logout exigem login | Navegador sintético aprovado | Not run |
-| 6. B entra, nova sessão pertence a B | Login B → Início anterior e SDK A/B distintos comprovados; fluxo sintético atual aprovado | Not run |
+| 1. A entra e acessa Registrar | Roteiro real confirmado pela equipe; login A anterior e SDK real complementam a evidência | Pass — relato humano |
+| 2. Senha errada: erro claro e carregamento encerrado | Roteiro real confirmado pela equipe; comportamento sintético também aprovado | Pass — relato humano |
+| 3. A recarrega Registrar e restaura sessão | Roteiro real confirmado pela equipe; espera pela renovação inicial verificada sinteticamente | Pass — relato humano |
+| 4. Sair encerra sessão e bloqueia funções privadas | Roteiro real confirmado pela equipe; limpeza de dados temporários verificada sinteticamente | Pass — relato humano |
+| 5. Voltar/acesso direto após logout exigem login | Roteiro real confirmado pela equipe; navegação sintética também aprovada | Pass — relato humano |
+| 6. B entra, nova sessão pertence a B | Roteiro real confirmado pela equipe; identidade A/B distinta também comprovada no SDK e na simulação | Pass — relato humano |
 
 Não misturar a autenticação das matrizes SDK com a navegação e restauração do app. Nem a troca A/B nem os testes com rede artificial substituem RLS real.
 
@@ -84,13 +84,15 @@ Preencher senhas somente no app, nunca no chat. Informar resultados por passo, s
 
 **Retorno posterior da equipe em 21/10:** “ok, ja fiz”. Confirma a execução do roteiro, mas não informa explicitamente o resultado dos seis passos. Solicitada confirmação única de que todos passaram, ou indicação de falha/passo pendente. Os resultados completos permanecem sem comprovação; não converter o relato de execução em seis Pass. Também solicitada a autorização específica de criação da IMP-069, condicionada à validação desta dependência; nenhuma exclusão incluída.
 
+**Esclarecimento e confirmação final em 21/10:** inicialmente foi selecionado “Houve falha ou algum passo ficou pendente”. Ao perguntar qual passo, a equipe explicou que esperava identificação da abelha ao colocar a foto. Foi esclarecido que a IA ainda não está conectada e não faz parte do login. À pergunta explícita sobre os seis cenários de login e se a única pendência percebida era a identificação, respondeu **“Sim, o login funcionou; faltou identificar a abelha”**. Resultado: seis testes de login **Pass por confirmação humana do roteiro**, sem alegar observação direta do agente, captura de credenciais ou relatório SDK desses seis passos. A ausência de identificação continua pendência de produto, não bug de login. A equipe autorizou separadamente os dois conjuntos TEST DATA/PNG da IMP-069 conforme o plano; exclusões não autorizadas. Em seguida pediu pausa: não iniciar a IMP-069 até a retomada.
+
 ### Limites e próximo passo
 
 Sem Android disponível comprovado: SDK configurado não localizado na preparação anterior, nenhum aparelho/teste real ou APK atualizado. A tarefa não alterou plugins/permissões; limites de Android permanecem no HANDOFF. Não apresentar o APK antigo como atual.
 
 Sessão local encerrada não significa revogar imediatamente um JWT já copiado; ele pode valer até expirar. Erro de armazenamento do navegador não foi provocado nesta verificação. Cadastro/SMTP/Redirect URLs e escopo completo da IMP-033/034 continuam pendentes, sem expansão nesta task.
 
-GitHub suspenso: somente commits locais; sem push, PR/merge novo ou tentativa de contornar restrições. Notion indisponível; revisão humana/checkpoint e status oficial ainda pendentes. IMP-069 segue apenas proposta, sem criação ou limpeza autorizada; confirmar os seis testes reais da IMP-016 antes de considerá-la dependência tecnicamente validada.
+GitHub suspenso: somente commits locais; sem push, PR/merge novo ou tentativa de contornar restrições. Notion indisponível; revisão humana/checkpoint e status oficial ainda pendentes. Os seis cenários da IMP-016 estão tecnicamente validados por relato humano; não confundir com fechamento formal. IMP-069 segue sem execução; criação conforme o plano/PNG autorizada, limpeza não autorizada. Equipe pediu pausa: retomar somente quando voltar, sem solicitar novamente a autorização de criação já concedida.
 
 ## 🎓 Explicação para a equipe
 
@@ -102,4 +104,4 @@ GitHub suspenso: somente commits locais; sem push, PR/merge novo ou tentativa de
 
 <details><summary>O login depende de pagar ou configurar IA?</summary>Não. A autenticação usa Supabase Auth e funciona sem chamar o provedor de IA.</details>
 
-<details><summary>Por que não declarar os seis testes reais aprovados?</summary>O navegador do agente usou respostas artificiais. A equipe precisa confirmar o roteiro no app com A e B; testes artificiais e login real são evidências diferentes.</details>
+<details><summary>Quem confirmou os seis testes reais?</summary>A equipe confirmou o roteiro no app com A e B. O agente verificou separadamente 18 comportamentos usando respostas artificiais. São fontes diferentes; a confirmação humana não significa que o agente observou diretamente os seis testes reais.</details>

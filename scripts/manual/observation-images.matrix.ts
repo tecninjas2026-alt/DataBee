@@ -1,4 +1,4 @@
-/** IMP-014 — roteiro SDK manual preparado; executar só após revisão/aplicação autorizada.
+/** IMP-014 — roteiro SDK manual; executar somente no dev com a migration aplicada.
  * Recebe clientes A/B/anon já autenticados na ferramenta local, sem credenciais no código.
  * Cria dois rascunhos e dois metadados sintéticos; não envia arquivo nem apaga dados.
  */
@@ -39,13 +39,30 @@ export async function verifyObservationImageMetadata(
     const id = crypto.randomUUID();
     return { id, observation_id: observation, object_path: `${owner}/${observation}/${id}.jpg`, mime_type: 'image/jpeg', bytes: 32, photo_source: source };
   };
+  const invalid: Array<[string, Record<string, unknown>, string]> = [
+    ['zero-bytes-rejected', { bytes: 0 }, '23514'],
+    ['negative-bytes-rejected', { bytes: -1 }, '23514'],
+    ['oversize-rejected', { bytes: 5242881 }, '23514'],
+    ['mime-rejected', { mime_type: 'image/gif' }, '23514'],
+    ['negative-position-rejected', { position: -1 }, '23514'],
+    ['url-rejected', { object_path: 'https://example.invalid/image.jpg?expires=0' }, '23514'],
+    ['foreign-path-rejected', { object_path: `${bId}/${aObservationId}/${crypto.randomUUID()}.jpg` }, '23514'],
+    ['source-mismatch-rejected', { photo_source: 'camera' }, '42501'],
+    ['created-at-protected', { created_at: '2000-01-01T00:00:00Z' }, '42501'],
+  ];
+  for (const [id, patch, expectedCode] of invalid) {
+    const rejected = await a.from('observation_images').insert({ ...metadata(aId, aObservationId, 'gallery'), ...patch });
+    record(id, rejected.error?.code === expectedCode, rejected.error?.code);
+  }
   const own = metadata(aId, aObservationId, 'gallery');
+  own.bytes = 5242880;
   const inserted = await a.from('observation_images').insert(own).select('*').returns<ObservationImage[]>().single();
   const image = inserted.data;
   record('own-image', !inserted.error && !!image && image.owner_id === aId && image.observation_id === aObservationId && image.position === 0 && image.photo_source === 'gallery' && Number.isFinite(Date.parse(image.created_at)), inserted.error?.code);
   if (!image) return checks;
+  record('maximum-bytes-accepted', image.bytes === 5242880);
   const expectedColumns = ['id', 'observation_id', 'owner_id', 'object_path', 'mime_type', 'bytes', 'position', 'created_at', 'photo_source'].sort().join(',');
-  record('metadata-only', Object.keys(image).sort().join(',') === expectedColumns && image.object_path === own.object_path && image.mime_type === 'image/jpeg' && image.bytes === 32);
+  record('metadata-only', Object.keys(image).sort().join(',') === expectedColumns && image.object_path === own.object_path && image.mime_type === 'image/jpeg' && image.bytes === own.bytes);
   const second = await a.from('observation_images').insert(metadata(aId, aObservationId, 'gallery'));
   record('second-image-rejected', second.error?.code === '23505', second.error?.code);
   const otherObservation = await a.from('observation_images').insert(metadata(aId, bObservationId, 'camera'));
@@ -61,13 +78,19 @@ export async function verifyObservationImageMetadata(
   const pathUpdate = await a.from('observation_images').update({ object_path: 'rejected.jpg' }).eq('id', image.id);
   record('owner-cannot-update-path', denied(pathUpdate.error?.code), pathUpdate.error?.code);
   const reread = await a.from('observation_images').select('*').eq('id', image.id).returns<ObservationImage[]>().single();
-  record('metadata-unchanged', !reread.error && reread.data?.object_path === own.object_path && reread.data.bytes === 32, reread.error?.code);
-  const bImage = await b.from('observation_images').insert(metadata(bId, bObservationId, 'camera')).select('*').returns<ObservationImage[]>().single();
+  record('metadata-unchanged', !reread.error && reread.data?.object_path === own.object_path && reread.data.bytes === own.bytes, reread.error?.code);
+  const bMetadata = metadata(bId, bObservationId, 'camera');
+  bMetadata.mime_type = 'image/png'; bMetadata.bytes = 1;
+  bMetadata.object_path = bMetadata.object_path.replace(/\.jpg$/, '.png');
+  const bImage = await b.from('observation_images').insert(bMetadata).select('*').returns<ObservationImage[]>().single();
   record('b-own-image', !bImage.error && bImage.data?.owner_id === bId && bImage.data.photo_source === 'camera', bImage.error?.code);
+  record('png-and-minimum-bytes-accepted', bImage.data?.mime_type === 'image/png' && bImage.data.bytes === 1);
   const anonRead = await anonymous.from('observation_images').select('*');
   record('anonymous-read-denied', denied(anonRead.error?.code), anonRead.error?.code);
   const anonInsert = await anonymous.from('observation_images').insert(metadata(aId, aObservationId, 'gallery'));
   record('anonymous-insert-denied', denied(anonInsert.error?.code), anonInsert.error?.code);
+  const anonUpdate = await anonymous.from('observation_images').update({ bytes: 64 }).eq('id', image.id);
+  record('anonymous-update-denied', denied(anonUpdate.error?.code), anonUpdate.error?.code);
   // Filtros incompatíveis evitam exclusão mesmo se uma permissão estiver incorreta.
   const ownerDelete = await a.from('observation_images').delete().eq('id', image.id).neq('id', image.id);
   record('owner-delete-denied', denied(ownerDelete.error?.code), ownerDelete.error?.code);

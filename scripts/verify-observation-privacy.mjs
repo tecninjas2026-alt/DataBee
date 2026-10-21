@@ -8,9 +8,11 @@ import { createHash } from 'node:crypto';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const profilesMode = process.argv.includes('--profiles');
-const taskId = profilesMode ? 'IMP-032' : 'IMP-013';
-const assetName = profilesMode ? 'profile-privacy' : 'observation-privacy';
-const port = profilesMode ? 4214 : 4213;
+const imagesMode = process.argv.includes('--images');
+if (profilesMode && imagesMode) throw new Error('Selecione apenas um roteiro de verificação.');
+const taskId = imagesMode ? 'IMP-014' : profilesMode ? 'IMP-032' : 'IMP-013';
+const assetName = imagesMode ? 'observation-images' : profilesMode ? 'profile-privacy' : 'observation-privacy';
+const port = imagesMode ? 4215 : profilesMode ? 4214 : 4213;
 const localConfig = readFileSync(join(root, 'src/environments/supabase.config.ts'), 'utf8');
 const url = localConfig.match(/url\s*:\s*['"]([^'"]*)['"]/u)?.[1]?.trim();
 const publishableKey = localConfig.match(/publishableKey\s*:\s*['"]([^'"]*)['"]/u)?.[1]?.trim();
@@ -29,9 +31,9 @@ const cases = JSON.parse(readFileSync(join(root, `scripts/manual/${assetName}.ca
 const testIds = new Set(cases.map(item => item.id));
 const authReasons = new Set(['invalid_credentials', 'email_not_confirmed', 'over_request_rate_limit', 'user_banned', 'auth_unavailable']);
 const origin = `http://127.0.0.1:${port}`;
-const reportPath = join(root, profilesMode ? '.tmp/imp032-privacy-report.json' : '.tmp/imp013-privacy-report.json');
-const migrationVersion = profilesMode ? '20261021115711' : '20261016032127';
-const migrationFile = profilesMode ? '20261021115711_imp032_profiles.sql' : '20261016032127_imp013_observations_private_locations.sql';
+const reportPath = join(root, imagesMode ? '.tmp/imp014-privacy-report.json' : profilesMode ? '.tmp/imp032-privacy-report.json' : '.tmp/imp013-privacy-report.json');
+const migrationVersion = imagesMode ? '20261021122259' : profilesMode ? '20261021115711' : '20261016032127';
+const migrationFile = imagesMode ? '20261021122259_imp014_observation_images.sql' : profilesMode ? '20261021115711_imp032_profiles.sql' : '20261016032127_imp013_observations_private_locations.sql';
 const migrationSha256 = createHash('sha256').update(readFileSync(join(root, 'supabase/migrations', migrationFile))).digest('hex');
 const assets = new Map([
   ['/', ['text/html; charset=utf-8', readFileSync(join(root, `scripts/manual/${assetName}.html`))]],

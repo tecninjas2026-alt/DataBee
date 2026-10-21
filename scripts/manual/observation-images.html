@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>DataBee — verificação dos metadados das fotos</title>
+    <link rel="stylesheet" href="/client.css">
+    <script type="module" src="/client.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Metadados das fotos — IMP-014</h1>
+      <p>Use somente as contas de teste A e B, diferentes entre si, no projeto de desenvolvimento.</p>
+      <p>O teste cria dois rascunhos privados e duas etiquetas de foto com informações artificiais. Não envia imagens, não usa GPS ou IA, não cria bucket e não apaga registros. Os dados de teste ficam no banco.</p>
+      <p>As senhas seguem direto do navegador para o Supabase. O relatório guarda apenas o resultado de cada verificação, sem nomes, e-mails, caminhos privados ou senhas.</p>
+      <form id="accounts" autocomplete="off">
+        <fieldset><legend>Conta A de teste</legend>
+          <label>E-mail de teste A<input id="a-email" type="email" autocomplete="off" required></label>
+          <label>Senha de teste A<input id="a-password" type="password" autocomplete="off" required></label>
+        </fieldset>
+        <fieldset><legend>Conta B — pessoa diferente</legend>
+          <label>E-mail de teste B<input id="b-email" type="email" autocomplete="off" required></label>
+          <label>Senha de teste B<input id="b-password" type="password" autocomplete="off" required></label>
+        </fieldset>
+        <button id="run" type="submit">Verificar metadados com A e B</button>
+      </form>
+      <p id="summary" role="status" aria-live="polite">Ainda não executado. Pass = esperado confirmado; Fail = falhou; Not run = não executado.</p>
+      <a id="download" href="/report" download="imp014-privacy-report.json" hidden>Baixar relatório sem dados pessoais</a>
+      <ol id="results"></ol>
+    </main>
+  </body>
+</html>

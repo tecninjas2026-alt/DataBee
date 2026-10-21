@@ -1,0 +1,29 @@
+{
+  "project_ref": "uqfuuahziwgxwjymtwil",
+  "migration_version": "20261021122259",
+  "migration_sha256": "2800443b77b929cfd4a4f7b4f6e2e557528ceafb0c354ac6200eb084d13b99cb",
+  "source": "sdk-anonymous-client",
+  "recorded_at": "2026-10-21T12:50:51.235Z",
+  "tests": [
+    {
+      "id": "anonymous-read",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anonymous-insert",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anonymous-update",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anonymous-delete",
+      "status": "Pass",
+      "code": "42501"
+    }
+  ]
+}

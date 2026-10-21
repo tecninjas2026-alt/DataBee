@@ -20,7 +20,8 @@
     "start:lan": "ng serve --host 0.0.0.0",
     "prestart:lan": "npm run ensure-env",
     "verify:privacy": "node scripts/verify-observation-privacy.mjs",
-    "verify:profiles": "node scripts/verify-observation-privacy.mjs --profiles"
+    "verify:profiles": "node scripts/verify-observation-privacy.mjs --profiles",
+    "verify:images": "node scripts/verify-observation-privacy.mjs --images"
   },
   "private": true,
   "dependencies": {

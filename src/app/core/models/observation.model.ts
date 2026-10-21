@@ -82,7 +82,7 @@ export interface ObservationImage {
   photo_source: PhotoSource;
 }
 
-/** IMP-014 — INSERT proposto. Gerar id antes para montar object_path; sem UPDATE/DELETE do cliente. */
+/** IMP-014 — INSERT do cliente. Gerar id antes para montar object_path; sem UPDATE/DELETE direto. */
 export interface ObservationImageInsert {
   id: string;
   observation_id: string;

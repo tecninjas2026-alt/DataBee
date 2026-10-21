@@ -6,7 +6,7 @@ Este arquivo vale para **qualquer** agente que trabalhe neste repositório. Leia
 **DataBee** é um app Android de **ciência cidadã**: a pessoa encontra uma abelha, fotografa, registra a localização (privada) e recebe uma **sugestão** de identificação por IA (família, gênero, espécie ou "inconclusivo"), que depois pode ser discutida e validada por humanos. Região: Curitiba e Região Metropolitana (PR). Catálogo inicial: 12 espécies validadas pelo Prof. Rodrigo (UFPR).
 Equipe **TEC_NINJAS** — estudantes do ensino médio (FIRST LEGO League, temporada BIOGLOW). Júlia (interface), Davi Z. (banco/backend), Arthur (IA), Eloisa (testes/Android), Clara (documentação), Maria (apresentação). Orientação: Prof. Rafaella; revisão técnica: Luiz Gustavo.
 Calendário: Semana 1 07–09/10 · S2 14–16/10 · S3 21–23/10 · S4 28–30/10/2026. **Feature freeze 28/10/2026. Prazo final de teste 04/11/2026.**
-Repositório oficial: https://github.com/TEC-NINJAS/DataBee
+Repositório oficial: https://github.com/tecninjas2026-alt/DataBee (desde 21/10/2026; o antigo `TEC-NINJAS/DataBee` foi suspenso — links antigos em `docs/verification/` são histórico)
 
 ## 2. Onde estão as definições (fonte de verdade = Notion)
 | O quê | Link |

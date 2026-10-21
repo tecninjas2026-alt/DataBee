@@ -4,7 +4,7 @@
 | Assunto | Onde |
 |---|---|
 | Decisões (D01–D25), escopo, requisitos, tasks IMP-xxx, critérios de aceite | Notion — links em `AGENTS.md` §2 |
-| Código, migrations, configuração compartilhável | Este repositório (https://github.com/TEC-NINJAS/DataBee) |
+| Código, migrations, configuração compartilhável | Este repositório (https://github.com/tecninjas2026-alt/DataBee) |
 | Estado atual para o próximo agente/aluno | `docs/HANDOFF.md` |
 | Regras para agentes | `AGENTS.md` + `docs/guides/` |
 Conflito entre repo e Notion: pare e pergunte; não "corrija" decisão humana.
@@ -39,7 +39,7 @@ gh pr create --base main --fill            # título = Conventional Commit; corp
 gh pr merge --rebase --delete-branch       # histórico linear; só com npm run check verde
 git switch main && git pull --ff-only
 ```
-  Sem `gh` logado: crie/mescle pelo REST da GitHub API (`POST /repos/TEC-NINJAS/DataBee/pulls` e `PUT .../pulls/<n>/merge` com `merge_method: rebase`) usando o token da credencial do Git (`git credential fill`), sem nunca imprimir o token.
+  Sem `gh` logado: crie/mescle pelo REST da GitHub API (`POST /repos/tecninjas2026-alt/DataBee/pulls` e `PUT .../pulls/<n>/merge` com `merge_method: rebase`) usando o token da credencial do Git (`git credential fill`), sem nunca imprimir o token.
 - `main` sempre executável. Proibido: `push --force`, `reset --hard`, `clean -fd`, resolver conflito com ours/theirs em massa.
 - Nunca commitar: `node_modules/`, `www/`, `android/app/build/`, `supabase.config.ts`, `.env*`, APKs.
 

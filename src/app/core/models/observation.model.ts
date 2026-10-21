@@ -78,6 +78,20 @@ export interface ObservationImage {
   bytes: number;
   position: number;
   created_at: string;
+  /** Origem preservada mesmo após conversão/reencode do arquivo. */
+  photo_source: PhotoSource;
+}
+
+/** IMP-014 — INSERT proposto. Gerar id antes para montar object_path; sem UPDATE/DELETE do cliente. */
+export interface ObservationImageInsert {
+  id: string;
+  observation_id: string;
+  owner_id?: string;
+  object_path: string;
+  mime_type: 'image/jpeg' | 'image/png';
+  bytes: number;
+  position?: number;
+  photo_source: PhotoSource;
 }
 
 export interface Comment {

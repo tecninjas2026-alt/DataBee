@@ -1,0 +1,132 @@
+Você está trabalhando no repositório DataBee, da equipe TEC_NINJAS.
+
+TAREFA: IMP-015 — Criar bucket privado e policies de Storage.
+
+DOCUMENTAÇÃO OFICIAL:
+https://app.notion.com/p/819d3425eae482f48a0e815f2d871981
+
+OBJETIVO:
+Criar um bucket privado no Supabase Storage para armazenar as fotografias de abelhas, implementando regras de segurança que protejam os arquivos de cada usuário.
+
+ANTES DE PROGRAMAR:
+1. Leia AGENTS.md, docs/HANDOFF.md, README.md, package.json e package-lock.json.
+2. Inspecione o Git status, as versões e as migrations existentes.
+3. Confirme que a IMP-014 foi implementada e testada.
+4. Verifique as tabelas observations e observation_images.
+5. Preserve o código existente e as convenções do repositório.
+6. Não instale dependências desnecessárias.
+7. Se houver dependências pendentes, explique o bloqueio antes de implementar.
+
+ESTRUTURA DO ARMAZENAMENTO:
+Criar o bucket:
+
+observation-images
+
+CONFIGURAÇÕES:
+- Acesso: PRIVATE.
+- Formatos permitidos: JPEG e PNG.
+- Limite máximo: 5 MB por arquivo.
+- Não permitir acesso público aos arquivos.
+- Usar configuração reproduzível e documentada, compatível com a versão real do Supabase.
+
+PADRÃO DO CAMINHO:
+user_id/observation_id/image_id.ext
+
+Onde:
+- user_id identifica o proprietário.
+- observation_id identifica a observação.
+- image_id identifica a fotografia.
+- ext é a extensão do arquivo.
+
+Reservar caminhos de compartilhamento para operações autorizadas do backend, não para escrita direta do cliente.
+
+REGRAS DE SEGURANÇA:
+1. Habilitar policies de Storage apropriadas.
+2. Usuário autenticado só pode enviar arquivos no próprio caminho.
+3. Verificar que a observação pertence ao usuário.
+4. Permitir upload apenas para observações próprias em estado draft e antes da finalização dos metadados.
+5. Permitir leitura privada somente ao proprietário.
+6. Usuário A não pode acessar ou alterar arquivos privados de B.
+7. Usuários anônimos não podem acessar arquivos.
+8. Não permitir UPDATE nem upsert para sobrescrever arquivos.
+9. Permitir DELETE direto somente de objeto temporário próprio, ainda sem metadado final.
+10. Após a finalização dos metadados, o cliente não pode substituir nem excluir diretamente o arquivo.
+11. Limpeza futura dos arquivos finalizados será realizada por backend autorizado.
+12. Não tornar o bucket público para resolver erros de permissão.
+
+IMPLEMENTAÇÃO:
+1. Inspecionar a estrutura e as regras atuais do Supabase.
+2. Preparar configuração e policies do bucket observation-images.
+3. Revisar as alterações antes de aplicá-las ao Supabase de desenvolvimento.
+4. Utilizar caminhos vinculados ao proprietário e à observação.
+5. Preparar testes com duas contas autenticadas, A e B.
+6. Usar imagens de teste autorizadas, sem dados pessoais ou GPS real.
+7. Registrar os resultados e os erros encontrados.
+8. Implementar exclusivamente a IMP-015.
+
+TESTES OBRIGATÓRIOS:
+
+TESTE 1:
+Usuário A envia uma fotografia válida para uma observação draft própria.
+Resultado esperado: upload permitido.
+
+TESTE 2:
+Usuário A consulta ou baixa sua própria fotografia.
+Resultado esperado: acesso permitido.
+
+TESTE 3:
+Usuário B tenta acessar, baixar ou enviar arquivo no caminho pertencente a A.
+Resultado esperado: acesso negado.
+
+TESTE 4:
+Usuário anônimo tenta acessar o arquivo.
+Resultado esperado: acesso negado.
+
+TESTE 5:
+Enviar arquivo maior que 5 MB.
+Resultado esperado: upload rejeitado.
+
+TESTE 6:
+Enviar arquivo com MIME não permitido.
+Resultado esperado: upload rejeitado.
+
+TESTE 7:
+Tentar sobrescrever um arquivo usando upsert.
+Resultado esperado: operação rejeitada.
+
+TESTE 8:
+Tentar modificar ou excluir diretamente um arquivo já finalizado.
+Resultado esperado: operação rejeitada.
+
+TESTE 9:
+Verificar que nenhum arquivo do bucket privado pode ser acessado por URL pública.
+
+VALIDAÇÃO:
+- Executar npm run check e verificações aplicáveis.
+- Usar cliente Supabase SDK autenticado para os testes A/B/anon.
+- Nunca utilizar a chave administrativa como prova de RLS.
+- Não registrar senhas, tokens, credenciais, imagens privadas ou GPS pessoal.
+- Não executar resets remotos, force push ou comandos destrutivos.
+- Não declarar que algum teste passou sem evidência real.
+- Não criar recursos fora do escopo da IMP-015.
+
+ENTREGA ESPERADA:
+1. Bucket privado observation-images configurado.
+2. Policies e configuração reproduzíveis no repositório.
+3. Arquivos criados e modificados.
+4. Comandos realmente executados e resultados.
+5. Evidências dos testes A/B/anon.
+6. Registro dos limites de tamanho e MIME.
+7. Pendências e problemas encontrados.
+8. Atualização de docs/HANDOFF.md.
+9. Explicação didática sobre Storage, bucket privado, RLS e caminhos de arquivos.
+
+Não marque a IMP-015 como Done antes da revisão humana e da confirmação dos testes.
+
+IMPORTANTE:
+A equipe está tratando uma suspensão de conta no GitHub. Preserve o repositório local e não tente contornar a suspensão.
+
+PRIMEIRO PASSO:
+Confirme que a IMP-014 está concluída e apresente a configuração e as policies propostas para revisão humana.
+
+Não aplique mudanças no Supabase remoto sem autorização da equipe.

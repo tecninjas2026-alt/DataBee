@@ -14,6 +14,7 @@ Repositório oficial: https://github.com/tecninjas2026-alt/DataBee (desde 21/10/
 | Página raiz do projeto (avaliação técnica e plano) | https://app.notion.com/p/2d5d3425eae482d5aa0f0102b42db87e |
 | Guia de execução (comece por aqui no Notion) | https://app.notion.com/p/0dfd3425eae482429f1b810626c44b39 |
 | Explicação do setup inicial (para alunos; tudo que foi construído até 14/10) | https://app.notion.com/p/3f9d3425eae4812b81ffc11a375d32b5 |
+| Explicação do progresso 15–21/10 (banco, fotos privadas, perfis, login) | https://app.notion.com/p/400d3425eae481a6bdb6d41f47418215 |
 | **Implementation Tasks** (IMP-001…070) | https://app.notion.com/p/018d3425eae483fa850f81c645fd0180 · data source `collection://e25d3425-eae4-82ac-bbc6-87a55de41da5` |
 | Project Decisions (D01–D25) | https://app.notion.com/p/4abd3425eae4829aa4e80171975fe704 |
 | MVP Locked Scope (Core/Stretch/OUT) | https://app.notion.com/p/ce1d3425eae4825287e081adb73842d5 |

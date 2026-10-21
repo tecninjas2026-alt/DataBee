@@ -1,6 +1,6 @@
 # IMP-032 — aplicação e integração em 21/10/2026
 
-**Estado:** migration aplicada no dev e perfil integrado ao login. Matriz real A/B e validação humana ainda pendentes; GitHub continua recusando acesso com suspensão (403). Não declarar Done.
+**Estado:** migration aplicada no dev, perfil integrado ao login e matriz SDK real **29/29 Pass** confirmada pela equipe. Fluxo real do app (login/restauração/troca) ainda requer confirmação específica; GitHub continua recusando acesso com suspensão (403). Não declarar Done.
 
 ## 🤖 Registro do agente — 21/10/2026
 
@@ -45,6 +45,7 @@ O teste troca temporariamente o apelido de A por valores sintéticos para verifi
 | `npm.cmd run check` | Lint e build de produção passaram; sem warnings novos |
 | TypeScript estrito do cliente manual + sintaxe Node do servidor | Passaram |
 | SDK real sem login | **4/4 Pass**: SELECT/INSERT/UPDATE/DELETE recusados com `42501`; relatório em `2026-10-21-imp-032-anonymous.json` |
+| SDK real com A/B/anon executado pela equipe | **29/29 Pass**, zero Fail/Not run; relatório de 21/10 às 09:30:55 (Brasília) validado por projeto, versão, hash e 29 IDs únicos; inclui apelido original restaurado |
 | Início em Chrome isolado, respostas de rede sintéticas | Fonte do nome = perfil salvo, evento repetido sem nova escrita/leitura, limpeza ao trocar conta, erro e nova tentativa, criação ausente com Participante, limpeza ao sair; todos conferidos, zero exceções |
 | Layout do app | Sem rolagem horizontal em 360 px; captura de sucesso em 390×844 inspecionada |
 | Ferramenta manual em Chrome isolado | 29 casos renderizados, quatro campos obrigatórios, formulário vazio recusado; sem exceções/overflow em 360/390 px; testes reais não iniciados pelo agente |
@@ -54,22 +55,22 @@ A tentativa inicial do SDK Node não chegou ao banco por conexão HTTPS; repeti�
 
 Não houve edição no Notion (ferramenta indisponível), APK novo ou teste Android. Esta task não altera plugins/permissões Android. Os bloqueios anteriores de SDK/aparelho continuam registrados no HANDOFF.
 
-### Próxima verificação humana
+### Verificação humana
 
-1. Abrir http://127.0.0.1:4214, informar somente ali A e B e clicar em **Verificar perfis com A e B**.
-2. Esperado: **29 Pass · 0 Fail · 0 Not run**, incluindo **Apelido original restaurado**. O agente deve validar o relatório sanitizado antes de registrar esse resultado como obtido.
-3. Abrir http://localhost:4200. Entrar com A: Início deve mostrar o apelido salvo (Participante, se ainda não alterado). Recarregar: o mesmo perfil volta. Sair: login. Entrar com B: perfil de B, sem resíduos de A.
+1. **Concluído:** equipe executou a ferramenta em http://127.0.0.1:4214 com A e B.
+2. **Confirmado:** 29 Pass · 0 Fail · 0 Not run, incluindo Apelido original restaurado. Relatório sanitizado validado e versionado em `2026-10-21-imp-032-client.json`.
+3. **Pendente no app:** abrir http://localhost:4200. Entrar com A: Início deve mostrar o apelido salvo (Participante, se ainda não alterado). Recarregar: o mesmo perfil volta. Sair: login. Entrar com B: perfil de B, sem resíduos de A.
 
 ## 🎓 Explicação para a equipe
 
 **Entrada → processamento → saída:** a pessoa entra na conta → o app busca a ficha no banco → mostra o apelido na saudação do Início. Se a ficha faltar, tenta criá-la uma vez; repetir a entrada preserva o que já estava salvo. A ficha contém só identificador, apelido e data.
 
-**RLS é o porteiro:** pessoas com login podem ler fichas mínimas, mas só o dono altera seu apelido. Data e identificador também têm proteção por coluna. Já conferimos a recusa de acesso sem login; ainda falta a equipe executar A/B.
+**RLS é o porteiro:** pessoas com login podem ler fichas mínimas, mas só o dono altera seu apelido. Data e identificador também têm proteção por coluna. A equipe executou o cliente real A/B/anon e os 29 casos passaram, incluindo a restauração do apelido. Evidência em [relatório sanitizado](2026-10-21-imp-032-client.json).
 
 **Se a rede falhar:** a conta continua conectada, o nome anterior é removido e aparece uma mensagem com botão de nova tentativa. Trocar de conta cancela a consulta anterior para que o apelido não se misture.
 
 <details><summary>Entrar outra vez troca ou duplica o perfil?</summary>Não deve. O app lê a mesma ficha; se precisar criar, ignora o conflito em vez de sobrescrever o apelido.</details>
 
-<details><summary>O que a equipe ainda precisa comprovar?</summary>Que A/B têm os acessos corretos no banco real e que login, recarregamento e saída funcionam com essas contas no app.</details>
+<details><summary>O que a equipe ainda precisa comprovar?</summary>Os acessos A/B no banco real já passaram. Falta confirmar o caminho no app: login, recarregamento, saída e entrada com outra conta. Cadastro novo e recuperação real de perfil ausente continuam sem execução remota.</details>
 
 <details><summary>O código já está no GitHub?</summary>Não. A conta continua suspensa e o GitHub recusou a conexão. O avanço está preservado localmente; publicar e integrar à main dependem da recuperação do acesso.</details>

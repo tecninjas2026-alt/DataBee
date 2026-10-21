@@ -1,0 +1,139 @@
+{
+  "project_ref": "uqfuuahziwgxwjymtwil",
+  "migration_version": "20261021115711",
+  "migration_sha256": "24e53da09610b8f593df5f933604350e54c142251cea9fd24c0ae2d560373fde",
+  "recorded_at": "2026-10-21T12:30:55.231Z",
+  "source": "manual-sdk-client",
+  "tests": [
+    {
+      "id": "auth-a",
+      "status": "Pass"
+    },
+    {
+      "id": "auth-b",
+      "status": "Pass"
+    },
+    {
+      "id": "distinct",
+      "status": "Pass"
+    },
+    {
+      "id": "profile-a",
+      "status": "Pass"
+    },
+    {
+      "id": "profile-b",
+      "status": "Pass"
+    },
+    {
+      "id": "a-read-b",
+      "status": "Pass"
+    },
+    {
+      "id": "b-read-a",
+      "status": "Pass"
+    },
+    {
+      "id": "minimal",
+      "status": "Pass"
+    },
+    {
+      "id": "owner-update",
+      "status": "Pass"
+    },
+    {
+      "id": "name-min",
+      "status": "Pass"
+    },
+    {
+      "id": "name-max",
+      "status": "Pass"
+    },
+    {
+      "id": "name-empty",
+      "status": "Pass",
+      "code": "23514"
+    },
+    {
+      "id": "name-spaces",
+      "status": "Pass",
+      "code": "23514"
+    },
+    {
+      "id": "name-whitespace",
+      "status": "Pass",
+      "code": "23514"
+    },
+    {
+      "id": "name-long",
+      "status": "Pass",
+      "code": "23514"
+    },
+    {
+      "id": "name-null",
+      "status": "Pass",
+      "code": "23502"
+    },
+    {
+      "id": "b-update-a",
+      "status": "Pass"
+    },
+    {
+      "id": "a-unchanged",
+      "status": "Pass"
+    },
+    {
+      "id": "a-forges-b",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "id-update",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "date-update",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "date-insert",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "repeat-profile",
+      "status": "Pass"
+    },
+    {
+      "id": "anon-read",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anon-insert",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anon-update",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anon-delete",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "owner-delete",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "restore-a",
+      "status": "Pass"
+    }
+  ]
+}

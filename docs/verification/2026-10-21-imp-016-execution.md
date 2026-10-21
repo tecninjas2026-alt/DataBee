@@ -82,6 +82,8 @@ Não misturar a autenticação das matrizes SDK com a navegação e restauraçã
 
 Preencher senhas somente no app, nunca no chat. Informar resultados por passo, sem prints contendo e-mail/senha. O roteiro não salva observações nem chama IA. Solicitação enviada pelo canal de pergunta; sem resposta humana na preparação deste registro.
 
+**Retorno posterior da equipe em 21/10:** “ok, ja fiz”. Confirma a execução do roteiro, mas não informa explicitamente o resultado dos seis passos. Solicitada confirmação única de que todos passaram, ou indicação de falha/passo pendente. Os resultados completos permanecem sem comprovação; não converter o relato de execução em seis Pass. Também solicitada a autorização específica de criação da IMP-069, condicionada à validação desta dependência; nenhuma exclusão incluída.
+
 ### Limites e próximo passo
 
 Sem Android disponível comprovado: SDK configurado não localizado na preparação anterior, nenhum aparelho/teste real ou APK atualizado. A tarefa não alterou plugins/permissões; limites de Android permanecem no HANDOFF. Não apresentar o APK antigo como atual.

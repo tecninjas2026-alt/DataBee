@@ -8,6 +8,8 @@ import {
   IonContent,
   IonHeader,
   IonIcon,
+  IonSpinner,
+  IonText,
   IonTitle,
   IonToolbar,
 } from '@ionic/angular';
@@ -35,6 +37,8 @@ import { PreviewBannerComponent } from '../../shared/components/preview-banner.c
     IonCard,
     IonCardContent,
     IonIcon,
+    IonSpinner,
+    IonText,
     PreviewBannerComponent,
   ],
 })

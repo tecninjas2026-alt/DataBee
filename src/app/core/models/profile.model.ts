@@ -1,4 +1,4 @@
-/** IMP-032 — contrato da migration proposta; ainda não aplicado no projeto remoto. */
+/** IMP-032 — contrato de public.profiles, protegido por RLS e permissões por coluna. */
 export interface Profile {
   /** Mesmo identificador da conta em Auth; não expõe o e-mail. */
   id: string;

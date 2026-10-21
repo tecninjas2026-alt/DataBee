@@ -16,6 +16,12 @@ h2 {
   font-weight: 700;
 }
 
+.profile-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .count {
   font-size: 1rem;
 }

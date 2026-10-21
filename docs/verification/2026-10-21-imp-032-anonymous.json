@@ -1,0 +1,26 @@
+{
+  "source": "sdk-anonymous-client",
+  "recorded_at": "2026-10-21T12:14:11.908Z",
+  "tests": [
+    {
+      "id": "anonymous-read",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anonymous-insert",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anonymous-update",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anonymous-delete",
+      "status": "Pass",
+      "code": "42501"
+    }
+  ]
+}

@@ -46,7 +46,8 @@ Sem servidor próprio, sem Python, sem ML local.
 |---|---|
 | `core/config/app-config.ts` | Lê environment, valida chave (bloqueia secret), limites de foto |
 | `core/supabase/supabase.service.ts` | Único `createClient`; `client` lança `config_missing` sem configuração |
-| `core/auth/auth.service.ts` | Sessão em signals, `init()` no boot, signIn/signUp/signOut, `previewMode` |
+| `core/auth/auth.service.ts` | Sessão e perfil em signals, `init()` no boot, login/saída, carga cancelável de perfil e `previewMode` |
+| `core/profiles/profile.service.ts` | Lê/cria o próprio perfil sem sobrescrever apelido existente (IMP-032); fonte do nome exibido |
 | `core/auth/auth.guards.ts` | `authGuard` (libera em pré-visualização) e `guestGuard` |
 | `core/device/photo.service.ts` | takePhoto/chooseFromGallery + reencode JPEG sem EXIF ≤ 2048 px / 5 MB |
 | `core/device/location.service.ts` | Permissão + leitura única de GPS com accuracy; erros mapeados |

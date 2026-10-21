@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>DataBee — verificação dos perfis</title>
+    <link rel="stylesheet" href="/client.css">
+    <script type="module" src="/client.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Verificação de perfis — IMP-032</h1>
+      <p>Use somente as contas A e B de teste, diferentes entre si, no projeto de desenvolvimento.</p>
+      <p>A verificação lê os perfis e troca temporariamente o apelido de A por texto de teste, restaurando o original ao terminar. Não cria nem apaga contas ou perfis, não usa fotos, GPS ou IA. As tentativas de exclusão usam filtros incompatíveis entre si.</p>
+      <p>As senhas seguem direto deste navegador para o Supabase. Não ficam no relatório, no servidor local ou no armazenamento do navegador. Se a conexão cair, confira o resultado “Apelido original restaurado” antes de fechar.</p>
+      <form id="accounts" autocomplete="off">
+        <fieldset><legend>Conta A de teste</legend>
+          <label>E-mail de teste A<input id="a-email" type="email" autocomplete="off" required></label>
+          <label>Senha de teste A<input id="a-password" type="password" autocomplete="off" required></label>
+        </fieldset>
+        <fieldset><legend>Conta B — pessoa diferente</legend>
+          <label>E-mail de teste B<input id="b-email" type="email" autocomplete="off" required></label>
+          <label>Senha de teste B<input id="b-password" type="password" autocomplete="off" required></label>
+        </fieldset>
+        <button id="run" type="submit">Verificar perfis com A e B</button>
+      </form>
+      <p id="summary" role="status" aria-live="polite">Ainda não executado. Pass = esperado confirmado; Fail = falhou; Not run = não executado.</p>
+      <a id="download" href="/report" download="imp032-privacy-report.json" hidden>Baixar relatório sem dados pessoais</a>
+      <ol id="results"></ol>
+    </main>
+  </body>
+</html>

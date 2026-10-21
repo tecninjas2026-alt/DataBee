@@ -16,6 +16,18 @@
 
   <section class="hero ion-padding">
     <h1>Olá{{ auth.displayName() ? ', ' + auth.displayName() : '' }}! 🐝</h1>
+    @if (auth.profileLoading()) {
+      <p class="profile-status" role="status">
+        <ion-spinner name="dots" aria-hidden="true" />
+        Carregando seu perfil…
+      </p>
+    }
+    @if (auth.profileError(); as message) {
+      <ion-text color="danger"><p role="alert">{{ message }}</p></ion-text>
+      <ion-button fill="outline" size="small" (click)="auth.retryProfile()">
+        Tentar carregar perfil novamente
+      </ion-button>
+    }
     <p>Encontrou uma abelha? Fotografe e registre sua observação.</p>
     <ion-button routerLink="/tabs/registrar" expand="block" size="large">
       <ion-icon slot="start" name="camera" />

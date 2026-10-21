@@ -7,6 +7,10 @@ import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const profilesMode = process.argv.includes('--profiles');
+const taskId = profilesMode ? 'IMP-032' : 'IMP-013';
+const assetName = profilesMode ? 'profile-privacy' : 'observation-privacy';
+const port = profilesMode ? 4214 : 4213;
 const localConfig = readFileSync(join(root, 'src/environments/supabase.config.ts'), 'utf8');
 const url = localConfig.match(/url\s*:\s*['"]([^'"]*)['"]/u)?.[1]?.trim();
 const publishableKey = localConfig.match(/publishableKey\s*:\s*['"]([^'"]*)['"]/u)?.[1]?.trim();
@@ -18,18 +22,19 @@ const require = createRequire(import.meta.url);
 // Reutiliza o esbuild já instalado e fixado pelo build Angular, sem nova dependência.
 const { build } = require('esbuild');
 const bundle = await build({
-  entryPoints: [join(root, 'scripts/manual/observation-privacy.client.ts')],
+  entryPoints: [join(root, `scripts/manual/${assetName}.client.ts`)],
   bundle: true, write: false, platform: 'browser', format: 'esm', target: 'es2022', logLevel: 'silent',
 });
-const cases = JSON.parse(readFileSync(join(root, 'scripts/manual/observation-privacy.cases.json'), 'utf8'));
+const cases = JSON.parse(readFileSync(join(root, `scripts/manual/${assetName}.cases.json`), 'utf8'));
 const testIds = new Set(cases.map(item => item.id));
 const authReasons = new Set(['invalid_credentials', 'email_not_confirmed', 'over_request_rate_limit', 'user_banned', 'auth_unavailable']);
-const origin = 'http://127.0.0.1:4213';
-const reportPath = join(root, '.tmp/imp013-privacy-report.json');
-const migrationVersion = '20261016032127';
-const migrationSha256 = createHash('sha256').update(readFileSync(join(root, 'supabase/migrations/20261016032127_imp013_observations_private_locations.sql'))).digest('hex');
+const origin = `http://127.0.0.1:${port}`;
+const reportPath = join(root, profilesMode ? '.tmp/imp032-privacy-report.json' : '.tmp/imp013-privacy-report.json');
+const migrationVersion = profilesMode ? '20261021115711' : '20261016032127';
+const migrationFile = profilesMode ? '20261021115711_imp032_profiles.sql' : '20261016032127_imp013_observations_private_locations.sql';
+const migrationSha256 = createHash('sha256').update(readFileSync(join(root, 'supabase/migrations', migrationFile))).digest('hex');
 const assets = new Map([
-  ['/', ['text/html; charset=utf-8', readFileSync(join(root, 'scripts/manual/observation-privacy.html'))]],
+  ['/', ['text/html; charset=utf-8', readFileSync(join(root, `scripts/manual/${assetName}.html`))]],
   ['/client.css', ['text/css; charset=utf-8', readFileSync(join(root, 'scripts/manual/observation-privacy.css'))]],
   ['/client.js', ['text/javascript; charset=utf-8', bundle.outputFiles[0].contents]],
   ['/config', ['application/json', JSON.stringify({ url, publishableKey })]],
@@ -39,7 +44,7 @@ createServer(async (request, response) => {
   response.setHeader('Cache-Control', 'no-store');
   response.setHeader('X-Content-Type-Options', 'nosniff');
   response.setHeader('Content-Security-Policy', `default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self' ${url}; base-uri 'none'; frame-ancestors 'none'; form-action 'none'`);
-  if (request.headers.host !== '127.0.0.1:4213') { response.writeHead(403).end(); return; }
+  if (request.headers.host !== `127.0.0.1:${port}`) { response.writeHead(403).end(); return; }
   const path = request.url;
   if (request.method === 'GET' && assets.has(path)) {
     const [contentType, content] = assets.get(path);
@@ -85,7 +90,7 @@ createServer(async (request, response) => {
     return;
   }
   response.writeHead(404).end();
-}).listen(4213, '127.0.0.1', () => {
-  console.log(`Cliente manual da IMP-013: ${origin}`);
+}).listen(port, '127.0.0.1', () => {
+  console.log(`Cliente manual da ${taskId}: ${origin}`);
   console.log('Use A/B somente nesta página local. Ctrl+C encerra. Relatório fica em .tmp (fora do Git).');
 });

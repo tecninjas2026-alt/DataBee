@@ -1,0 +1,10 @@
+{
+  "source": "browser-with-synthetic-network",
+  "repeatedDidNotReadOrWrite": true,
+  "clearedAOnSwitch": true,
+  "retryLoadedB": true,
+  "recoveredOnce": true,
+  "noOverflow": true,
+  "clearedOnLogout": true,
+  "runtimeErrors": 0
+}

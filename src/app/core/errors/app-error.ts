@@ -9,6 +9,7 @@ export type AppErrorCode =
   | 'auth_weak_password'
   | 'auth_user_exists'
   | 'auth_rate_limited'
+  | 'profile_unavailable'
   | 'network'
   | 'photo_cancelled'
   | 'photo_permission_denied'

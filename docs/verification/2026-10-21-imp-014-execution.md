@@ -1,6 +1,6 @@
 # IMP-014 — aplicação e testes em 21/10/2026
 
-**Estado:** migration aplicada no dev, estrutura conferida, quatro testes SDK anônimos aprovados. Matriz real A/B ainda aguardando execução da equipe. Sem Done, bucket, upload ou merge.
+**Estado:** migration aplicada no dev, estrutura conferida e matriz SDK real A/B/anon **32/32 Pass**, confirmada pela equipe. Quatro verificações anônimas independentes também passaram. Sem bucket/upload ou merge; revisão/Notion/fluxo Git ainda impedem declarar Done.
 
 ## 🤖 Registro do agente — 21/10/2026
 
@@ -14,6 +14,7 @@ A equipe respondeu **“Sim, pode aplicar a IMP-014”** após receber a [propos
 | `npm.cmd run supabase -- db push --yes` | Aplicação concluída no dev vinculado `uqfuuahziwgxwjymtwil` |
 | Consulta administrativa somente de leitura | Histórico contém IMP-013, IMP-032 e IMP-014; nove colunas obrigatórias; RLS ligado; constraints e políticas esperadas presentes |
 | SDK real sem login | **4 Pass / 0 Fail**: leitura, inserção, alteração e exclusão recusadas com `42501`; evidência em `2026-10-21-imp-014-anonymous.json` |
+| SDK real com A/B/anon, executado pela equipe | **32 Pass / 0 Fail / 0 Not run**; relatório de 21/10 às 10:04:26 (Brasília), conferido por projeto, versão, hash e 32 IDs únicos; evidência em `2026-10-21-imp-014-client.json` |
 | `npm.cmd run check` | Lint e build de produção passaram, sem warnings novos |
 | TypeScript estrito da página/roteiro + `node --check` do servidor | Passaram |
 | Chrome isolado 360/390 px | 32 verificações renderizadas, quatro campos obrigatórios, formulário vazio recusado, sem exceções ou rolagem horizontal |
@@ -30,18 +31,18 @@ O arquivo de migration aplicado não foi alterado; correções exigem uma nova m
 
 Credenciais entram somente na página local e seguem diretamente ao Supabase pelo SDK. Os clientes não persistem sessão; o formulário é limpo e o logout local é tentado ao terminar. Relatório contém somente projeto/versão/hash, data e IDs fixos de casos com Pass/Fail/Not run e códigos permitidos. Não registra e-mails, senhas, tokens, IDs das contas ou caminhos privados.
 
-### Matriz A/B preparada — ainda sem resultado real
+### Matriz A/B executada pela equipe
 
-Abrir **http://127.0.0.1:4215** e usar duas contas de teste diferentes. Esperado após a execução: **32 Pass · 0 Fail · 0 Not run**. O agente deve conferir o relatório `.tmp/imp014-privacy-report.json` contra casos, projeto, versão e hash antes de registrar sucesso.
+A equipe executou **http://127.0.0.1:4215** com contas diferentes e informou “não houve falhas”. O agente validou o relatório `.tmp/imp014-privacy-report.json` contra os casos, projeto, versão e hash: **32 Pass · 0 Fail · 0 Not run**. Cópia sanitizada em [relatório real da IMP-014](2026-10-21-imp-014-client.json).
 
 | Critério obrigatório | Casos correspondentes | Estado nesta etapa |
 |---|---|---|
-| A insere em draft próprio | a-draft, own-image | Não executado com A/B |
-| Segunda foto recusada | second-image-rejected | Não executado |
-| A não vincula à observação de B | foreign-observation-rejected, forged-owner-rejected | Não executado |
-| B não lê/altera A | b-cannot-read-a, b-cannot-update-a | Não executado |
-| Nem dono altera caminho/metadados | owner-cannot-update, owner-cannot-update-path, metadata-unchanged | Não executado |
-| Somente nove campos, sem binário | metadata-only | Não executado com A/B; estrutura inspecionada |
+| A insere em draft próprio | a-draft, own-image | Pass |
+| Segunda foto recusada | second-image-rejected | Pass |
+| A não vincula à observação de B | foreign-observation-rejected, forged-owner-rejected | Pass |
+| B não lê/altera A | b-cannot-read-a, b-cannot-update-a | Pass |
+| Nem dono altera caminho/metadados | owner-cannot-update, owner-cannot-update-path, metadata-unchanged | Pass |
+| Somente nove campos, sem binário | metadata-only | Pass |
 
 O roteiro também cobre bytes zero/negativo/acima do limite, MIME proibido, posição negativa, URL/caminho de outro dono, origem diferente do pai, data protegida, JPEG no limite máximo e PNG com tamanho mínimo. Os números são **metadados declarados sintéticos**: não significam validação de arquivo ou upload real. Não há exclusão de dados; DELETE usa filtros contraditórios. Dois rascunhos e dois metadados válidos são mantidos para a equipe.
 
@@ -49,10 +50,10 @@ Limites ainda não executados no remoto: recusa de inserção em observação sa
 
 ### Pendências
 
-- Equipe executar A/B e agente validar/registrar o relatório. Confirmar entendimento antes de Done.
+- Matriz A/B confirmada e registrada. Ainda falta revisão/checkpoint de entendimento e o fluxo Git/Notion antes de Done.
 - GitHub continua com suspensão 403 na última verificação desta sessão; sem push, PR, merge ou main atualizado. Preservar commits locais, sem contornar restrições.
 - Notion indisponível: registro e status oficiais não atualizados. Não inferir Done de dependências.
-- IMP-015 recebida integralmente, porém aguarda esta matriz/revisão antes de propor bucket/policies e autorização própria antes da aplicação remota. Nenhum bucket foi criado na IMP-014.
+- IMP-015 recebida integralmente: dependência técnica IMP-014 aplicada/testes obrigatórios agora confirmada; pode preparar proposta para revisão. Sua aplicação remota continua exigindo autorização própria. Nenhum bucket foi criado na IMP-014.
 - Nenhuma mudança Android, APK ou teste em aparelho nesta task.
 
 ## 🎓 Explicação para a equipe

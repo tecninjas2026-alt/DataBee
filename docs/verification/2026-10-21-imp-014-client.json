@@ -1,0 +1,157 @@
+{
+  "project_ref": "uqfuuahziwgxwjymtwil",
+  "migration_version": "20261021122259",
+  "migration_sha256": "2800443b77b929cfd4a4f7b4f6e2e557528ceafb0c354ac6200eb084d13b99cb",
+  "recorded_at": "2026-10-21T13:04:26.298Z",
+  "source": "manual-sdk-client",
+  "tests": [
+    {
+      "id": "auth-a",
+      "status": "Pass"
+    },
+    {
+      "id": "auth-b",
+      "status": "Pass"
+    },
+    {
+      "id": "distinct-accounts",
+      "status": "Pass"
+    },
+    {
+      "id": "a-draft",
+      "status": "Pass"
+    },
+    {
+      "id": "b-draft",
+      "status": "Pass"
+    },
+    {
+      "id": "zero-bytes-rejected",
+      "status": "Pass",
+      "code": "23514"
+    },
+    {
+      "id": "negative-bytes-rejected",
+      "status": "Pass",
+      "code": "23514"
+    },
+    {
+      "id": "oversize-rejected",
+      "status": "Pass",
+      "code": "23514"
+    },
+    {
+      "id": "mime-rejected",
+      "status": "Pass",
+      "code": "23514"
+    },
+    {
+      "id": "negative-position-rejected",
+      "status": "Pass",
+      "code": "23514"
+    },
+    {
+      "id": "url-rejected",
+      "status": "Pass",
+      "code": "23514"
+    },
+    {
+      "id": "foreign-path-rejected",
+      "status": "Pass",
+      "code": "23514"
+    },
+    {
+      "id": "source-mismatch-rejected",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "created-at-protected",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "own-image",
+      "status": "Pass"
+    },
+    {
+      "id": "maximum-bytes-accepted",
+      "status": "Pass"
+    },
+    {
+      "id": "metadata-only",
+      "status": "Pass"
+    },
+    {
+      "id": "second-image-rejected",
+      "status": "Pass",
+      "code": "23505"
+    },
+    {
+      "id": "foreign-observation-rejected",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "forged-owner-rejected",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "b-cannot-read-a",
+      "status": "Pass"
+    },
+    {
+      "id": "b-cannot-update-a",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "owner-cannot-update",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "owner-cannot-update-path",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "metadata-unchanged",
+      "status": "Pass"
+    },
+    {
+      "id": "b-own-image",
+      "status": "Pass"
+    },
+    {
+      "id": "png-and-minimum-bytes-accepted",
+      "status": "Pass"
+    },
+    {
+      "id": "anonymous-read-denied",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anonymous-insert-denied",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anonymous-update-denied",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "owner-delete-denied",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anonymous-delete-denied",
+      "status": "Pass",
+      "code": "42501"
+    }
+  ]
+}

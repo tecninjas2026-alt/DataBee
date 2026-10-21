@@ -26,7 +26,21 @@ export interface Observation {
   publication: ObservationPublication;
   analysis_status: AnalysisStatus;
   curation_status: CurationStatus | null;
+  analysis_started_at: string | null;
   public_region_label: PublicRegionLabel | null;
+}
+
+/** INSERT do cliente: estados, data de criação e campos públicos vêm somente do banco/backend. */
+export interface ObservationDraftInsert {
+  id?: string;
+  user_id?: string;
+  photo_source: PhotoSource;
+  /** Omitir/null quando a data original não for confiável. */
+  captured_at?: string | null;
+}
+
+export interface ObservationOwnerUpdate {
+  captured_at?: string | null;
 }
 
 /** Linha privada (somente o dono lê). Nunca enviar ao VLM nem ao feed. */
@@ -35,10 +49,25 @@ export interface ObservationPrivateLocation {
   owner_id: string;
   latitude: number;
   longitude: number;
-  accuracy: number;
+  accuracy: number | null;
   location_source: LocationSource;
-  consent_at: string;
+  /** Obrigatório no banco para device_gps; outras origens podem não ter consentimento de GPS. */
+  consent_at: string | null;
 }
+
+export interface ObservationPrivateLocationInsert {
+  observation_id: string;
+  owner_id?: string;
+  latitude: number;
+  longitude: number;
+  accuracy?: number | null;
+  location_source: LocationSource;
+  consent_at?: string | null;
+}
+
+export type ObservationPrivateLocationUpdate = Partial<
+  Pick<ObservationPrivateLocation, 'latitude' | 'longitude' | 'accuracy' | 'location_source' | 'consent_at'>
+>;
 
 export interface ObservationImage {
   id: string;

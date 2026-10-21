@@ -73,4 +73,4 @@ Não houve edição no Notion (ferramenta indisponível), APK novo ou teste Andr
 
 <details><summary>O que a equipe ainda precisa comprovar?</summary>Os acessos A/B no banco real já passaram. Falta confirmar o caminho no app: login, recarregamento, saída e entrada com outra conta. Cadastro novo e recuperação real de perfil ausente continuam sem execução remota.</details>
 
-<details><summary>O código já está no GitHub?</summary>Não. A conta continua suspensa e o GitHub recusou a conexão. O avanço está preservado localmente; publicar e integrar à main dependem da recuperação do acesso.</details>
+<details><summary>O código já está no GitHub?</summary>Sim, desde 21/10/2026. A conta antiga foi suspensa; o projeto foi migrado para https://github.com/tecninjas2026-alt/DataBee e este trabalho foi integrado à <code>main</code>.</details>

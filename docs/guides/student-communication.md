@@ -42,7 +42,7 @@ Sugiro a IMP-xxx porque …
 | Rota | O endereço de uma tela dentro do app. |
 | Build | Traduzir e empacotar o código para o navegador/celular entenderem. |
 | APK | O arquivo instalável do app Android. |
-| Commit / branch / PR | Foto do projeto salva no Git / linha de trabalho separada / pedido para juntar a mudança ao projeto principal. |
+| Commit / main | Foto do projeto salva no Git / a linha principal do histórico. Neste projeto todo commit vai direto para a `main`, que fica online no GitHub como registro. |
 | VLM | IA que entende imagens e texto; dá uma **sugestão**, não uma certeza. |
 | Structured Outputs | Pedir para a IA responder num formato fixo (JSON) que o app consegue conferir. |
 | EXIF | Informações escondidas dentro da foto (pode ter GPS); removemos por privacidade. |

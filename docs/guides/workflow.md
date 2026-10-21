@@ -11,15 +11,15 @@ Conflito entre repo e Notion: pare e pergunte; não "corrija" decisão humana.
 
 ## 2. Executar uma task IMP-xxx (agente com autonomia + alunos)
 1. **Agente** escolhe a task (Ready/In progress com dependências Done), lê a página inteira no Notion e conta aos alunos o plano em linguagem simples. Status da task → `In progress`.
-2. **Agente**: `git switch main && git pull --ff-only` → `git switch -c feat/imp-xxx-slug`.
-3. **Agente** implementa só a task, roda `npm run check`, testa no navegador (e gera APK se tocar Android), commita (§3) e faz push da branch.
-4. **Agente** atualiza `docs/HANDOFF.md`, faz a autorrevisão (§6), abre o PR (template `.github/pull_request_template.md`) e **faz o merge em `main` ele mesmo** (rebase), apaga a branch e atualiza o `main` local. Check falhando ou dúvida de produto = sem merge, PR fica aberto com explicação.
+2. **Agente**: `git switch main && git pull --ff-only` (só existe a `main`).
+3. **Agente** implementa só a task, roda `npm run check`, testa no navegador (e gera APK se tocar Android) e commita direto na `main` (§3) a cada etapa estável.
+4. **Agente** atualiza `docs/HANDOFF.md`, faz a autorrevisão (§6) e envia: `git push origin main`. Código quebrado nunca é enviado; dúvida de produto = parar e perguntar antes de commitar.
 5. **Agente** registra no Notion (seções "🤖 Registro do agente" e "🎓 Explicação para a equipe"), Status `Review`, e relata aos alunos (formato em `student-communication.md`).
-6. **Alunos** testam (navegador/celular) seguindo os passos dados e conseguem explicar entrada → processamento → saída. Pedem ajuda ao agente se algo não ficou claro; correções viram nova branch `fix/...`.
+6. **Alunos** testam (navegador/celular) seguindo os passos dados e conseguem explicar entrada → processamento → saída. Pedem ajuda ao agente se algo não ficou claro; correções viram novos commits `fix(...)` na `main`.
 7. Com a confirmação da equipe: Status `Done` e as tasks dependentes que ficaram liberadas → `Ready`.
 
 ## 3. Git — Conventional Commits
-- Branches: `feat/imp-019-camera`, `fix/imp-022-upload-retry`, `docs/...`, `chore/...`, `build/...`.
+- **Só a `main`.** Sem branches e sem PRs (decisão da equipe em 21/10/2026). O GitHub (https://github.com/tecninjas2026-alt/DataBee) é o registro histórico online; cada commit com mensagem clara conta a história do projeto.
 - Mensagem:
 ```text
 <tipo>(<escopo>): <descrição curta no imperativo, minúsculas, sem ponto final>
@@ -32,14 +32,14 @@ Refs: IMP-019
 - Escopos usuais: `auth`, `register`, `observations`, `feed`, `ai`, `catalog`, `supabase`, `android`, `ui`, `deps`, `docs`, `agents`.
 - Mudança que quebra compatibilidade: `feat(api)!: ...` + rodapé `BREAKING CHANGE: ...`.
 - Commits pequenos, um assunto por commit, `git add <arquivos específicos>`; revisar `git diff --staged` (segredos!) antes.
-- PR e merge (feitos pelo agente):
+- Envio (feito pelo agente):
 ```bash
-git push -u origin feat/imp-019-camera
-gh pr create --base main --fill            # título = Conventional Commit; corpo segue o template
-gh pr merge --rebase --delete-branch       # histórico linear; só com npm run check verde
-git switch main && git pull --ff-only
+git switch main && git pull --ff-only     # sempre começar atualizado
+npm run check                             # tem que passar antes de cada commit/push
+git add <arquivos específicos>
+git commit -m "feat(register): add photo upload" -m "Refs: IMP-022"
+git push origin main                      # se recusado: git pull --rebase origin main, check de novo, push
 ```
-  Sem `gh` logado: crie/mescle pelo REST da GitHub API (`POST /repos/tecninjas2026-alt/DataBee/pulls` e `PUT .../pulls/<n>/merge` com `merge_method: rebase`) usando o token da credencial do Git (`git credential fill`), sem nunca imprimir o token.
 - `main` sempre executável. Proibido: `push --force`, `reset --hard`, `clean -fd`, resolver conflito com ours/theirs em massa.
 - Nunca commitar: `node_modules/`, `www/`, `android/app/build/`, `supabase.config.ts`, `.env*`, APKs.
 
@@ -60,13 +60,13 @@ O agente deve entender pedidos simples como estes e executar tudo sozinho:
 - "Explica o que você fez na IMP-xxx." / "O que é RLS?"
 - "Deu erro: <print ou texto>." → diagnosticar, corrigir e explicar.
 
-## 6. Prompt para revisão (antes do PR)
+## 6. Prompt de autorrevisão (antes de cada push)
 ```text
-Revise o diff atual (git diff main) contra AGENTS.md e o guia da área. Liste só problemas reais:
+Revise o diff a enviar (git diff --staged ou git diff origin/main) contra AGENTS.md e o guia da área. Liste só problemas reais:
 segurança/privacidade, RLS, segredos, estados de loading/erro, duplo envio, tipos any, escopo extra.
 Não reescreva o código; aponte arquivo:linha e a correção mínima.
 ```
 Economia de tokens: uma task por conversa; carregar só o guia da área; o HANDOFF carrega o contexto entre conversas.
 
 ## 7. Definition of Done global (Notion "Git Workflow e DoD")
-Código executa e `npm run check` passa · comportamento e erros testados · nenhum segredo no diff/bundle/logs · alteração revisada por humano · caminhos/comandos/configuração manual registrados · evidência identifica o build · alunos explicam entrada/processamento/saída/armazenamento/falha (apoiados pela "🎓 Explicação para a equipe").
+Código executa e `npm run check` passa · comportamento e erros testados · nenhum segredo no diff/bundle/logs · alteração autorrevisada pelo agente e explicada à equipe · caminhos/comandos/configuração manual registrados · evidência identifica o build · alunos explicam entrada/processamento/saída/armazenamento/falha (apoiados pela "🎓 Explicação para a equipe").

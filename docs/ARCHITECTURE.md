@@ -45,6 +45,7 @@ Sem servidor próprio, sem Python, sem ML local.
 | Arquivo | Responsabilidade |
 |---|---|
 | `core/config/app-config.ts` | Lê environment, valida chave (bloqueia secret), limites de foto |
+| `core/config/observation-storage.ts` | Nome, formatos e limite do bucket privado observation-images (IMP-015); não realiza upload |
 | `core/supabase/supabase.service.ts` | Único `createClient`; `client` lança `config_missing` sem configuração |
 | `core/auth/auth.service.ts` | Sessão e perfil em signals, `init()` no boot, login/saída, carga cancelável de perfil e `previewMode` |
 | `core/profiles/profile.service.ts` | Lê/cria o próprio perfil sem sobrescrever apelido existente (IMP-032); fonte do nome exibido |

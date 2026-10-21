@@ -7,12 +7,16 @@ import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const profilesMode = process.argv.includes('--profiles');
-const imagesMode = process.argv.includes('--images');
-if (profilesMode && imagesMode) throw new Error('Selecione apenas um roteiro de verificação.');
-const taskId = imagesMode ? 'IMP-014' : profilesMode ? 'IMP-032' : 'IMP-013';
-const assetName = imagesMode ? 'observation-images' : profilesMode ? 'profile-privacy' : 'observation-privacy';
-const port = imagesMode ? 4215 : profilesMode ? 4214 : 4213;
+const modes = [
+  { flag: '--profiles', taskId: 'IMP-032', assetName: 'profile-privacy', port: 4214, migrationFile: '20261021115711_imp032_profiles.sql' },
+  { flag: '--images', taskId: 'IMP-014', assetName: 'observation-images', port: 4215, migrationFile: '20261021122259_imp014_observation_images.sql' },
+  { flag: '--storage', taskId: 'IMP-015', assetName: 'observation-storage', port: 4216, migrationFile: '20261021130929_imp015_private_storage.sql' },
+];
+const selectedModes = modes.filter(mode => process.argv.includes(mode.flag));
+if (selectedModes.length > 1) throw new Error('Selecione apenas um roteiro de verificação.');
+const { taskId, assetName, port, migrationFile } = selectedModes[0] ?? {
+  taskId: 'IMP-013', assetName: 'observation-privacy', port: 4213, migrationFile: '20261016032127_imp013_observations_private_locations.sql',
+};
 const localConfig = readFileSync(join(root, 'src/environments/supabase.config.ts'), 'utf8');
 const url = localConfig.match(/url\s*:\s*['"]([^'"]*)['"]/u)?.[1]?.trim();
 const publishableKey = localConfig.match(/publishableKey\s*:\s*['"]([^'"]*)['"]/u)?.[1]?.trim();
@@ -31,9 +35,8 @@ const cases = JSON.parse(readFileSync(join(root, `scripts/manual/${assetName}.ca
 const testIds = new Set(cases.map(item => item.id));
 const authReasons = new Set(['invalid_credentials', 'email_not_confirmed', 'over_request_rate_limit', 'user_banned', 'auth_unavailable']);
 const origin = `http://127.0.0.1:${port}`;
-const reportPath = join(root, imagesMode ? '.tmp/imp014-privacy-report.json' : profilesMode ? '.tmp/imp032-privacy-report.json' : '.tmp/imp013-privacy-report.json');
-const migrationVersion = imagesMode ? '20261021122259' : profilesMode ? '20261021115711' : '20261016032127';
-const migrationFile = imagesMode ? '20261021122259_imp014_observation_images.sql' : profilesMode ? '20261021115711_imp032_profiles.sql' : '20261016032127_imp013_observations_private_locations.sql';
+const reportPath = join(root, `.tmp/${taskId.toLowerCase().replace('-', '')}-privacy-report.json`);
+const migrationVersion = migrationFile.slice(0, 14);
 const migrationSha256 = createHash('sha256').update(readFileSync(join(root, 'supabase/migrations', migrationFile))).digest('hex');
 const assets = new Map([
   ['/', ['text/html; charset=utf-8', readFileSync(join(root, `scripts/manual/${assetName}.html`))]],

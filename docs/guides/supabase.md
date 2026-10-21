@@ -72,8 +72,8 @@ create policy "owner inserts initial draft" on public.observations
 - Prova de RLS = teste com **cliente** autenticado como A, como B e anônimo (matriz A/B/anon). SQL Editor roda como admin e **não prova nada**.
 
 ## 5. Storage
-- **Nome atual pedido pela equipe na IMP-015: `observation-images`**, privado; substitui o nome antigo `observation-photos` deste guia. Proposta em revisão, sem bucket remoto criado nesta etapa. `file_size_limit` 5.242.880 bytes; `allowed_mime_types` `image/jpeg, image/png`.
-- Path: `<user_id>/<observation_id>/<image_id>.jpg` ou `.png`, coerente com os metadados da IMP-014. Policies propostas conferem dono do objeto, pasta do usuário e dono da observação. Upload somente draft/idle próprio sem metadado final; `shared/` é reservado ao backend.
+- **Nome atual pedido pela equipe na IMP-015: `observation-images`**, privado; substitui o nome antigo `observation-photos` deste guia. Criado em 21/10 após autorização; policies aplicadas, matriz A/B de arquivos ainda aguardando resultado. `file_size_limit` 5.242.880 bytes; `allowed_mime_types` `image/jpeg, image/png`.
+- Path: `<user_id>/<observation_id>/<image_id>.jpg` ou `.png`, coerente com os metadados da IMP-014. Policies conferem dono do objeto, pasta do usuário e dono da observação. Upload somente draft/idle próprio sem metadado final; `shared/` é reservado ao backend.
 - Sem UPDATE ou `upsert` para sobrescrever. DELETE direto somente de temporário próprio sem metadado correspondente; não executar limpeza como parte dos testes. Arquivo finalizado exige backend autorizado (IMP-035).
 - Cópia compartilhada `shared/<observation_id>/<uuid>.jpg` é escrita só pelo backend (IMP-039); leitura por outros só via Function `get-observation-image` que assina URL de **60 s** (IMP-040). Nunca bucket público.
 

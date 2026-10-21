@@ -1,4 +1,4 @@
-/** IMP-015 — roteiro SDK preparado, sem execução nesta proposta.
+/** IMP-015 — roteiro SDK manual, somente no dev com a migration aplicada.
  * Usar somente contas dev A/B e imagem sintética gerada pela equipe.
  * Mantém dados/arquivos de teste; a única chamada remove é um teste NEGATIVO
  * do arquivo criado e finalizado nesta mesma execução, nunca uma foto existente.

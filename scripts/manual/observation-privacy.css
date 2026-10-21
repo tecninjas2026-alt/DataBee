@@ -1,0 +1,15 @@
+:root { font-family: system-ui, sans-serif; color: #302516; background: #fffaf0; }
+body { margin: 0; }
+main { max-width: 760px; margin: auto; padding: 24px 20px; }
+h1 { font-size: 1.6rem; }
+p, li { line-height: 1.6; }
+form { display: grid; gap: 16px; }
+fieldset { border: 1px solid #c7b185; border-radius: 12px; padding: 16px; min-width: 0; }
+label { display: grid; gap: 6px; margin: 12px 0; }
+input { font: inherit; padding: 12px; min-width: 0; border: 1px solid #9e875c; border-radius: 6px; }
+button { font: inherit; font-weight: 600; padding: 16px; border: 0; border-radius: 10px; background: #ffbe32; color: #302516; cursor: pointer; }
+button:disabled { opacity: .6; cursor: wait; }
+li { padding: 8px 0; }
+[data-status="Pass"] { color: #175c2d; }
+[data-status="Fail"] { color: #a51d26; font-weight: 700; }
+a { color: #704a00; }

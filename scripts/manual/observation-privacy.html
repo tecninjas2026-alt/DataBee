@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>DataBee — verificação manual de privacidade</title>
+    <link rel="stylesheet" href="/client.css">
+    <script type="module" src="/client.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Verificação de privacidade — IMP-013</h1>
+      <p>Ferramenta local da equipe. Execute somente depois de aplicar a migration no projeto dev conferido.</p>
+      <p>O teste cria três rascunhos privados e uma localização artificial, com dados sintéticos. Não usa o GPS do aparelho, não chama IA e não apaga registros: as tentativas de DELETE usam um filtro que nunca corresponde a uma linha. As senhas são enviadas pelo SDK diretamente ao Supabase e ficam só na memória desta página.</p>
+      <form id="accounts" autocomplete="off">
+        <fieldset><legend>Conta A</legend>
+          <label>E-mail de teste A<input id="a-email" type="email" autocomplete="off" required></label>
+          <label>Senha de teste A<input id="a-password" type="password" autocomplete="off" required></label>
+        </fieldset>
+        <fieldset><legend>Conta B — pessoa diferente</legend>
+          <label>E-mail de teste B<input id="b-email" type="email" autocomplete="off" required></label>
+          <label>Senha de teste B<input id="b-password" type="password" autocomplete="off" required></label>
+        </fieldset>
+        <button id="run" type="submit">Executar verificação real</button>
+      </form>
+      <p id="summary" role="status" aria-live="polite">Ainda não executado. Pass = esperado confirmado; Fail = falhou; Not run = não executado.</p>
+      <a id="download" href="/report" download="imp013-privacy-report.json" hidden>Baixar relatório sanitizado</a>
+      <ol id="results"></ol>
+    </main>
+  </body>
+</html>

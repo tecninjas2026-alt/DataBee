@@ -1,0 +1,246 @@
+{
+  "project_ref": "uqfuuahziwgxwjymtwil",
+  "migration_version": "20261016032127",
+  "migration_sha256": "59c2375ff2b4f937d292adf1a0a3ea578649d3b96294b3b72adb3d438e59482f",
+  "recorded_at": "2026-10-21T01:54:31.649Z",
+  "source": "manual-sdk-client",
+  "tests": [
+    {
+      "id": "auth-a",
+      "status": "Pass"
+    },
+    {
+      "id": "auth-b",
+      "status": "Fail",
+      "reason": "invalid_credentials"
+    },
+    {
+      "id": "distinct",
+      "status": "Not run"
+    },
+    {
+      "id": "draft",
+      "status": "Not run"
+    },
+    {
+      "id": "read-own",
+      "status": "Not run"
+    },
+    {
+      "id": "no-gps-columns",
+      "status": "Not run"
+    },
+    {
+      "id": "location",
+      "status": "Not run"
+    },
+    {
+      "id": "without-location",
+      "status": "Not run"
+    },
+    {
+      "id": "b-own",
+      "status": "Not run"
+    },
+    {
+      "id": "a-read-b",
+      "status": "Not run"
+    },
+    {
+      "id": "b-read-observation",
+      "status": "Not run"
+    },
+    {
+      "id": "b-read-location",
+      "status": "Not run"
+    },
+    {
+      "id": "b-update-observation",
+      "status": "Not run"
+    },
+    {
+      "id": "b-update-location",
+      "status": "Not run"
+    },
+    {
+      "id": "unchanged",
+      "status": "Not run"
+    },
+    {
+      "id": "anon-observation",
+      "status": "Not run"
+    },
+    {
+      "id": "anon-location",
+      "status": "Not run"
+    },
+    {
+      "id": "anon-insert",
+      "status": "Not run"
+    },
+    {
+      "id": "anon-update",
+      "status": "Not run"
+    },
+    {
+      "id": "anon-insert-location",
+      "status": "Not run"
+    },
+    {
+      "id": "anon-update-location",
+      "status": "Not run"
+    },
+    {
+      "id": "latitude",
+      "status": "Not run"
+    },
+    {
+      "id": "longitude",
+      "status": "Not run"
+    },
+    {
+      "id": "latitude-low",
+      "status": "Not run"
+    },
+    {
+      "id": "longitude-low",
+      "status": "Not run"
+    },
+    {
+      "id": "accuracy",
+      "status": "Not run"
+    },
+    {
+      "id": "source",
+      "status": "Not run"
+    },
+    {
+      "id": "consent",
+      "status": "Not run"
+    },
+    {
+      "id": "accuracy-null",
+      "status": "Not run"
+    },
+    {
+      "id": "accuracy-zero",
+      "status": "Not run"
+    },
+    {
+      "id": "accuracy-restore",
+      "status": "Not run"
+    },
+    {
+      "id": "own-update",
+      "status": "Not run"
+    },
+    {
+      "id": "forge-owner",
+      "status": "Not run"
+    },
+    {
+      "id": "location-owner",
+      "status": "Not run"
+    },
+    {
+      "id": "b-location-owner",
+      "status": "Not run"
+    },
+    {
+      "id": "insert-lifecycle",
+      "status": "Not run"
+    },
+    {
+      "id": "insert-publication",
+      "status": "Not run"
+    },
+    {
+      "id": "insert-analysis_status",
+      "status": "Not run"
+    },
+    {
+      "id": "insert-curation_status",
+      "status": "Not run"
+    },
+    {
+      "id": "insert-analysis_started_at",
+      "status": "Not run"
+    },
+    {
+      "id": "insert-public_region_label",
+      "status": "Not run"
+    },
+    {
+      "id": "insert-created_at",
+      "status": "Not run"
+    },
+    {
+      "id": "update-lifecycle",
+      "status": "Not run"
+    },
+    {
+      "id": "update-publication",
+      "status": "Not run"
+    },
+    {
+      "id": "update-analysis_status",
+      "status": "Not run"
+    },
+    {
+      "id": "update-curation_status",
+      "status": "Not run"
+    },
+    {
+      "id": "update-analysis_started_at",
+      "status": "Not run"
+    },
+    {
+      "id": "update-public_region_label",
+      "status": "Not run"
+    },
+    {
+      "id": "update-created_at",
+      "status": "Not run"
+    },
+    {
+      "id": "update-owner",
+      "status": "Not run"
+    },
+    {
+      "id": "update-location-owner",
+      "status": "Not run"
+    },
+    {
+      "id": "update-location-observation",
+      "status": "Not run"
+    },
+    {
+      "id": "delete-a-observation",
+      "status": "Not run"
+    },
+    {
+      "id": "delete-a-location",
+      "status": "Not run"
+    },
+    {
+      "id": "delete-b-observation",
+      "status": "Not run"
+    },
+    {
+      "id": "delete-b-location",
+      "status": "Not run"
+    },
+    {
+      "id": "delete-anon-observation",
+      "status": "Not run"
+    },
+    {
+      "id": "delete-anon-location",
+      "status": "Not run"
+    },
+    {
+      "id": "final-integrity",
+      "status": "Not run"
+    }
+  ]
+}

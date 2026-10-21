@@ -18,7 +18,8 @@
     "android:run": "npm run build && npx cap run android",
     "supabase": "node scripts/supabase.mjs",
     "start:lan": "ng serve --host 0.0.0.0",
-    "prestart:lan": "npm run ensure-env"
+    "prestart:lan": "npm run ensure-env",
+    "verify:privacy": "node scripts/verify-observation-privacy.mjs"
   },
   "private": true,
   "dependencies": {

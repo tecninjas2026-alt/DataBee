@@ -1,0 +1,49 @@
+{
+  "project_ref": "uqfuuahziwgxwjymtwil",
+  "migration_version": "20261016032127",
+  "migration_sha256": "59c2375ff2b4f937d292adf1a0a3ea578649d3b96294b3b72adb3d438e59482f",
+  "recorded_at": "2026-10-21T01:49:17.613Z",
+  "source": "anonymous-sdk-node",
+  "tests": [
+    {
+      "id": "anon-observation",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anon-location",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anon-insert",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anon-update",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anon-insert-location",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anon-update-location",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "delete-anon-observation",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "delete-anon-location",
+      "status": "Pass",
+      "code": "42501"
+    }
+  ]
+}

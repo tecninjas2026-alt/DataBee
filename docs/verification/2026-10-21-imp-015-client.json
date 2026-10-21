@@ -1,0 +1,109 @@
+{
+  "project_ref": "uqfuuahziwgxwjymtwil",
+  "migration_version": "20261021130929",
+  "migration_sha256": "fade4e832c34f0822eabc6312ad1678e5aacd6357e1425f5f287f9d699c174d8",
+  "recorded_at": "2026-10-21T13:34:38.325Z",
+  "source": "manual-sdk-client",
+  "tests": [
+    {
+      "id": "auth-a",
+      "status": "Pass"
+    },
+    {
+      "id": "auth-b",
+      "status": "Pass"
+    },
+    {
+      "id": "distinct-accounts",
+      "status": "Pass"
+    },
+    {
+      "id": "own-draft",
+      "status": "Pass"
+    },
+    {
+      "id": "other-own-draft",
+      "status": "Pass"
+    },
+    {
+      "id": "other-own-file",
+      "status": "Pass"
+    },
+    {
+      "id": "owner-cannot-read-other",
+      "status": "Pass"
+    },
+    {
+      "id": "owner-upload",
+      "status": "Pass"
+    },
+    {
+      "id": "owner-download",
+      "status": "Pass"
+    },
+    {
+      "id": "other-download-denied",
+      "status": "Pass"
+    },
+    {
+      "id": "other-upload-denied",
+      "status": "Pass"
+    },
+    {
+      "id": "foreign-observation-upload-denied",
+      "status": "Pass"
+    },
+    {
+      "id": "shared-upload-denied",
+      "status": "Pass"
+    },
+    {
+      "id": "anonymous-download-denied",
+      "status": "Pass"
+    },
+    {
+      "id": "anonymous-upload-denied",
+      "status": "Pass"
+    },
+    {
+      "id": "oversize-rejected",
+      "status": "Pass"
+    },
+    {
+      "id": "mime-rejected",
+      "status": "Pass"
+    },
+    {
+      "id": "upsert-overwrite-denied",
+      "status": "Pass"
+    },
+    {
+      "id": "direct-update-denied",
+      "status": "Pass"
+    },
+    {
+      "id": "metadata-finalized",
+      "status": "Pass"
+    },
+    {
+      "id": "upload-after-finalization-denied",
+      "status": "Pass"
+    },
+    {
+      "id": "finalized-update-denied",
+      "status": "Pass"
+    },
+    {
+      "id": "finalized-delete-blocked",
+      "status": "Pass"
+    },
+    {
+      "id": "finalized-file-preserved",
+      "status": "Pass"
+    },
+    {
+      "id": "public-url-denied",
+      "status": "Pass"
+    }
+  ]
+}

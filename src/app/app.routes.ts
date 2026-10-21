@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { authGuard, guestGuard } from './core/auth/auth.guards';
+import { authGuard, guestGuard, tabsChildGuard } from './core/auth/auth.guards';
 
 /**
  * Mapa das 8 telas do MVP (D25):
@@ -16,7 +16,7 @@ export const routes: Routes = [
   },
   {
     path: 'tabs',
-    canActivate: [authGuard],
+    canActivateChild: [tabsChildGuard],
     loadComponent: () => import('./features/tabs/tabs.page').then((m) => m.TabsPage),
     children: [
       {

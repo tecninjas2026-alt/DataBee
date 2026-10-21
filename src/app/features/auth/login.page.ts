@@ -91,8 +91,15 @@ export class LoginPage {
     } catch (error) {
       this.errorMessage.set(toUserMessage(error));
     } finally {
+      this.form.controls.password.reset();
       this.busy.set(false);
     }
+  }
+
+  ionViewDidLeave(): void {
+    this.form.reset();
+    this.errorMessage.set(null);
+    this.infoMessage.set(null);
   }
 
   protected explorePreview(): void {

@@ -83,12 +83,15 @@ export class AuthService {
   }
 
   async signOut(): Promise<void> {
-    if (this.supabase.isConfigured) {
-      // scope 'local': encerra esta instalação; não depende de rede para limpar o estado.
-      const { error } = await this.supabase.client.auth.signOut({ scope: 'local' });
-      if (error) console.warn('[auth] signOut retornou erro; sessão local removida mesmo assim');
+    try {
+      if (this.supabase.isConfigured) {
+        // O SDK encerra esta instalação; JWT já copiado pode valer até expirar.
+        const { error } = await this.supabase.client.auth.signOut({ scope: 'local' });
+        if (error) console.warn('[auth] Não foi possível confirmar a saída no servidor');
+      }
+    } finally {
+      this.updateSession(null);
     }
-    this.updateSession(null);
   }
 
   retryProfile(): void {

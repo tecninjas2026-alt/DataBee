@@ -1,0 +1,28 @@
+{
+  "source": "browser-with-synthetic-network",
+  "checks": {
+    "unauthenticatedDirectRouteBlocked": true,
+    "loadingVisible": true,
+    "invalidCredentialsSafe": true,
+    "duplicateSubmitBlocked": true,
+    "passwordClearedOnFailure": true,
+    "passwordClearedOnSuccess": true,
+    "authenticatedRegistrarAllowed": true,
+    "protectedPageWaitsForRefresh": true,
+    "sessionRestoredAfterRefresh": true,
+    "logoutClearsPrivateState": true,
+    "backAfterLogoutBlocked": true,
+    "directAfterLogoutBlocked": true,
+    "newSessionBelongsToB": true,
+    "previewHomePreserved": true,
+    "previewRegistrarDenied": true,
+    "previewDetailsDenied": true,
+    "noOverflow360": true,
+    "noOverflow390": true
+  },
+  "source_sha256": "e6e244315073b5a031b9ce545eded2d5f9d267bc2e5baf6c045904ef8b5d644a",
+  "runtimeErrors": 0,
+  "aiRequests": 0,
+  "unexpectedBackendRequests": 0,
+  "recorded_at": "2026-10-21T13:55:56.622Z"
+}

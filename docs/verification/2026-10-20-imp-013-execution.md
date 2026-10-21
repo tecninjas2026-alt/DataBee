@@ -1,6 +1,6 @@
 # IMP-013 — aplicação e verificação em 20/10/2026
 
-**Estado:** migration aplicada no dev; acesso anônimo testado; matriz A/B ainda incompleta por falha na entrada de B. Não declarar Done nem fazer merge até obter as evidências restantes e revisão humana.
+**Estado:** migration aplicada no dev; **59/59 casos SDK A/B/anon Pass**, com confirmação da equipe. Código e testes prontos para revisão final. **Envio da evidência final e merge bloqueados pelo GitHub**, que informou conta suspensa (HTTP 403). Não declarar Done; Notion e checkpoint continuam pendentes.
 
 ## 🤖 Registro do agente — 20/10/2026
 
@@ -42,7 +42,7 @@ Executada pelo agente com `@supabase/supabase-js` e a chave pública local, sem 
 
 Os probes de UPDATE/DELETE usam igualdade e desigualdade simultâneas para o mesmo identificador: nenhuma linha pode corresponder ao filtro, mesmo se houver permissão indevida. Não se apagou nenhum registro remoto nem se removeu usuário/projeto.
 
-### Cliente manual A/B/anon e pendência atual
+### Cliente manual A/B/anon
 
 Arquivos: `scripts/verify-observation-privacy.mjs`, `scripts/manual/observation-privacy.{client.ts,cases.json,html,css}` e comando `verify:privacy` no `package.json`. O rascunho preexistente foi revisado e complementado para 59 casos, incluindo dono legítimo, ausência de GPS, isolamento, limites numéricos, estados protegidos, UPDATE permitido, identificadores e negação de DELETE.
 
@@ -54,12 +54,39 @@ Para cada execução completa, o teste cria três drafts artificiais e uma local
 
 Na [tentativa registrada](2026-10-20-imp-013-initial-auth.json): **auth-a Pass; auth-b Fail; 57 casos Not run**. A falha ocorreu antes da criação de dados e antes da matriz de isolamento. Após melhorar a mensagem segura e recarregar a página, o relatório confirmou `invalid_credentials`: e-mail/senha de B não foram aceitos. Isso não distingue qual dos dois valores está incorreto ou se a conta existe; não é falha de RLS. Solicitada à equipe a correção do acesso de B na página ou conferência no Dashboard, sem compartilhar credenciais.
 
+### Resultado final autenticado
+
+Depois, a equipe informou **“deu tudo certo agora”**. O agente leu o relatório mais recente, gerado em **20/10/2026 às 22:57:40 (America/Sao_Paulo)**, e confirmou **59 Pass, 0 Fail e 0 Not run**. [Relatório final sanitizado](2026-10-20-imp-013-client.json).
+
+Antes de guardar a evidência, foram conferidos referência do projeto, versão/hash do SQL, origem do relatório, IDs únicos e correspondência exata dos 59 casos com a matriz versionada. Só foram copiados metadados públicos, IDs de casos, resultados e códigos SQL permitidos. A tentativa inicial de autenticação foi mantida como histórico e não representa o resultado final.
+
+| Verificação | Resultado real |
+|---|---|
+| A/B autenticados e distintos; criação e leitura próprias | Pass |
+| B não lê/altera observação ou localização de A; A não lê observação de B | Pass |
+| Draft sem GPS; captured_at NULL quando omitido; SELECT observations sem campos de GPS | Pass |
+| GPS artificial e vínculo do dono; precisão NULL/zero/positiva | Pass |
+| Limites superior/inferior de latitude/longitude, precisão negativa e origem/consentimento inválidos | Recusados como esperado |
+| INSERT/UPDATE de lifecycle, publication, analysis_status, curation_status, analysis_started_at, região pública e created_at | Recusados como esperado |
+| Troca de donos ou vínculo da localização | Recusada como esperado |
+| UPDATE permitido pelo dono | Pass |
+| A/B/anon sem grant DELETE, com filtros sem correspondência | Recusado como esperado; nenhuma linha apagada |
+| Integridade final de estados, donos e dados artificiais | Pass |
+
+O problema de autenticação de B foi resolvido pela equipe na página; o agente não recebeu nem alterou a senha. Não houve redefinição de conta, alteração de RLS para contornar acesso ou uso de SQL admin para provar isolamento.
+
+### GitHub: bloqueio externo na finalização
+
+Ao conferir main antes do merge, `git fetch origin` retornou **403** e a mensagem **“Your account is suspended”**. Uma consulta autenticada de leitura ao PR #9 também retornou **403**, com suspensão de conta confirmada na resposta. Não se trocou de conta nem se tentou contornar a restrição.
+
+Até a última comunicação bem-sucedida, o PR #9 estava aberto em rascunho e a branch remota continha `dbfde94` (aplicação/cliente/evidência parcial). Os arquivos finais ficam em commit local enquanto a conta não recupera acesso. Não foi possível verificar se main mudou, enviar a evidência final, atualizar o PR ou realizar merge. A referência origin/main em cache não é uma nova conferência do remoto.
+
 ### Pendências para fechar a etapa
 
-1. Responsável conferir a conta B e autenticar A/B na página local; credenciais nunca pelo chat.
-2. Obter relatório completo, corrigir eventuais falhas e registrar a evidência sanitizada, distinguindo Fail de Not run.
+1. Responsável recuperar o acesso da conta no GitHub; não há pendência de senha B nos testes.
+2. Com acesso restabelecido: fetch, conferir main, rebase se necessário, realizar os checks pertinentes e enviar a evidência final ao PR #9. Não repetir a aplicação da migration nem os testes sem motivo novo.
 3. Reconciliar documentação/status da task e dependências no Notion quando houver acesso; obter revisão humana/checkpoint.
-4. Atualizar o PR com o resultado final e fazer merge somente com os critérios de segurança atendidos. `Done` depende da confirmação da equipe.
+4. Atualizar o PR, retirar de rascunho e fazer merge conforme workflow. Atualizar main local após merge. `Done` depende da confirmação da equipe; não foi alterado nesta sessão.
 
 APK não gerado: esta task não altera câmera, GPS do aparelho ou Android. O botão Salvar do app continua dependendo das tasks de persistência.
 
@@ -67,7 +94,7 @@ APK não gerado: esta task não altera câmera, GPS do aparelho ou Android. O bo
 
 Agora a receita foi aplicada: as duas gavetas já existem no Supabase. Entrada: conta e dados de uma observação → processamento: o banco confere quem é o dono, os campos permitidos e os limites dos valores → saída: rascunho privado e localização separada quando ela for informada.
 
-Os oito testes sem login confirmaram que uma pessoa sem conta não abre as gavetas. Para provar a separação entre usuários, precisamos entrar como A e B. Uma falha de login acontece antes dessa conferência e não conta como teste aprovado do banco.
+Os testes confirmaram que uma pessoa sem login não abre as gavetas e que B não acessa os registros privados de A. Os 59 casos passaram com as contas distintas. Isso protege os dados mesmo quando uma requisição tenta mudar estados fora da tela. O bloqueio atual está no GitHub, não na entrada de B nem no banco.
 
 ### Como testar no computador
 

@@ -1,0 +1,284 @@
+{
+  "project_ref": "uqfuuahziwgxwjymtwil",
+  "migration_version": "20261016032127",
+  "migration_sha256": "59c2375ff2b4f937d292adf1a0a3ea578649d3b96294b3b72adb3d438e59482f",
+  "recorded_at": "2026-10-21T01:57:40.852Z",
+  "source": "manual-sdk-client",
+  "tests": [
+    {
+      "id": "auth-a",
+      "status": "Pass"
+    },
+    {
+      "id": "auth-b",
+      "status": "Pass"
+    },
+    {
+      "id": "distinct",
+      "status": "Pass"
+    },
+    {
+      "id": "draft",
+      "status": "Pass"
+    },
+    {
+      "id": "read-own",
+      "status": "Pass"
+    },
+    {
+      "id": "no-gps-columns",
+      "status": "Pass"
+    },
+    {
+      "id": "location",
+      "status": "Pass"
+    },
+    {
+      "id": "without-location",
+      "status": "Pass"
+    },
+    {
+      "id": "b-own",
+      "status": "Pass"
+    },
+    {
+      "id": "a-read-b",
+      "status": "Pass"
+    },
+    {
+      "id": "b-read-observation",
+      "status": "Pass"
+    },
+    {
+      "id": "b-read-location",
+      "status": "Pass"
+    },
+    {
+      "id": "b-update-observation",
+      "status": "Pass"
+    },
+    {
+      "id": "b-update-location",
+      "status": "Pass"
+    },
+    {
+      "id": "unchanged",
+      "status": "Pass"
+    },
+    {
+      "id": "anon-observation",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anon-location",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anon-insert",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anon-update",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anon-insert-location",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "anon-update-location",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "latitude",
+      "status": "Pass",
+      "code": "23514"
+    },
+    {
+      "id": "longitude",
+      "status": "Pass",
+      "code": "23514"
+    },
+    {
+      "id": "latitude-low",
+      "status": "Pass",
+      "code": "23514"
+    },
+    {
+      "id": "longitude-low",
+      "status": "Pass",
+      "code": "23514"
+    },
+    {
+      "id": "accuracy",
+      "status": "Pass",
+      "code": "23514"
+    },
+    {
+      "id": "source",
+      "status": "Pass",
+      "code": "23514"
+    },
+    {
+      "id": "consent",
+      "status": "Pass",
+      "code": "23514"
+    },
+    {
+      "id": "accuracy-null",
+      "status": "Pass"
+    },
+    {
+      "id": "accuracy-zero",
+      "status": "Pass"
+    },
+    {
+      "id": "accuracy-restore",
+      "status": "Pass"
+    },
+    {
+      "id": "own-update",
+      "status": "Pass"
+    },
+    {
+      "id": "forge-owner",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "location-owner",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "b-location-owner",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "insert-lifecycle",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "insert-publication",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "insert-analysis_status",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "insert-curation_status",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "insert-analysis_started_at",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "insert-public_region_label",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "insert-created_at",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "update-lifecycle",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "update-publication",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "update-analysis_status",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "update-curation_status",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "update-analysis_started_at",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "update-public_region_label",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "update-created_at",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "update-owner",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "update-location-owner",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "update-location-observation",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "delete-a-observation",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "delete-a-location",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "delete-b-observation",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "delete-b-location",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "delete-anon-observation",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "delete-anon-location",
+      "status": "Pass",
+      "code": "42501"
+    },
+    {
+      "id": "final-integrity",
+      "status": "Pass"
+    }
+  ]
+}

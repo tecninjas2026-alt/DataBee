@@ -1,0 +1,73 @@
+{
+  "scope": "local-only-no-Supabase",
+  "checks": [
+    {
+      "name": "manifesto inicial ausente",
+      "passed": true
+    },
+    {
+      "name": "origem externa recusada",
+      "passed": true
+    },
+    {
+      "name": "reserva local aceita",
+      "passed": true
+    },
+    {
+      "name": "manifesto salvo antes de resposta",
+      "passed": true
+    },
+    {
+      "name": "PNG persistido idêntico",
+      "passed": true
+    },
+    {
+      "name": "segunda aba bloqueada",
+      "passed": true
+    },
+    {
+      "name": "etapa com licença errada recusada",
+      "passed": true
+    },
+    {
+      "name": "gravar etapa pendente",
+      "passed": true
+    },
+    {
+      "name": "liberar execução",
+      "passed": true
+    },
+    {
+      "name": "outras contas recusadas",
+      "passed": true
+    },
+    {
+      "name": "retomada conserva IDs e pendência",
+      "passed": true
+    },
+    {
+      "name": "gravar confirmação",
+      "passed": true
+    },
+    {
+      "name": "regressão de etapa recusada",
+      "passed": true
+    },
+    {
+      "name": "manifesto inconsistente bloqueia retomada",
+      "passed": true
+    },
+    {
+      "name": "Host estrangeiro recusado",
+      "passed": true
+    },
+    {
+      "name": "origem estrangeira recusada no servidor real",
+      "passed": true
+    },
+    {
+      "name": "servidor real ainda sem execução",
+      "passed": true
+    }
+  ]
+}

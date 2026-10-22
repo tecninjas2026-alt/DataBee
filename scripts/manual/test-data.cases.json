@@ -1,0 +1,20 @@
+[
+  { "id": "auth-a", "title": "Entrar com A" },
+  { "id": "auth-b", "title": "Entrar com B" },
+  { "id": "distinct-accounts", "title": "Contas diferentes" },
+  { "id": "manifest-saved", "title": "Manifesto e PNG salvos antes das escritas" },
+  { "id": "a-created", "title": "Conjunto A completo e etiquetado" },
+  { "id": "b-created", "title": "Conjunto B completo e etiquetado" },
+  { "id": "a-reads-own", "title": "A lê seus dados e PNG idêntico" },
+  { "id": "b-reads-own", "title": "B lê seus dados e PNG idêntico" },
+  { "id": "b-cannot-read-a", "title": "B não lê os registros de A" },
+  { "id": "b-cannot-download-a", "title": "B não baixa o PNG de A" },
+  { "id": "b-cannot-update-draft", "title": "B não modifica o rascunho de A" },
+  { "id": "b-cannot-update-location", "title": "B não modifica a localização fictícia de A" },
+  { "id": "b-cannot-update-image", "title": "B não modifica os metadados de A" },
+  { "id": "b-cannot-replace-png", "title": "B não substitui o PNG de A" },
+  { "id": "anon-cannot-read", "title": "Sem login não lê os registros privados" },
+  { "id": "anon-cannot-download", "title": "Sem login não baixa o PNG" },
+  { "id": "a-preserved", "title": "A permanece íntegro após tentativas" },
+  { "id": "b-preserved", "title": "Controle B permanece íntegro" }
+]

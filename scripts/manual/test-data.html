@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>DataBee — TEST DATA — IMP-069</title>
+    <link rel="stylesheet" href="/client.css">
+    <script type="module" src="/client.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>TEST DATA — IMP-069</h1>
+      <p><strong>Dados fictícios, sem valor científico.</strong> Ferramenta de desenvolvimento fora do app.</p>
+      <p id="project" role="status">Conferindo o projeto de desenvolvimento…</p>
+      <p>Cria um conjunto para A e outro para B: rascunho privado, localização fictícia (0,0 ou 0,1), PNG artificial com texto TEST DATA e metadados da imagem. Não usa câmera, GPS ou IA.</p>
+      <p>O manifesto é a lista de etiquetas dos dados: fica salvo neste computador antes da criação. Se houver falha, use as mesmas contas e o mesmo botão para conferir os IDs e continuar. Nenhuma exclusão é executada.</p>
+      <p>Senhas seguem direto para o Supabase. Não são gravadas no manifesto ou relatório. Use somente as contas de teste A/B.</p>
+      <form id="accounts" autocomplete="off">
+        <fieldset><legend>Conta A de teste</legend>
+          <label>E-mail A<input id="a-email" type="email" autocomplete="off" required></label>
+          <label>Senha A<input id="a-password" type="password" autocomplete="off" required></label>
+        </fieldset>
+        <fieldset><legend>Conta B — diferente de A</legend>
+          <label>E-mail B<input id="b-email" type="email" autocomplete="off" required></label>
+          <label>Senha B<input id="b-password" type="password" autocomplete="off" required></label>
+        </fieldset>
+        <button id="run" type="submit" disabled>Criar ou retomar os dois conjuntos TEST DATA</button>
+      </form>
+      <p id="summary" role="status" aria-live="polite">Ainda não executado. Pass = confirmado; Fail = falhou; Not run = não executado.</p>
+      <p><a href="/seed-run" download="imp069-manifest-local.json">Consultar manifesto local (IDs privados; não publicar)</a></p>
+      <a id="download" href="/report" download="imp069-report.json" hidden>Baixar relatório sem dados pessoais</a>
+      <ol id="results"></ol>
+    </main>
+  </body>
+</html>

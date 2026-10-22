@@ -22,7 +22,8 @@
     "verify:privacy": "node scripts/verify-observation-privacy.mjs",
     "verify:profiles": "node scripts/verify-observation-privacy.mjs --profiles",
     "verify:images": "node scripts/verify-observation-privacy.mjs --images",
-    "verify:storage": "node scripts/verify-observation-privacy.mjs --storage"
+    "verify:storage": "node scripts/verify-observation-privacy.mjs --storage",
+    "verify:seed": "node scripts/verify-observation-privacy.mjs --seed"
   },
   "private": true,
   "dependencies": {

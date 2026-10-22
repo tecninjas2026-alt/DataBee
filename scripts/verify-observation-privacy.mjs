@@ -5,12 +5,14 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
+import { createSeedHandler } from './manual/test-data.server.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const modes = [
   { flag: '--profiles', taskId: 'IMP-032', assetName: 'profile-privacy', port: 4214, migrationFile: '20261021115711_imp032_profiles.sql' },
   { flag: '--images', taskId: 'IMP-014', assetName: 'observation-images', port: 4215, migrationFile: '20261021122259_imp014_observation_images.sql' },
   { flag: '--storage', taskId: 'IMP-015', assetName: 'observation-storage', port: 4216, migrationFile: '20261021130929_imp015_private_storage.sql' },
+  { flag: '--seed', taskId: 'IMP-069', assetName: 'test-data', port: 4217, migrationFile: '20261021130929_imp015_private_storage.sql' },
 ];
 const selectedModes = modes.filter(mode => process.argv.includes(mode.flag));
 if (selectedModes.length > 1) throw new Error('Selecione apenas um roteiro de verificação.');
@@ -38,11 +40,16 @@ const origin = `http://127.0.0.1:${port}`;
 const reportPath = join(root, `.tmp/${taskId.toLowerCase().replace('-', '')}-privacy-report.json`);
 const migrationVersion = migrationFile.slice(0, 14);
 const migrationSha256 = createHash('sha256').update(readFileSync(join(root, 'supabase/migrations', migrationFile))).digest('hex');
+const seedHandler = taskId === 'IMP-069' ? createSeedHandler(root, reference, origin) : null;
+const scriptSha256 = createHash('sha256').update(bundle.outputFiles[0].contents).digest('hex');
+const serverSha256 = seedHandler ? createHash('sha256')
+  .update(readFileSync(fileURLToPath(import.meta.url)))
+  .update(readFileSync(join(root, 'scripts/manual/test-data.server.mjs'))).digest('hex') : undefined;
 const assets = new Map([
   ['/', ['text/html; charset=utf-8', readFileSync(join(root, `scripts/manual/${assetName}.html`))]],
   ['/client.css', ['text/css; charset=utf-8', readFileSync(join(root, 'scripts/manual/observation-privacy.css'))]],
   ['/client.js', ['text/javascript; charset=utf-8', bundle.outputFiles[0].contents]],
-  ['/config', ['application/json', JSON.stringify({ url, publishableKey })]],
+  ['/config', ['application/json', JSON.stringify({ url, publishableKey, projectRef: reference })]],
 ]);
 
 createServer(async (request, response) => {
@@ -50,6 +57,7 @@ createServer(async (request, response) => {
   response.setHeader('X-Content-Type-Options', 'nosniff');
   response.setHeader('Content-Security-Policy', `default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self' ${url}; base-uri 'none'; frame-ancestors 'none'; form-action 'none'`);
   if (request.headers.host !== `127.0.0.1:${port}`) { response.writeHead(403).end(); return; }
+  if (seedHandler && await seedHandler(request, response)) return;
   const path = request.url;
   if (request.method === 'GET' && assets.has(path)) {
     const [contentType, content] = assets.get(path);
@@ -88,7 +96,9 @@ createServer(async (request, response) => {
         };
       });
       mkdirSync(join(root, '.tmp'), { recursive: true });
-      writeFileSync(reportPath, JSON.stringify({ project_ref: reference, migration_version: migrationVersion, migration_sha256: migrationSha256, recorded_at: new Date().toISOString(), source: 'manual-sdk-client', tests }, null, 2));
+      const report = { project_ref: reference, migration_version: migrationVersion, migration_sha256: migrationSha256, script_sha256: scriptSha256, ...(serverSha256 ? { server_sha256: serverSha256 } : {}), recorded_at: new Date().toISOString(), source: 'manual-sdk-client', tests };
+      if (seedHandler) seedHandler.saveReport(report);
+      else writeFileSync(reportPath, JSON.stringify(report, null, 2));
       response.setHeader('Content-Type', 'application/json');
       response.end('{"saved":true}');
     } catch { response.writeHead(400).end(); }

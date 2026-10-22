@@ -1,0 +1,38 @@
+{
+  "scope": "synthetic-browser-no-Supabase-no-email-delivery",
+  "intercepted_signup_requests": 3,
+  "checks": [
+    {
+      "name": "cadastro sem apelido explica o campo obrigatório",
+      "status": "Pass"
+    },
+    {
+      "name": "e-mail inválido no formulário não envia cadastro",
+      "status": "Pass"
+    },
+    {
+      "name": "senha curta no formulário não envia cadastro",
+      "status": "Pass"
+    },
+    {
+      "name": "destinatário recusado mostra orientação sem detalhes internos",
+      "status": "Pass"
+    },
+    {
+      "name": "endereço rejeitado pelo servidor mostra mensagem própria",
+      "status": "Pass"
+    },
+    {
+      "name": "limite de e-mail termina carregamento e orienta aguardar",
+      "status": "Pass"
+    },
+    {
+      "name": "erros de cadastro não criam sessão local",
+      "status": "Pass"
+    },
+    {
+      "name": "sem exceções JavaScript durante cadastro",
+      "status": "Pass"
+    }
+  ]
+}

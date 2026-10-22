@@ -6,6 +6,8 @@ export type AppErrorCode =
   | 'config_missing'
   | 'auth_invalid_credentials'
   | 'auth_email_not_confirmed'
+  | 'auth_email_invalid'
+  | 'auth_email_delivery_unavailable'
   | 'auth_weak_password'
   | 'auth_user_exists'
   | 'auth_rate_limited'

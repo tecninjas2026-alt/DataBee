@@ -29,8 +29,8 @@
         <ion-card-content>
           <h2>Prévia do registro</h2>
           <p>
-            O salvamento ainda está em desenvolvimento, com ou sem localização. Por enquanto, você pode testar
-            a foto e escolher se deseja incluir o GPS. Nenhuma observação foi salva.
+            O salvamento ainda está em desenvolvimento, com ou sem localização. Por enquanto, você pode testar a foto.
+            Para fotos tiradas pelo app, também pode escolher se deseja incluir o GPS. Nenhuma observação foi salva.
           </p>
           <p>A foto fica apenas na memória do app e será perdida ao fechar ou recarregar.</p>
         </ion-card-content>
@@ -39,67 +39,69 @@
       <ion-card>
         <ion-card-content>
           <h2>Localização (opcional)</h2>
-          <p>
-            Usamos o GPS para registrar onde a abelha foi vista. As coordenadas exatas ficam
-            <strong>privadas</strong>
-            (só você vê). Se publicar, o feed mostra apenas “Curitiba — PR” ou “Região Metropolitana de Curitiba (RMC) —
-            PR”.
-          </p>
           @if (photo.source === 'gallery') {
-            <ion-note color="warning">
-              Foto da galeria: a localização atual do aparelho pode não ser o local onde a foto foi tirada.
-            </ion-note>
-          }
-
-          @switch (draft.consent()) {
-            @case ('unknown') {
-              <div class="actions">
-                <ion-button expand="block" (click)="allowLocation()">
-                  <ion-icon slot="start" name="locate" />
-                  Permitir e obter localização
-                </ion-button>
-                <ion-button expand="block" fill="outline" (click)="declineLocation()">
-                  Não usar localização
-                </ion-button>
-              </div>
-            }
-            @case ('declined') {
-              <p role="status">
-                <strong>Localização dispensada.</strong>
-                A foto continua nesta prévia, sem coordenadas. Você pode mudar essa escolha abaixo.
-              </p>
-              <ion-button fill="clear" (click)="allowLocation()">Mudei de ideia: obter localização</ion-button>
-            }
-            @case ('granted') {
-              @if (locating()) {
-                <p>
-                  <ion-spinner name="crescent" />
-                  Obtendo localização…
-                </p>
-              } @else if (draft.location(); as location) {
-                <dl class="summary">
-                  <dt>Latitude</dt>
-                  <dd>{{ location.latitude | number: '1.5-5' }}</dd>
-                  <dt>Longitude</dt>
-                  <dd>{{ location.longitude | number: '1.5-5' }}</dd>
-                  <dt>Precisão</dt>
-                  <dd>± {{ location.accuracy | number: '1.0-0' }} m</dd>
-                  <dt>Origem</dt>
-                  <dd>GPS do dispositivo</dd>
-                </dl>
-                <ion-button fill="clear" (click)="allowLocation()">Atualizar localização</ion-button>
-              } @else {
-                @if (locationError(); as message) {
-                  <ion-text color="danger" role="alert">
-                    <p>{{ message }}</p>
-                  </ion-text>
-                }
+            <p role="status">
+              Para fotos da galeria, não usamos a localização atual do aparelho, pois ela pode ser diferente do lugar
+              onde a foto foi tirada. Este registro fica sem coordenadas.
+            </p>
+          } @else {
+            <p>
+              Usamos o GPS para registrar onde a abelha foi vista. As coordenadas exatas ficam
+              <strong>privadas</strong>
+              (só você vê). Se publicar, o feed mostra apenas “Curitiba — PR” ou “Região Metropolitana de Curitiba (RMC)
+              — PR”.
+            </p>
+            @switch (draft.consent()) {
+              @case ('unknown') {
                 <div class="actions">
-                  <ion-button expand="block" (click)="allowLocation()">Tentar novamente</ion-button>
+                  <ion-button expand="block" (click)="allowLocation()">
+                    <ion-icon slot="start" name="locate" />
+                    Permitir e obter localização
+                  </ion-button>
                   <ion-button expand="block" fill="outline" (click)="declineLocation()">
                     Não usar localização
                   </ion-button>
                 </div>
+              }
+              @case ('declined') {
+                <p role="status">
+                  <strong>Localização dispensada.</strong>
+                  A foto continua nesta prévia, sem coordenadas. Você pode mudar essa escolha abaixo.
+                </p>
+                <ion-button fill="clear" (click)="allowLocation()">Mudei de ideia: obter localização</ion-button>
+              }
+              @case ('granted') {
+                @if (locating()) {
+                  <p>
+                    <ion-spinner name="crescent" />
+                    Obtendo localização…
+                  </p>
+                } @else if (draft.location(); as location) {
+                  <dl class="summary">
+                    <dt>Latitude</dt>
+                    <dd>{{ location.latitude | number: '1.5-5' }}</dd>
+                    <dt>Longitude</dt>
+                    <dd>{{ location.longitude | number: '1.5-5' }}</dd>
+                    <dt>Precisão</dt>
+                    <dd>± {{ location.accuracy | number: '1.0-0' }} m</dd>
+                    <dt>Origem</dt>
+                    <dd>GPS do dispositivo</dd>
+                  </dl>
+                  <ion-button fill="clear" (click)="allowLocation()">Atualizar localização</ion-button>
+                  <ion-button fill="clear" (click)="declineLocation()">Não usar localização</ion-button>
+                } @else {
+                  @if (locationError(); as message) {
+                    <ion-text color="danger" role="alert">
+                      <p>{{ message }}</p>
+                    </ion-text>
+                  }
+                  <div class="actions">
+                    <ion-button expand="block" (click)="allowLocation()">Tentar novamente</ion-button>
+                    <ion-button expand="block" fill="outline" (click)="declineLocation()">
+                      Não usar localização
+                    </ion-button>
+                  </div>
+                }
               }
             }
           }
@@ -113,8 +115,8 @@
           Salvar observação
         </ion-button>
         <ion-note id="save-unavailable">
-          Salvar ainda não está disponível, mesmo com GPS. A localização é opcional e não impede o salvamento
-          quando essa função estiver pronta.
+          Salvar ainda não está disponível, mesmo com GPS. A localização é opcional e não impede o salvamento quando
+          essa função estiver pronta.
         </ion-note>
       </div>
     </div>

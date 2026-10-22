@@ -12,6 +12,7 @@ export type LocationConsent = 'unknown' | 'granted' | 'declined';
  */
 @Injectable({ providedIn: 'root' })
 export class RegistrationDraftStore {
+  private version = 0;
   private readonly _photo = signal<PickedPhoto | null>(null);
   private readonly _location = signal<DeviceLocation | null>(null);
   private readonly _consent = signal<LocationConsent>('unknown');
@@ -21,21 +22,32 @@ export class RegistrationDraftStore {
   readonly consent = this._consent.asReadonly();
   readonly hasPhoto = computed(() => this._photo() !== null);
 
+  /** Invalida respostas assíncronas iniciadas antes de trocar foto/conta ou sair. */
+  get revision(): number {
+    return this.version;
+  }
+
   setPhoto(photo: PickedPhoto): void {
+    this.version++;
     this.releasePhoto();
     this._photo.set(photo);
+    this._location.set(null);
+    this._consent.set('unknown');
   }
 
   setConsent(consent: LocationConsent): void {
+    if (consent === 'granted' && this._photo()?.source !== 'camera') return;
     this._consent.set(consent);
     if (consent !== 'granted') this._location.set(null);
   }
 
   setLocation(location: DeviceLocation): void {
+    if (this._photo()?.source !== 'camera' || this._consent() !== 'granted') return;
     this._location.set(location);
   }
 
   reset(): void {
+    this.version++;
     this.releasePhoto();
     this._photo.set(null);
     this._location.set(null);

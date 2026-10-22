@@ -4,6 +4,7 @@ import { IonButton, IonContent, IonHeader, IonIcon, IonSpinner, IonText, IonTitl
 import { addIcons } from 'ionicons';
 import { arrowForward, camera, image, trashOutline } from 'ionicons/icons';
 
+import { AuthService } from '../../core/auth/auth.service';
 import { PhotoService } from '../../core/device/photo.service';
 import { AppError, toUserMessage } from '../../core/errors/app-error';
 import { PhotoSource } from '../../core/models/observation.model';
@@ -32,6 +33,7 @@ export class RegisterPhotoPage {
   protected readonly draft = inject(RegistrationDraftStore);
   private readonly photos = inject(PhotoService);
   private readonly router = inject(Router);
+  private readonly auth = inject(AuthService);
 
   protected readonly busy = signal(false);
   protected readonly errorMessage = signal<string | null>(null);
@@ -41,14 +43,25 @@ export class RegisterPhotoPage {
   }
 
   protected async pick(source: PhotoSource): Promise<void> {
-    if (this.busy()) return;
+    const owner = this.auth.user()?.id;
+    if (this.busy() || !owner) return;
+    const revision = this.draft.revision;
     this.busy.set(true);
     this.errorMessage.set(null);
     try {
-      this.draft.setPhoto(await this.photos.pick(source));
+      const photo = await this.photos.pick(source);
+      if (this.auth.user()?.id === owner && this.draft.revision === revision) {
+        this.draft.setPhoto(photo);
+      } else {
+        URL.revokeObjectURL(photo.previewUrl);
+      }
     } catch (error) {
       // Cancelar não é erro: mantém a foto anterior (se houver) e a tela utilizável.
-      if (!(error instanceof AppError && error.code === 'photo_cancelled')) {
+      if (
+        this.auth.user()?.id === owner &&
+        this.draft.revision === revision &&
+        !(error instanceof AppError && error.code === 'photo_cancelled')
+      ) {
         this.errorMessage.set(toUserMessage(error));
       }
     } finally {

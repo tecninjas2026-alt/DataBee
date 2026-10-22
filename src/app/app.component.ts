@@ -15,12 +15,18 @@ export class AppComponent {
   private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
   private readonly draft = inject(RegistrationDraftStore);
+  private draftOwner: string | null = null;
 
   constructor() {
-    // Sessão encerrada (logout, expiração, outro dispositivo): limpa dados locais e volta ao login.
+    // Troca direta A → B também precisa limpar a foto/GPS, mesmo sem evento de logout.
     effect(() => {
-      if (!this.auth.initialized() || this.auth.previewMode() || this.auth.isAuthenticated()) return;
-      this.draft.reset();
+      if (!this.auth.initialized()) return;
+      const owner = this.auth.user()?.id ?? null;
+      if (owner !== this.draftOwner || !owner) {
+        this.draft.reset();
+        this.draftOwner = owner;
+      }
+      if (this.auth.previewMode() || owner) return;
       if (!this.router.url.startsWith('/login')) {
         void this.router.navigateByUrl('/login', { replaceUrl: true });
       }

@@ -158,6 +158,14 @@ function mapAuthError(error: unknown): AppError {
       return new AppError('auth_invalid_credentials', 'E-mail ou senha incorretos.', error);
     case 'email_not_confirmed':
       return new AppError('auth_email_not_confirmed', 'Confirme seu e-mail antes de entrar.', error);
+    case 'email_address_invalid':
+      return new AppError('auth_email_invalid', 'Confira o endereço informado e use um e-mail válido.', error);
+    case 'email_address_not_authorized':
+      return new AppError(
+        'auth_email_delivery_unavailable',
+        'Não foi possível enviar a confirmação para este e-mail. Peça ajuda à equipe responsável pelo app.',
+        error,
+      );
     case 'weak_password':
       return new AppError('auth_weak_password', 'Senha fraca. Use pelo menos 8 caracteres.', error);
     case 'user_already_exists':

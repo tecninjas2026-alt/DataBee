@@ -1,0 +1,145 @@
+{
+  "scope": "read-only-structure-not-a-client-RLS-test",
+  "project_ref": "uqfuuahziwgxwjymtwil",
+  "columns_per_table": {
+    "observations": 11,
+    "observation_private_locations": 7,
+    "observation_images": 9
+  },
+  "rls": [
+    {
+      "relname": "objects",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "observations",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "observation_private_locations",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "observation_images",
+      "relrowsecurity": true
+    }
+  ],
+  "bucket": [
+    {
+      "allowed_mime_types": [
+        "image/jpeg",
+        "image/png"
+      ],
+      "file_size_limit": 5242880,
+      "id": "observation-images",
+      "public": false
+    }
+  ],
+  "authenticated_observation_updates": [
+    {
+      "column_name": "captured_at",
+      "privilege_type": "UPDATE"
+    }
+  ],
+  "policies": [
+    {
+      "schema": "public",
+      "table": "observation_images",
+      "name": "owner inserts image metadata into own idle draft",
+      "command": "INSERT",
+      "roles": [
+        "authenticated"
+      ]
+    },
+    {
+      "schema": "public",
+      "table": "observation_images",
+      "name": "owner reads image metadata",
+      "command": "SELECT",
+      "roles": [
+        "authenticated"
+      ]
+    },
+    {
+      "schema": "public",
+      "table": "observation_private_locations",
+      "name": "owner inserts own observation location",
+      "command": "INSERT",
+      "roles": [
+        "authenticated"
+      ]
+    },
+    {
+      "schema": "public",
+      "table": "observation_private_locations",
+      "name": "owner reads private location",
+      "command": "SELECT",
+      "roles": [
+        "authenticated"
+      ]
+    },
+    {
+      "schema": "public",
+      "table": "observation_private_locations",
+      "name": "owner updates private location",
+      "command": "UPDATE",
+      "roles": [
+        "authenticated"
+      ]
+    },
+    {
+      "schema": "public",
+      "table": "observations",
+      "name": "owner inserts initial draft",
+      "command": "INSERT",
+      "roles": [
+        "authenticated"
+      ]
+    },
+    {
+      "schema": "public",
+      "table": "observations",
+      "name": "owner reads observations",
+      "command": "SELECT",
+      "roles": [
+        "authenticated"
+      ]
+    },
+    {
+      "schema": "public",
+      "table": "observations",
+      "name": "owner updates allowed observation fields",
+      "command": "UPDATE",
+      "roles": [
+        "authenticated"
+      ]
+    },
+    {
+      "schema": "storage",
+      "table": "objects",
+      "name": "databee owner deletes only temporary image",
+      "command": "DELETE",
+      "roles": [
+        "authenticated"
+      ]
+    },
+    {
+      "schema": "storage",
+      "table": "objects",
+      "name": "databee owner reads private image",
+      "command": "SELECT",
+      "roles": [
+        "authenticated"
+      ]
+    },
+    {
+      "schema": "storage",
+      "table": "objects",
+      "name": "databee owner uploads temporary image",
+      "command": "INSERT",
+      "roles": [
+        "authenticated"
+      ]
+    }
+  ]
+}

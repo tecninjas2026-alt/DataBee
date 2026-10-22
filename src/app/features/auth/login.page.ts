@@ -82,7 +82,9 @@ export class LoginPage {
       } else {
         const result = await this.auth.signUp(email, password, displayName);
         if (result.needsEmailConfirmation) {
-          this.infoMessage.set('Conta criada! Confirme pelo link enviado ao seu e-mail e depois entre.');
+          this.infoMessage.set(
+            'Confira sua caixa de entrada e o spam. Para entrar, confirme seu e-mail pelo link de cadastro.',
+          );
           this.mode.set('signin');
         } else {
           await this.router.navigateByUrl('/tabs/inicio', { replaceUrl: true });

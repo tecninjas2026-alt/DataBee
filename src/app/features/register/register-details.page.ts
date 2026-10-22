@@ -67,14 +67,20 @@ export class RegisterDetailsPage {
   }
 
   protected async allowLocation(): Promise<void> {
-    if (this.locating()) return;
+    const photo = this.draft.photo();
+    if (this.locating() || photo?.source !== 'camera') return;
     this.draft.setConsent('granted');
     this.locating.set(true);
     this.locationError.set(null);
     try {
-      this.draft.setLocation(await this.locationService.getCurrent());
+      const location = await this.locationService.getCurrent();
+      if (this.draft.photo() === photo && this.draft.consent() === 'granted') {
+        this.draft.setLocation(location);
+      }
     } catch (error) {
-      this.locationError.set(toUserMessage(error));
+      if (this.draft.photo() === photo && this.draft.consent() === 'granted') {
+        this.locationError.set(toUserMessage(error));
+      }
     } finally {
       this.locating.set(false);
     }

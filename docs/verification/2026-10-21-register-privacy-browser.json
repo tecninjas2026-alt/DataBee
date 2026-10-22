@@ -1,0 +1,53 @@
+{
+  "scope": "synthetic-browser-no-Supabase-no-Android",
+  "checks": [
+    {
+      "name": "rota privada sem sessão exige login",
+      "status": "Pass"
+    },
+    {
+      "name": "câmera mantém opção de GPS autorizado",
+      "status": "Pass"
+    },
+    {
+      "name": "galeria limpa coordenadas e consentimento anteriores",
+      "status": "Pass"
+    },
+    {
+      "name": "galeria não chama GPS nem oferece botão de permissão",
+      "status": "Pass"
+    },
+    {
+      "name": "galeria sem overflow em 360px",
+      "status": "Pass"
+    },
+    {
+      "name": "galeria sem overflow em 390px",
+      "status": "Pass"
+    },
+    {
+      "name": "substituir foto da câmera também limpa GPS",
+      "status": "Pass"
+    },
+    {
+      "name": "resposta atrasada de GPS após saída é ignorada",
+      "status": "Pass"
+    },
+    {
+      "name": "resposta atrasada de foto após sair e voltar à mesma conta é ignorada",
+      "status": "Pass"
+    },
+    {
+      "name": "troca direta A para B limpa foto e GPS",
+      "status": "Pass"
+    },
+    {
+      "name": "URL privada após saída continua bloqueada",
+      "status": "Pass"
+    },
+    {
+      "name": "sem exceções JavaScript",
+      "status": "Pass"
+    }
+  ]
+}

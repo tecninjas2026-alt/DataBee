@@ -13,7 +13,20 @@
 
 Estado da versão: **Em teste**. Registro adicionado à página oficial de versões Android do Notion. Nenhuma aprovação completa ou Done atribuído.
 
-## Próxima rodada
+## Segunda rodada — confirmada
+
+A professora respondeu **“Tudo funcionando”** ao roteiro de quatro passos enviado após a primeira rodada. Registrar os seguintes resultados como Pass por relato humano, sem exigir repetição:
+
+| Roteiro efetivamente solicitado | Resultado |
+|---|---|
+| Cancelar câmera, escolher/substituir imagem, sem GPS anterior | Pass — relato humano |
+| GPS desligado, orientação sem travar; religar e tentar novamente | Pass — relato humano |
+| Fechar completamente e reabrir, mantendo a sessão | Pass — relato humano |
+| Sair, usar Voltar, exigir login e limpar foto após entrar novamente | Pass — relato humano |
+
+Essa confirmação não comprova troca entre duas contas, todos os modos de permissão ou cadastro de uma nova conta. Pergunta sobre cadastro/confirmar e-mail enviada à professora, aguardando resposta.
+
+### Roteiro de referência mais amplo
 
 1. Cancelar câmera/galeria, trocar a foto e conferir limpeza da localização anterior.
 2. Negar localização ou desligar GPS: mensagem segura, app utilizável, sem coordenadas inventadas. Reautorizar depois.
@@ -24,4 +37,4 @@ Esses quatro relatos não comprovam todos os 11 casos da IMP-021, a matriz compl
 
 ## Desenvolvimento seguinte
 
-Concluir as validações pendentes de IMP-020/021 e cadastro/sessão IMP-033/034. Depois seguir o plano de IMP-022 (upload privado) e IMP-035 (salvar/descarte), sem refazer foto/GPS ou enfraquecer RLS. Mudanças remotas continuam dependentes da revisão/autorização específica das tasks. Salvar segue desabilitado e IA não foi conectada.
+Próximo checkpoint: cadastro novo com recebimento e confirmação de e-mail (IMP-033), seguido das verificações restantes de IMP-034 e da matriz física. Não repetir os quatro passos da segunda rodada já confirmados. Depois seguir o plano de IMP-022 (upload privado) e IMP-035 (salvar/descarte), sem refazer foto/GPS ou enfraquecer RLS. Mudanças remotas continuam dependentes da revisão/autorização específica das tasks. Salvar segue desabilitado e IA não foi conectada.

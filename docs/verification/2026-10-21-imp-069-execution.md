@@ -1,7 +1,7 @@
-# IMP-069 — ferramenta manual preparada; execução A/B pendente
+# IMP-069 — dados criados e execução A/B confirmada (18/18 Pass)
 
 **Data:** 21/10/2026 (America/Sao_Paulo). **Agente:** Codex.
-**Estado:** implementação local verificada; criação dos conjuntos e matriz real **Not run**. Nenhuma escrita remota desta task. Não marcar Done ou Review da task completa antes da execução humana A/B e revisão dos resultados. Notion indisponível nesta sessão; registro abaixo preparado para transferência.
+**Estado:** implementação entregue na main (`70e8cb6`); execução real A/B/anon com **18 Pass, 0 Fail e 0 Not run**, conferida em artefatos locais e confirmada pela equipe (“tudo certo. tudo pass”). Dois conjuntos TEST DATA permanecem no dev; nenhuma exclusão. Resultado técnico pronto para Review. Notion indisponível nesta sessão: atualização oficial pendente; não afirmar que o status foi alterado. A confirmação recebida cobre a execução; checkpoint de compreensão ainda não registrado para Done.
 
 Fonte: [plano completo e autorização preservada](2026-10-21-imp-069-plan.md), [HANDOFF](../HANDOFF.md) e retomada da equipe nesta conversa. Dependências IMP-013/014/015/016 constam Done no HANDOFF atualizado. O plano histórico descreve uma pausa anterior e fechamento então pendente; isso não é um novo pedido de autorização. A autorização cobre dois conjuntos com PNG artificial; **não cobre exclusão**.
 
@@ -38,11 +38,28 @@ Fonte técnica consultada: [implementação oficial de informações do objeto](
 | PNG local | Inspecionado visualmente: TEST DATA / DataBee DEV — sem valor científico |
 | Ensaio local isolado, sem Supabase | 17 controles confirmados: persistência antes da resposta, PNG idêntico, retomada com mesmos IDs e pendência, contas diferentes recusadas, bloqueio entre abas, licença inválida, regressão de etapa, manifesto inconsistente, Host/origem externos; [evidência sanitizada](2026-10-21-imp-069-local.json) |
 | `npm.cmd run supabase -- migration list --linked` | Somente leitura: quatro versões remotas coincidem com as locais (20261016032127, 20261021115711, 20261021122259, 20261021130929) |
-| Manifesto da execução real | Ainda ausente; ferramenta pronta aguardando login A/B |
-| Criação A/B, leitura própria, isolamento B/anon, integridade final | **Not run**; verificações locais não provam RLS remoto |
+| Manifesto da execução real | Conferido localmente: dois conjuntos, donos diferentes, caminhos canônicos, quatro etapas `confirmed` por conjunto; PNG persistido com hash/tamanho/MIME corretos |
+| Criação A/B, leitura própria, isolamento B/anon, integridade final | **18/18 Pass** na execução com contas reais feita pela equipe; [relatório sanitizado](2026-10-21-imp-069-client.json) |
 | Android | Não se aplica: ferramenta exclusiva de desenvolvimento |
 
 O primeiro Chrome não respondeu no ambiente restrito; nova execução autorizada fora da restrição passou. A CLI precisou atualizar seu arquivo local de telemetria fora do repositório; a consulta remota foi somente leitura. Nenhuma credencial registrada.
+
+### Confirmação da execução real — 21/10/2026
+
+O relatório do cliente foi gravado em **21/10/2026 às 21:44:52 (America/Sao_Paulo)**. O agente conferiu o relatório atual e sua cópia por execução, o manifesto e o PNG locais. Os hashes do cliente compilado e dos dois arquivos do servidor coincidem com o código entregue; os quatro hashes das migrations coincidem com os arquivos locais e com o manifesto. O resultado abaixo é do SDK com A/B/anon, não do ensaio local isolado.
+
+| Critério do plano | Evidência confirmada |
+|---|---|
+| A cria draft, localização, PNG e metadados | `a-created` Pass; B também criou seu controle (`b-created`) |
+| A consulta os próprios dados | `a-reads-own` Pass, incluindo comparação dos bytes do PNG; B também lê seu controle |
+| B não consulta os dados de A | Consultas exatas a observação/localização/metadados e download privado negados |
+| B não modifica os dados de A | UPDATE do rascunho, localização, metadados e substituição do PNG bloqueados; releitura final de A e B íntegros |
+| Sem login não lê dados privados | Consultas às três tabelas e download negados; erros de rede não contam como aprovação |
+| Inspeção dos arquivos e registros | Fonte e relatório revisados; manifesto com IDs e caminhos coerentes; PNG artificial TEST DATA e coordenadas fictícias conforme o plano; sem segredos/dados pessoais no artefato publicado |
+
+**Limite da evidência:** o agente conferiu os artefatos da execução e a confirmação humana; não observou a digitação das credenciais e não abriu nova sessão A/B. A conferência posterior foi somente local, sem novas escritas remotas. Não houve limpeza ou teste de DELETE. Manifesto completo, IDs dos donos/observações/imagens e caminhos continuam exclusivamente em `.tmp`, fora do Git. Preservar esses arquivos para qualquer futura inspeção ou proposta de limpeza seletiva.
+
+Relatório sanitizado arquivado em `docs/verification/2026-10-21-imp-069-client.json`. Próximo trabalho de código sugerido: IMP-022 → IMP-035, após obter os critérios completos no Notion ou colados pela equipe. Não iniciar implementação por suposição. Transferir este registro e a explicação abaixo para a task; verificar suas dependentes e o checkpoint de compreensão antes de concluir formalmente no Notion.
 
 ### Execução pela equipe
 
@@ -50,7 +67,7 @@ O primeiro Chrome não respondeu no ambiente restrito; nova execução autorizad
 2. Preencher as contas de teste A e B **somente no formulário local**. Não enviar senhas ao chat. Usar duas contas diferentes e preservar sua ordem na retomada.
 3. Clicar **Criar ou retomar os dois conjuntos TEST DATA** uma vez. Aguardar; ao concluir, são esperados 18 Pass. Se houver falha, relatar o nome da etapa e as contagens, sem credenciais ou IDs.
 4. Baixar o relatório sanitizado. O link do manifesto é para consulta **local privada** e permanece no computador. Não apagar `.tmp` nem tentar limpar dados pelo Dashboard durante o teste.
-5. O agente deve conferir os resultados reais e o manifesto, registrar quais etapas foram confirmadas/ausentes/incertas, atualizar HANDOFF e Notion e mover a task para Review. Done depende de confirmação da equipe. Qualquer limpeza futura segue o plano e exige autorização da lista exata.
+5. Resultados reais e manifesto já conferidos; nenhuma etapa pendente ou incerta no manifesto. HANDOFF atualizado. Falta transferir o registro ao Notion e registrar o checkpoint de compreensão para Done. Não é necessário repetir a criação. Qualquer limpeza futura segue o plano e exige autorização da lista exata.
 
 ## 🎓 Explicação para a equipe
 
@@ -58,7 +75,7 @@ O primeiro Chrome não respondeu no ambiente restrito; nova execução autorizad
 
 Entrada → contas A/B e PNG artificial → salvar as etiquetas, criar cada peça, conferir quem pode ler/alterar → dois conjuntos privados no Supabase e relatório sem dados pessoais no computador. Se a conexão falhar, as etiquetas permitem conferir o que ficou e continuar sem duplicar. O porteiro do banco (RLS) deve deixar cada conta abrir somente seu próprio conjunto.
 
-<details><summary>Já criamos os dados de treino?</summary>Não nesta etapa. A ferramenta está pronta; a criação e os testes reais exigem a entrada das contas A/B no formulário local.</details>
+<details><summary>Já criamos os dados de treino?</summary>Sim. A equipe entrou no formulário local e confirmou todos os testes. São dois conjuntos fictícios privados, um para A e outro para B; os 18 resultados e as oito etapas de criação estão confirmados.</details>
 
 <details><summary>Por que salvar o manifesto antes?</summary>Para saber exatamente quais peças pertencem ao ensaio, mesmo se a internet cair depois da criação. Sem isso poderíamos confundir dados de teste com outros registros.</details>
 

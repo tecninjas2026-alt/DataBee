@@ -1,0 +1,101 @@
+{
+  "project_ref": "uqfuuahziwgxwjymtwil",
+  "migration_version": "20261021130929",
+  "migration_sha256": "fade4e832c34f0822eabc6312ad1678e5aacd6357e1425f5f287f9d699c174d8",
+  "script_sha256": "df7ad0efcc90df522a71780854638f947e98b7d0814fa0fdf8c9fc879d9786f1",
+  "server_sha256": "847335cb76bf2326ca79dd4e69b6c7ae047b43b0e89035cd178e0e57f36390e4",
+  "recorded_at": "2026-10-22T00:44:52.967Z",
+  "source": "manual-sdk-client",
+  "tests": [
+    {
+      "id": "auth-a",
+      "status": "Pass"
+    },
+    {
+      "id": "auth-b",
+      "status": "Pass"
+    },
+    {
+      "id": "distinct-accounts",
+      "status": "Pass"
+    },
+    {
+      "id": "manifest-saved",
+      "status": "Pass"
+    },
+    {
+      "id": "a-created",
+      "status": "Pass"
+    },
+    {
+      "id": "b-created",
+      "status": "Pass"
+    },
+    {
+      "id": "a-reads-own",
+      "status": "Pass"
+    },
+    {
+      "id": "b-reads-own",
+      "status": "Pass"
+    },
+    {
+      "id": "b-cannot-read-a",
+      "status": "Pass"
+    },
+    {
+      "id": "b-cannot-download-a",
+      "status": "Pass"
+    },
+    {
+      "id": "b-cannot-update-draft",
+      "status": "Pass"
+    },
+    {
+      "id": "b-cannot-update-location",
+      "status": "Pass"
+    },
+    {
+      "id": "b-cannot-update-image",
+      "status": "Pass"
+    },
+    {
+      "id": "b-cannot-replace-png",
+      "status": "Pass"
+    },
+    {
+      "id": "anon-cannot-read",
+      "status": "Pass"
+    },
+    {
+      "id": "anon-cannot-download",
+      "status": "Pass"
+    },
+    {
+      "id": "a-preserved",
+      "status": "Pass"
+    },
+    {
+      "id": "b-preserved",
+      "status": "Pass"
+    }
+  ],
+  "migrations_local": [
+    {
+      "version": "20261016032127",
+      "sha256": "59c2375ff2b4f937d292adf1a0a3ea578649d3b96294b3b72adb3d438e59482f"
+    },
+    {
+      "version": "20261021115711",
+      "sha256": "24e53da09610b8f593df5f933604350e54c142251cea9fd24c0ae2d560373fde"
+    },
+    {
+      "version": "20261021122259",
+      "sha256": "2800443b77b929cfd4a4f7b4f6e2e557528ceafb0c354ac6200eb084d13b99cb"
+    },
+    {
+      "version": "20261021130929",
+      "sha256": "fade4e832c34f0822eabc6312ad1678e5aacd6357e1425f5f287f9d699c174d8"
+    }
+  ]
+}

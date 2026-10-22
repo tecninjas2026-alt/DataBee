@@ -6,11 +6,11 @@ Cada versão terá APK acessível, data, código de origem, estado e descrição
 
 | Versão | Estado | Permite testar | Falta | Arquivo |
 |---|---|---|---|---|
-| 22/10/2026 · 08ab799 | Compilada; testes físicos adiados | Login de contas confirmadas, apelido, foto, GPS opcional na câmera | Validar cadastro/confirmação e sessão completos; salvar e IA ainda não disponíveis | [Baixar APK — 9,4 MB](https://github.com/tecninjas2026-alt/DataBee/releases/download/android-test-2026-10-22-08ab799/DataBee-2026-10-22-08ab799-debug.apk) |
+| 22/10/2026 · 08ab799 | Em teste — login, câmera, galeria e GPS confirmados pela professora no Galaxy S24 Ultra / Android 16 | Foto, localização e acesso com conta confirmada | Casos de interrupção/permissão e sessão; cadastro/confirmação completos; salvar e IA ainda não disponíveis | [Baixar APK — 9,4 MB](https://github.com/tecninjas2026-alt/DataBee/releases/download/android-test-2026-10-22-08ab799/DataBee-2026-10-22-08ab799-debug.apk) |
 
 Arquivo local: `.tmp/DataBee-2026-10-22-08ab799-debug.apk`. Evidência: `docs/verification/2026-10-22-android-apk.md`.
 
-Próxima versão: avançar primeiro no navegador, conforme pedido da equipe em 22/10. Usar estados Em preparação, Disponível para teste, Em teste, Aprovada pela equipe e Substituída; preservar o histórico.
+Próxima rodada: concluir interrupções/permissões e sessão no aparelho, além do cadastro/confirmação no navegador. A equipe iniciou os testes físicos após a publicação. Usar estados Em preparação, Disponível para teste, Em teste, Aprovada pela equipe e Substituída; preservar o histórico. Evidência: `docs/verification/2026-10-22-android-device-report.md`.
 
 Instalar: baixar o APK da versão escolhida no Notion, abrir no Android e instalar/atualizar. Login exige internet. Se houver erro na atualização, registrar a mensagem e conferir a assinatura antes de sugerir desinstalação.
 

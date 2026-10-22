@@ -102,6 +102,11 @@ Detalhes e modelos em `docs/guides/student-communication.md`.
 4. No Notion, na página da task: seção **"🤖 Registro do agente — data"** (arquivos, comandos, verificado/não verificado) e seção **"🎓 Explicação para a equipe"** (conceitos e processo explicados para iniciantes, com perguntas do checkpoint e respostas em toggles). Ao fechar um marco (gate/semana), crie uma página-filha do Guia de execução no mesmo estilo de "Explicação do setup inicial", consolidando tudo o que foi feito. Status → `Review` (o código já está em `main`). `Done` quando a equipe confirmar que testou e entendeu (ou pedir explicitamente para concluir); depois marque como `Ready` as tasks que ficaram desbloqueadas.
 5. Relate aos alunos no formato do §6.
 
+## Entrega e continuidade — preferência da equipe em 22/10/2026
+- Publicar cada APK de teste na página compartilhada de versões Android do Notion, com arquivo acessível à equipe, data, código de origem e descrição curta do que funciona e falta. Link local no chat não substitui entrega compartilhada.
+- Preservar histórico e só marcar aprovação após teste real. Se escrita/upload não estiverem disponíveis, registrar pendência sem alegar publicação.
+- Retomar as bases do Notion, este arquivo, HANDOFF e student-communication.md antes de conduzir o chat. Fazer o trabalho técnico autorizado e explicar em português simples, sem repetir solicitações já resolvidas.
+
 ## 10. Comandos
 ```bash
 npm install                  # instala dependências (npm ci em máquina limpa)

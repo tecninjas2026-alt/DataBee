@@ -103,6 +103,8 @@ Detalhes e modelos em `docs/guides/student-communication.md`.
 5. Relate aos alunos no formato do §6.
 
 ## Entrega e continuidade — preferência da equipe em 22/10/2026
+- Página oficial: https://app.notion.com/p/401d3425eae4800c811ffcbc7967cc6a. Padrão: docs/android-versions.md. Usar títulos hierárquicos, listas curtas, versões da mais recente para a mais antiga e download direto visível no topo.
+- Notion Free deste workspace limita arquivos a 5 MB. Se o APK exceder o limite, hospedar em GitHub Releases como teste e incluir download direto no Notion; não contratar plano nem alegar anexo direto quando for link externo.
 - Publicar cada APK de teste na página compartilhada de versões Android do Notion, com arquivo acessível à equipe, data, código de origem e descrição curta do que funciona e falta. Link local no chat não substitui entrega compartilhada.
 - Preservar histórico e só marcar aprovação após teste real. Se escrita/upload não estiverem disponíveis, registrar pendência sem alegar publicação.
 - Retomar as bases do Notion, este arquivo, HANDOFF e student-communication.md antes de conduzir o chat. Fazer o trabalho técnico autorizado e explicar em português simples, sem repetir solicitações já resolvidas.

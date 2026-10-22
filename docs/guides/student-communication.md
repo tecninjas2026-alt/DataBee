@@ -24,7 +24,11 @@ Sugiro a IMP-xxx porque …
 ```
 
 ## Início de sessão (mensagem sugerida)
-"Olá! Li o estado do projeto. Hoje estamos na **Semana X**. Já funciona: …. Ainda falta: …. Sugiro começarmos pela **IMP-xxx — título** porque …. Posso começar? Se preferirem outra coisa (rodar o app, gerar o APK, outra task), é só dizer."
+"Olá! Li o estado do projeto. Hoje estamos na **Semana X**. Já funciona: …. Ainda falta: …. Vou começar pela **IMP-xxx — título** porque …."
+
+Para trabalho técnico já autorizado, execute e explique. Peça esclarecimento apenas quando faltar acesso, decisão ou ação física da equipe. Retome as bases do Notion e o HANDOFF; não dependa só da memória do chat.
+
+Entregas Android seguem `docs/android-versions.md` e a [página oficial de versões](https://app.notion.com/p/401d3425eae4800c811ffcbc7967cc6a): títulos hierárquicos, listas curtas, estado honesto, pendências e download fácil. O padrão também está no Notion.
 
 ## Pequeno glossário (use e amplie nas explicações)
 | Termo | Explicação simples |

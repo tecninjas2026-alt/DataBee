@@ -2,6 +2,10 @@
 
 Fonte oficial: Notion → "Data Model e BeeAnalysisV2" e "Bee Identification AI Prompt". Tasks: IMP-070 (catálogo), 023 (contrato/validador), 024 (prompt), 025 (secrets — humano), 026 (tabela), 027 (stub), 028 (VLM real), 029 (persistência/cache), 030 (UI).
 
+**D15 atualizada em 23/10:** iniciar sem custo, evolução paga só com novo orçamento autorizado. Provedor elegível ainda pendente: Gemini Developer API não ativado pela restrição de público menor de 18 anos nos termos oficiais. Não resolver apenas com conta adulta. Nenhum modelo/chave configurado, nenhuma foto transmitida. Ver `docs/decisions/2026-10-23-free-ai-prototype.md`. As referências OpenAI abaixo descrevem o plano anterior, não aprovação para despesa.
+
+**Preparação já no código:** contrato/validador em `supabase/functions/_shared/bee-analysis.ts`; prompt oficial bee-v2 e projeção de campos permitidos em `bee-prompt.ts`. Contexto exige catálogo aprovado (não o draft IMP-070), versão, IDs/níveis/nomes e características revisadas quando disponíveis; região D10 opcional. Não é endpoint, não chama IA nem grava resultado. A futura function autenticada deverá carregar catálogo mantido no servidor, verificar a imagem e adaptar a chamada ao provedor aprovado.
+
 ## 1. Fluxo
 ```
 App (observação saved, idle) --POST {observation_id} + JWT--> Edge analyze-observation

@@ -1,0 +1,71 @@
+{
+  "scope": "Synthetic prompt and field-projection checks. No model call, scientific evaluation, photo transmission or remote write.",
+  "passed": 16,
+  "cases": 16,
+  "results": [
+    {
+      "name": "official Notion prompt preserved",
+      "result": "Pass"
+    },
+    {
+      "name": "approved catalog accepted",
+      "result": "Pass"
+    },
+    {
+      "name": "region omitted when absent",
+      "result": "Pass"
+    },
+    {
+      "name": "approved region Curitiba — PR",
+      "result": "Pass"
+    },
+    {
+      "name": "approved region Região Metropolitana de Curitiba (RMC) — PR",
+      "result": "Pass"
+    },
+    {
+      "name": "draft refused",
+      "result": "Pass"
+    },
+    {
+      "name": "empty catalog refused",
+      "result": "Pass"
+    },
+    {
+      "name": "duplicate id refused",
+      "result": "Pass"
+    },
+    {
+      "name": "missing scientific name refused",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid level refused",
+      "result": "Pass"
+    },
+    {
+      "name": "unbounded traits refused",
+      "result": "Pass"
+    },
+    {
+      "name": "blank trait refused",
+      "result": "Pass"
+    },
+    {
+      "name": "large text refused",
+      "result": "Pass"
+    },
+    {
+      "name": "precise location refused as region",
+      "result": "Pass"
+    },
+    {
+      "name": "private extra fields are never serialized",
+      "result": "Pass"
+    },
+    {
+      "name": "error excludes catalog data",
+      "result": "Pass"
+    }
+  ]
+}

@@ -54,6 +54,8 @@ Os alunos têm pouca experiência técnica: **você executa** e depois **explica
 Segredos (secret key, `service_role`, `OPENAI_API_KEY`, senhas): **nunca peça para colarem no chat**. Guie o aluno para inserir direto no Dashboard ou num comando no terminal dele.
 
 ## 5. Stack e regras invioláveis
+**Atualização D15 — 23/10/2026:** a professora autorizou iniciar sem custo e considerar serviço pago depois. Teto atual zero; não habilitar pagamento/recarga/fallback pago. Gemini foi proposto, mas não ativado: a restrição dos seus termos sobre aplicativos destinados/provavelmente acessados por menores de 18 anos afeta o projeto escolar. Provedor elegível e conta/modelo continuam pendentes. A preparação pode ser independente do provedor; não alegar identificação real antes da integração. Evidência: `docs/decisions/2026-10-23-free-ai-prototype.md` e D15 no Notion. A referência OpenAI abaixo permanece o planejamento anterior, sem autorização atual de custo.
+
 **Stack fixa:** Ionic 9 + Angular 22 (standalone, signals, zoneless) · Capacitor 8 (Android) · Supabase (Auth, Postgres+RLS, Storage privado, Edge Functions Deno) · VLM remoto (OpenAI, Structured Outputs) chamado **só** pela Edge Function `analyze-observation`.
 Proibido no Core: Firebase, NgRx/Redux, servidor próprio, Python, ML local/ONNX/embeddings, PostGIS, Tailwind/Bootstrap, outra biblioteca de UI. Nova dependência só com motivo registrado no HANDOFF e versão exata (`npm i -E`).
 - **Segredos** nunca no frontend, Git, Notion, logs ou chat. Frontend só usa Project URL + publishable key (`src/environments/supabase.config.ts`, ignorado pelo Git).

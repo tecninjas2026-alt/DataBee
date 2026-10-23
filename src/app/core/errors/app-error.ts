@@ -17,6 +17,7 @@ export type AppErrorCode =
   | 'photo_permission_denied'
   | 'photo_invalid'
   | 'photo_too_large'
+  | 'upload_pending'
   | 'location_permission_denied'
   | 'location_disabled'
   | 'location_timeout'

@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-23T13:21:59.446Z",
+  "scope": "local simulated SDK boundaries; not remote RLS, real JPEG or browser/Android validation",
+  "results": [
+    {
+      "name": "galeria privada sem GPS nem estados protegidos enviados",
+      "result": "Pass"
+    },
+    {
+      "name": "retry reaproveita UUID, arquivo e metadado",
+      "result": "Pass"
+    },
+    {
+      "name": "resposta de upload perdida após confirmação é reconciliada",
+      "result": "Pass"
+    },
+    {
+      "name": "resposta SQL perdida após commit é reconciliada",
+      "result": "Pass"
+    },
+    {
+      "name": "falha SQL preserva pendência e retry usa mesma foto",
+      "result": "Pass"
+    },
+    {
+      "name": "falha anterior ao upload mantém draft e referência",
+      "result": "Pass"
+    },
+    {
+      "name": "read403 não equivale a arquivo ausente",
+      "result": "Pass"
+    },
+    {
+      "name": "readNetwork não equivale a arquivo ausente",
+      "result": "Pass"
+    },
+    {
+      "name": "armazenamento local bloqueado impede toda escrita remota",
+      "result": "Pass"
+    },
+    {
+      "name": "troca de conta interrompe etapas posteriores",
+      "result": "Pass"
+    },
+    {
+      "name": "GPS sintético fica somente na tabela privada",
+      "result": "Pass"
+    },
+    {
+      "name": "recuperação após perda de memória reaproveita arquivo remoto",
+      "result": "Pass"
+    },
+    {
+      "name": "recuperação sem arquivo exige mesma foto, recusa outra",
+      "result": "Pass"
+    },
+    {
+      "name": "arquivo diferente no caminho reservado nunca é sobrescrito",
+      "result": "Pass"
+    },
+    {
+      "name": "journal rejeita dono e caminho inválidos",
+      "result": "Pass"
+    },
+    {
+      "name": "duplo toque não inicia outro envio",
+      "result": "Pass"
+    },
+    {
+      "name": "galeria não aceita consentimento ou GPS herdado",
+      "result": "Pass"
+    },
+    {
+      "name": "estado alterado no servidor bloqueia novas escritas",
+      "result": "Pass"
+    },
+    {
+      "name": "pendências não aparecem para outra conta",
+      "result": "Pass"
+    },
+    {
+      "name": "GPS perdido antes da escrita exige nova escolha explícita",
+      "result": "Pass"
+    },
+    {
+      "name": "upload atrasado é aguardado antes do metadado",
+      "result": "Pass"
+    },
+    {
+      "name": "timeout preserva pendência; resposta tardia não avança; retry reconcilia",
+      "result": "Pass"
+    }
+  ]
+}

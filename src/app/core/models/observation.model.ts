@@ -43,6 +43,14 @@ export interface ObservationOwnerUpdate {
   captured_at?: string | null;
 }
 
+/** IMP-035: retorno previsto de save-observation; backend ainda depende de implantação. */
+export interface SavedObservationConfirmation {
+  id: string;
+  lifecycle: 'saved';
+  publication: 'private';
+  analysis_status: 'idle';
+}
+
 /** Linha privada (somente o dono lê). Nunca enviar ao VLM nem ao feed. */
 export interface ObservationPrivateLocation {
   observation_id: string;

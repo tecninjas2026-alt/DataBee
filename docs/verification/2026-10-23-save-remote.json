@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-23T14:21:52.589Z",
+  "scope": "real authenticated SDK A/B/anon and deployed save-observation; synthetic technical users and photo; no signup/email delivery or device proof; no deletion",
+  "results": [
+    {
+      "name": "A cria draft privado pelo SDK",
+      "result": "Pass"
+    },
+    {
+      "name": "A envia JPEG e metadado próprios",
+      "result": "Pass"
+    },
+    {
+      "name": "B não salva observação de A",
+      "result": "Pass"
+    },
+    {
+      "name": "anon não salva observação",
+      "result": "Pass"
+    },
+    {
+      "name": "cliente A não chama rotina privilegiada diretamente",
+      "result": "Pass"
+    },
+    {
+      "name": "A salva pela Function implantada",
+      "result": "Pass"
+    },
+    {
+      "name": "retry de salvar conserva mesma observação",
+      "result": "Pass"
+    },
+    {
+      "name": "A reabre saved/private/idle e foto idêntica",
+      "result": "Pass"
+    },
+    {
+      "name": "B não lê registro, metadado nem arquivo de A",
+      "result": "Pass"
+    },
+    {
+      "name": "sem IA disponível, nenhum estado ou tabela de IA é necessário",
+      "result": "Pass"
+    }
+  ]
+}

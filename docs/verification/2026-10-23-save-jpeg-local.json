@@ -1,0 +1,37 @@
+{
+  "scope": "local structural validation, not full pixel decode or deployed function",
+  "results": [
+    {
+      "name": "JPEG real sintético 8x8 aceito",
+      "result": "Pass"
+    },
+    {
+      "name": "conteúdo inválido recusado",
+      "result": "Pass"
+    },
+    {
+      "name": "arquivo truncado recusado",
+      "result": "Pass"
+    },
+    {
+      "name": "EXIF APP1 recusado",
+      "result": "Pass"
+    },
+    {
+      "name": "comentário recusado",
+      "result": "Pass"
+    },
+    {
+      "name": "dimensão maior que 2048 recusada",
+      "result": "Pass"
+    },
+    {
+      "name": "bytes após EOI recusados",
+      "result": "Pass"
+    },
+    {
+      "name": "arquivo maior que 5MB recusado",
+      "result": "Pass"
+    }
+  ]
+}

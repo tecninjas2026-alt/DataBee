@@ -27,12 +27,12 @@
 
       <ion-card>
         <ion-card-content>
-          <h2>Prévia do registro</h2>
+          <h2>Envio privado</h2>
           <p>
-            O salvamento ainda está em desenvolvimento, com ou sem localização. Por enquanto, você pode testar a foto.
-            Para fotos tiradas pelo app, também pode escolher se deseja incluir o GPS. Nenhuma observação foi salva.
+            Confira a foto e escolha se deseja incluir a localização. Ao salvar, a foto e os dados ficam privados na sua
+            conta. Depois você pode reabrir o registro em Minhas observações.
           </p>
-          <p>A foto fica apenas na memória do app e será perdida ao fechar ou recarregar.</p>
+          <p>Antes do envio, a foto fica apenas na memória do app. Nenhuma identificação por IA será iniciada.</p>
         </ion-card-content>
       </ion-card>
 
@@ -43,6 +43,10 @@
             <p role="status">
               Para fotos da galeria, não usamos a localização atual do aparelho, pois ela pode ser diferente do lugar
               onde a foto foi tirada. Este registro fica sem coordenadas.
+            </p>
+          } @else if (draft.locationLocked()) {
+            <p role="status">
+              A escolha de localização foi mantida para este envio. Isso evita misturar a foto com outra leitura do GPS.
             </p>
           } @else {
             <p>
@@ -109,14 +113,32 @@
       </ion-card>
 
       <div class="actions">
-        <!-- TODO(IMP-022/IMP-035): upload privado + draft → saved/private/idle. Botão fica desabilitado até lá. -->
-        <ion-button expand="block" color="secondary" [disabled]="true" aria-describedby="save-unavailable">
+        @if (uploadService.busy()) {
+          <p role="status" aria-live="polite">
+            <ion-spinner name="crescent" />
+            {{ uploadService.progress() }}
+          </p>
+        }
+        @if (uploadError(); as message) {
+          <ion-text color="danger" role="alert">
+            <p>{{ message }}</p>
+          </ion-text>
+        }
+        <ion-button
+          expand="block"
+          color="secondary"
+          (click)="saveObservation()"
+          [disabled]="uploadService.busy() || locating()"
+          aria-describedby="save-privacy"
+        >
           <ion-icon slot="start" name="save-outline" />
-          Salvar observação
+          {{ draft.uploadId() ? 'Conferir e concluir salvamento' : 'Salvar observação' }}
         </ion-button>
-        <ion-note id="save-unavailable">
-          Salvar ainda não está disponível, mesmo com GPS. A localização é opcional e não impede o salvamento quando
-          essa função estiver pronta.
+        @if (draft.uploadId(); as id) {
+          <ion-note>Referência do envio: {{ id }}. Se houver uma falha, tente novamente nesta tela.</ion-note>
+        }
+        <ion-note id="save-privacy">
+          A localização é opcional. Salvar não publica sua foto e não inicia a identificação por IA.
         </ion-note>
       </div>
     </div>

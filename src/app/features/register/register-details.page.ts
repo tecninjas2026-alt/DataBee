@@ -23,6 +23,8 @@ import { LocationService } from '../../core/device/location.service';
 import { toUserMessage } from '../../core/errors/app-error';
 import { PreviewBannerComponent } from '../../shared/components/preview-banner.component';
 import { RegistrationDraftStore } from './registration-draft.store';
+import { ObservationUploadService } from './observation-upload.service';
+import { AuthService } from '../../core/auth/auth.service';
 
 /** Tela 4 — Novo Registro / Dados e localização (IMP-020; salvar = IMP-022/035). */
 @Component({
@@ -51,24 +53,29 @@ import { RegistrationDraftStore } from './registration-draft.store';
 })
 export class RegisterDetailsPage {
   protected readonly draft = inject(RegistrationDraftStore);
+  protected readonly uploadService = inject(ObservationUploadService);
+  private readonly auth = inject(AuthService);
   private readonly locationService = inject(LocationService);
   private readonly router = inject(Router);
 
   protected readonly locating = signal(false);
   protected readonly locationError = signal<string | null>(null);
+  protected readonly uploadError = signal<string | null>(null);
 
   constructor() {
     addIcons({ locate, saveOutline });
   }
 
   ionViewWillEnter(): void {
+    this.uploadError.set(null);
     // Acesso direto pela URL sem foto: volta para a etapa 1.
     if (!this.draft.hasPhoto()) void this.router.navigateByUrl('/tabs/registrar', { replaceUrl: true });
   }
 
   protected async allowLocation(): Promise<void> {
     const photo = this.draft.photo();
-    if (this.locating() || photo?.source !== 'camera') return;
+    if (this.locating() || this.draft.locationLocked() || this.uploadService.busy() || photo?.source !== 'camera')
+      return;
     this.draft.setConsent('granted');
     this.locating.set(true);
     this.locationError.set(null);
@@ -87,7 +94,24 @@ export class RegisterDetailsPage {
   }
 
   protected declineLocation(): void {
+    if (this.draft.locationLocked() || this.uploadService.busy()) return;
     this.draft.setConsent('declined');
     this.locationError.set(null);
+  }
+
+  protected async saveObservation(): Promise<void> {
+    if (this.uploadService.busy() || this.locating()) return;
+    const owner = this.auth.user()?.id;
+    const photo = this.draft.photo();
+    this.uploadError.set(null);
+    try {
+      const id = await this.uploadService.save();
+      if (this.auth.user()?.id === owner && this.draft.photo() === photo) {
+        this.draft.reset();
+        await this.router.navigateByUrl(`/observacao/${id}`, { replaceUrl: true });
+      }
+    } catch (error) {
+      if (this.auth.user()?.id === owner && this.draft.photo() === photo) this.uploadError.set(toUserMessage(error));
+    }
   }
 }

@@ -10,10 +10,11 @@ Ionic + Angular (Android via Capacitor)
         ├─ Auth (e-mail/senha)
         ├─ Postgres + RLS  (profiles, observations, observation_private_locations,
         │                   observation_images, ai_identifications, comments, taxa)
-        ├─ Storage privado (observation-photos)
+        ├─ Storage privado (observation-images)
         └─ Edge Functions  analyze-observation  → VLM (OpenAI, Structured Outputs)
                            get-observation-image → URL assinada 60 s
-                           (+ publicação/cleanup definidos nas IMP-035/039)
+                           save-observation → confirma saved/private/idle, sem IA
+                           (+ publicação/cleanup ainda pendentes)
 ```
 Sem servidor próprio, sem Python, sem ML local.
 
@@ -35,10 +36,10 @@ Sem servidor próprio, sem Python, sem ML local.
 | 1 | Login | `/login` | `features/auth/login.page.*` | Funcional (requer publishable key) |
 | 2 | Início | `/tabs/inicio` | `features/home/home.page.*` | UI pronta; contagem/conquistas TODO |
 | 3 | Novo Registro — Foto | `/tabs/registrar` | `features/register/register-photo.page.*` | Funcional (câmera/galeria/preview/reencode) |
-| 4 | Novo Registro — Dados | `/tabs/registrar/dados` | `features/register/register-details.page.*` | Consentimento + GPS funcionais; salvar = IMP-022/035 |
+| 4 | Novo Registro — Dados | `/tabs/registrar/dados` | `features/register/register-details.page.*` | GPS opcional + upload recuperável + salvar privado sem IA |
 | 5 | Resultado + Aprender | `/observacao/:id/resultado` | `features/observations/analysis-result.page.ts` | Placeholder (IMP-030) |
-| 6 | Minhas Observações | `/tabs/minhas` | `features/observations/my-observations.page.ts` | Estado vazio (IMP-036) |
-| 7 | Detalhe | `/observacao/:id` | `features/observations/observation-detail.page.ts` | Placeholder (IMP-037) |
+| 6 | Minhas Observações | `/tabs/minhas` | `features/observations/my-observations.page.ts` | Salvos próprios, paginação de 20, rascunhos separados e retry |
+| 7 | Detalhe | `/observacao/:id` | `features/observations/observation-detail.page.ts` | Foto/dados próprios, GPS privado e estado sem nova chamada de IA |
 | 8 | Feed/Comunidade | `/tabs/feed` | `features/feed/feed.page.ts` | Estado vazio (IMP-041/044) |
 
 ## Peças centrais

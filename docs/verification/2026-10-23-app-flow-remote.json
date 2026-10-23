@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-23T14:23:13.614Z",
+  "scope": "real Angular upload/save/read services with authenticated SDK and deployed backend; in-memory Web Locks/bitmap shims, not browser/Android UI; synthetic data preserved; no deletion",
+  "results": [
+    {
+      "name": "serviço Angular real envia e salva pelo SDK autenticado",
+      "result": "Pass"
+    },
+    {
+      "name": "A vê dois salvos, em ordem recente, por consulta persistida",
+      "result": "Pass"
+    },
+    {
+      "name": "reabrir com outro serviço não depende da memória do registro",
+      "result": "Pass"
+    },
+    {
+      "name": "B tem histórico vazio e não abre detalhe privado de A",
+      "result": "Pass"
+    },
+    {
+      "name": "ID inexistente retorna indisponível",
+      "result": "Pass"
+    },
+    {
+      "name": "cliente comum não altera lifecycle",
+      "result": "Pass"
+    },
+    {
+      "name": "servidor recusa draft sem foto",
+      "result": "Pass"
+    },
+    {
+      "name": "servidor recusa EXIF real anexado ao JPEG e mantém draft/idle",
+      "result": "Pass"
+    },
+    {
+      "name": "rascunho fica separado dos dois salvos",
+      "result": "Pass"
+    },
+    {
+      "name": "URL privada dura 60 segundos e foto corresponde ao envio",
+      "result": "Pass"
+    },
+    {
+      "name": "URL expirada é negada; dono autenticado obtém nova URL",
+      "result": "Pass"
+    }
+  ]
+}

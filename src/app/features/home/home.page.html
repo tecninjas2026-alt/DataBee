@@ -23,7 +23,9 @@
       </p>
     }
     @if (auth.profileError(); as message) {
-      <ion-text color="danger"><p role="alert">{{ message }}</p></ion-text>
+      <ion-text color="danger">
+        <p role="alert">{{ message }}</p>
+      </ion-text>
       <ion-button fill="outline" size="small" (click)="auth.retryProfile()">
         Tentar carregar perfil novamente
       </ion-button>
@@ -39,9 +41,13 @@
     <ion-card-content>
       <h2>Suas contribuições</h2>
       <p class="count">
-        <strong>{{ savedCount }}</strong>
+        <strong>{{ savedCount() ?? '—' }}</strong>
         observações salvas
       </p>
+      @if (countError()) {
+        <p role="status">Não foi possível carregar a contagem.</p>
+        <ion-button fill="clear" (click)="loadCount()">Atualizar contagem</ion-button>
+      }
     </ion-card-content>
   </ion-card>
 

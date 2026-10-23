@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="primary"><ion-title>Minhas observações</ion-title></ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)"><ion-refresher-content /></ion-refresher>
+  <div class="observations ion-padding">
+    @if (pending().length) {
+      <ion-card>
+        <ion-card-content>
+          <h2>Envios pendentes</h2>
+          <p>Há rascunhos aguardando conclusão. Eles ainda não fazem parte do histórico salvo.</p>
+          <ion-button routerLink="/tabs/registrar" fill="outline">Ver envios deste aparelho</ion-button>
+        </ion-card-content>
+      </ion-card>
+    }
+    @if (loading()) {
+      <p role="status">
+        <ion-spinner name="crescent" />
+        Carregando observações…
+      </p>
+    }
+    @if (error(); as message) {
+      <ion-text color="danger" role="alert">
+        <p>{{ message }}</p>
+      </ion-text>
+      <ion-button (click)="load()" [disabled]="loading()">Tentar novamente</ion-button>
+    }
+    @if (!loading() && !error() && !items().length) {
+      <app-empty-state
+        emoji="📷"
+        title="Nenhuma observação ainda"
+        message="Quando você salvar um registro, ele aparece aqui."
+      >
+        <ion-button routerLink="/tabs/registrar">Registrar abelha</ion-button>
+      </app-empty-state>
+    }
+    @for (item of items(); track item.id) {
+      <ion-card>
+        <app-private-photo [observationId]="item.id" [ownerId]="item.user_id" />
+        <ion-card-content>
+          <h2>{{ item.created_at | date: 'dd/MM/yyyy · HH:mm' }}</h2>
+          <p>{{ labels[item.analysis_status] }}</p>
+          <p>{{ item.publication === 'private' ? 'Privada' : 'Publicada' }}</p>
+          <ion-button [routerLink]="['/observacao', item.id]" fill="outline">Abrir observação</ion-button>
+        </ion-card-content>
+      </ion-card>
+    }
+    @if (more() && !error()) {
+      <ion-button expand="block" (click)="load(true)" [disabled]="loading()">Carregar mais</ion-button>
+    }
+  </div>
+</ion-content>

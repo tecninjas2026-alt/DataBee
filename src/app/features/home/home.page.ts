@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   IonButton,
@@ -19,6 +19,7 @@ import { camera, lockClosed, logOutOutline } from 'ionicons/icons';
 import { AuthService } from '../../core/auth/auth.service';
 import { ACHIEVEMENTS } from '../../core/models/achievements';
 import { PreviewBannerComponent } from '../../shared/components/preview-banner.component';
+import { ObservationsService } from '../observations/observations.service';
 
 /** Tela 2 — Início: chamada "Registrar abelha", resumo e as 3 conquistas (D23/D25). */
 @Component({
@@ -45,8 +46,39 @@ import { PreviewBannerComponent } from '../../shared/components/preview-banner.c
 export class HomePage {
   protected readonly auth = inject(AuthService);
   protected readonly achievements = ACHIEVEMENTS;
-  // TODO(IMP-036): contar observações salvas do usuário; TODO(D23): calcular conquistas desbloqueadas.
-  protected readonly savedCount = 0;
+  private readonly observations = inject(ObservationsService);
+  private readonly count = signal<{ owner: string; value: number } | null>(null);
+  private countRequest: AbortController | null = null;
+  protected readonly countError = signal(false);
+  protected readonly savedCount = computed(() =>
+    this.count()?.owner === this.auth.user()?.id ? this.count()?.value : null,
+  );
+  // TODO(D23): calcular conquistas desbloqueadas.
+
+  ionViewWillEnter(): void {
+    void this.loadCount();
+  }
+  ionViewDidLeave(): void {
+    this.countRequest?.abort();
+    this.countRequest = null;
+    this.count.set(null);
+  }
+
+  protected async loadCount(): Promise<void> {
+    this.countRequest?.abort();
+    const request = new AbortController();
+    this.countRequest = request;
+    const owner = this.auth.user()?.id;
+    this.count.set(null);
+    this.countError.set(false);
+    if (!owner) return;
+    try {
+      const value = await this.observations.countSaved(request.signal);
+      if (!request.signal.aborted && this.auth.user()?.id === owner) this.count.set({ owner, value });
+    } catch {
+      if (!request.signal.aborted && this.auth.user()?.id === owner) this.countError.set(true);
+    }
+  }
 
   constructor() {
     addIcons({ camera, lockClosed, logOutOutline });

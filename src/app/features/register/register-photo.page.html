@@ -36,30 +36,64 @@
     }
 
     <div class="actions">
-      <ion-button expand="block" (click)="pick('camera')" [disabled]="busy()">
+      <ion-button
+        expand="block"
+        (click)="pick('camera')"
+        [disabled]="busy() || uploads.busy() || recoverySelection() !== null"
+      >
         <ion-icon slot="start" name="camera" />
         {{ draft.hasPhoto() ? 'Tirar outra' : 'Tirar foto' }}
       </ion-button>
-      <ion-button expand="block" fill="outline" (click)="pick('gallery')" [disabled]="busy()">
+      <ion-button expand="block" fill="outline" (click)="pick('gallery')" [disabled]="busy() || uploads.busy()">
         <ion-icon slot="start" name="image" />
         Escolher da galeria
       </ion-button>
       @if (busy()) {
         <ion-spinner name="crescent" />
       }
+      @if (recoverySelection()) {
+        <ion-button fill="clear" (click)="cancelRecovery()" [disabled]="busy() || uploads.busy()">
+          Cancelar recuperação
+        </ion-button>
+      }
     </div>
 
     @if (draft.hasPhoto()) {
       <div class="actions">
-        <ion-button expand="block" color="secondary" (click)="next()">
+        <ion-button expand="block" color="secondary" (click)="next()" [disabled]="busy() || uploads.busy()">
           Continuar
           <ion-icon slot="end" name="arrow-forward" />
         </ion-button>
-        <ion-button expand="block" fill="clear" color="danger" (click)="discard()">
+        <ion-button
+          expand="block"
+          fill="clear"
+          color="danger"
+          (click)="discard()"
+          [disabled]="busy() || uploads.busy()"
+        >
           <ion-icon slot="start" name="trash-outline" />
-          Descartar foto
+          Limpar prévia deste aparelho
         </ion-button>
       </div>
+    }
+    @if (ownPending().length) {
+      <section aria-label="Envios privados deste aparelho">
+        <h2>Envios privados deste aparelho</h2>
+        <p>Retome um envio sem criar outra observação. Limpar a prévia não apaga arquivos do servidor.</p>
+        @for (reference of ownPending(); track reference.observationId) {
+          <p>{{ reference.stage === 'ready' ? 'Foto enviada · privada' : 'Envio pendente' }}</p>
+          <p>{{ reference.observationId }}</p>
+          <ion-button fill="outline" (click)="recover(reference)" [disabled]="busy() || uploads.busy()">
+            Retomar envio
+          </ion-button>
+        }
+      </section>
+    }
+    @if (uploads.busy()) {
+      <p role="status">
+        <ion-spinner name="crescent" />
+        {{ uploads.progress() }}
+      </p>
     }
   </div>
 </ion-content>

@@ -52,7 +52,7 @@ Fontes adicionais consultadas: [IMP-036](https://app.notion.com/p/50fd3425eae483
 - **10 casos reais SDK A/B/anon** aprovados contra a Function implantada: salvar, repetir, reabrir, isolamento e rotina privilegiada inacessível ao cliente. Relatório `2026-10-23-save-remote.json`.
 - **11 casos de integração** aprovados com os serviços Angular reais e clientes autenticados: app envia/salva, A vê dois salvos/um draft separado, nova instância reabre, B vazio/sem acesso, JPEG com EXIF recusado, URL de 60 s expira de fato e é renovada pelo dono. Relatório `2026-10-23-app-flow-remote.json`. Web Locks e leitura de dimensões em Node usam adaptações em memória; isso não prova UI/plugins Android.
 - Duas contas técnicas usam endereços sintéticos e confirmação administrativa, sem disparo de e-mail; **não comprovam cadastro/SMTP**. Senhas/tokens/chaves não foram gravados nem exibidos. Manifesto privado `.tmp/imp035-remote-manifest.json` identifica os recursos reservados; preservar sem limpeza.
-- Dependências preservadas. APK 1.0.1-test/código 2 em preparação; publicação seguirá o padrão do Notion. Teste humano do novo fluxo ainda pendente.
+- Dependências preservadas. APK 1.0.1-test/código 2 publicado no GitHub Releases e página de versões do Notion; detalhes em [entrega Android](2026-10-23-android-apk.md). Teste humano do novo fluxo ainda pendente.
 
 ## Como testar a próxima etapa
 

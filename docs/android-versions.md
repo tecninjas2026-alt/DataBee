@@ -6,11 +6,12 @@ Cada versão terá APK acessível, data, código de origem, estado e descrição
 
 | Versão | Estado | Permite testar | Falta | Arquivo |
 |---|---|---|---|---|
+| 23/10/2026 · ba10fcf · 1.0.1-test / código 2 | Disponível para teste — validação técnica aprovada, nova interface no celular pendente | Salvar foto/dados privados, GPS opcional na câmera, histórico, reabertura e recuperação | IA, publicação/feed, descarte remoto e validação humana do novo fluxo | [Baixar APK — 9,1 MB](https://github.com/tecninjas2026-alt/DataBee/releases/download/android-test-2026-10-23-ba10fcf/DataBee-2026-10-23-ba10fcf-debug.apk) |
 | 22/10/2026 · 08ab799 | Em teste — básicos e roteiro adicional de interrupção/GPS/sessão confirmados no Galaxy S24 Ultra / Android 16 | Foto, localização e acesso com conta confirmada | Casos de interrupção/permissão e sessão; cadastro/confirmação completos; salvar e IA ainda não disponíveis | [Baixar APK — 9,4 MB](https://github.com/tecninjas2026-alt/DataBee/releases/download/android-test-2026-10-22-08ab799/DataBee-2026-10-22-08ab799-debug.apk) |
 
-Arquivo local: `.tmp/DataBee-2026-10-22-08ab799-debug.apk`. Evidência: `docs/verification/2026-10-22-android-apk.md`.
+Mais recente: `.tmp/DataBee-2026-10-23-ba10fcf-debug.apk`. Mesma assinatura da versão anterior; instalar como atualização. Evidência: [APK de 23/10](verification/2026-10-23-android-apk.md). A versão de 22/10 permanece preservada no histórico.
 
-Próximo checkpoint: cadastro novo com recebimento e confirmação de e-mail. Os quatro passos adicionais enviados à professora já passaram; demais casos da matriz não foram presumidos. A equipe iniciou os testes físicos após a publicação. Usar estados Em preparação, Disponível para teste, Em teste, Aprovada pela equipe e Substituída; preservar o histórico. Evidência: `docs/verification/2026-10-22-android-device-report.md`.
+Próximo checkpoint: no novo APK, Registrar → foto → Continuar → Salvar → fechar/reabrir → Minhas observações → Abrir observação. Conferir foto/dados/localização escolhida. Cadastro novo e confirmação de e-mail continuam pendentes; os testes confirmados em 22/10 não precisam ser repetidos como se fossem desconhecidos. Usar estados Em preparação, Disponível para teste, Em teste, Aprovada pela equipe e Substituída; preservar o histórico.
 
 Instalar: baixar o APK da versão escolhida no Notion, abrir no Android e instalar/atualizar. Login exige internet. Se houver erro na atualização, registrar a mensagem e conferir a assinatura antes de sugerir desinstalação.
 

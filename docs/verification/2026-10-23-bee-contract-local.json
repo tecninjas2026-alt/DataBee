@@ -1,0 +1,155 @@
+{
+  "scope": "Synthetic structure/catalog checks only; no VLM, scientific evaluation, remote writes or Android test.",
+  "cases": 37,
+  "passed": 37,
+  "results": [
+    {
+      "name": "accept family",
+      "result": "Pass"
+    },
+    {
+      "name": "accept genus",
+      "result": "Pass"
+    },
+    {
+      "name": "accept species",
+      "result": "Pass"
+    },
+    {
+      "name": "three ordered candidates",
+      "result": "Pass"
+    },
+    {
+      "name": "inconclusive with genus",
+      "result": "Pass"
+    },
+    {
+      "name": "poor empty abstention",
+      "result": "Pass"
+    },
+    {
+      "name": "no match",
+      "result": "Pass"
+    },
+    {
+      "name": "missing field",
+      "result": "Pass"
+    },
+    {
+      "name": "extra root field",
+      "result": "Pass"
+    },
+    {
+      "name": "extra match field",
+      "result": "Pass"
+    },
+    {
+      "name": "four candidates",
+      "result": "Pass"
+    },
+    {
+      "name": "repeated rank",
+      "result": "Pass"
+    },
+    {
+      "name": "rank string",
+      "result": "Pass"
+    },
+    {
+      "name": "fraction rank",
+      "result": "Pass"
+    },
+    {
+      "name": "rank starts at two",
+      "result": "Pass"
+    },
+    {
+      "name": "repeated taxon",
+      "result": "Pass"
+    },
+    {
+      "name": "invented id",
+      "result": "Pass"
+    },
+    {
+      "name": "incorrect level",
+      "result": "Pass"
+    },
+    {
+      "name": "empty evidence",
+      "result": "Pass"
+    },
+    {
+      "name": "blank evidence",
+      "result": "Pass"
+    },
+    {
+      "name": "oversized evidence",
+      "result": "Pass"
+    },
+    {
+      "name": "too many evidence items",
+      "result": "Pass"
+    },
+    {
+      "name": "no match with candidate",
+      "result": "Pass"
+    },
+    {
+      "name": "possible match without candidate",
+      "result": "Pass"
+    },
+    {
+      "name": "inconclusive without explanation",
+      "result": "Pass"
+    },
+    {
+      "name": "poor without explanation",
+      "result": "Pass"
+    },
+    {
+      "name": "too many limitations",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid status",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid quality",
+      "result": "Pass"
+    },
+    {
+      "name": "control character",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid JSON sanitized",
+      "result": "Pass"
+    },
+    {
+      "name": "oversized JSON",
+      "result": "Pass"
+    },
+    {
+      "name": "empty catalog refused",
+      "result": "Pass"
+    },
+    {
+      "name": "duplicate catalog refused",
+      "result": "Pass"
+    },
+    {
+      "name": "parse roundtrip",
+      "result": "Pass"
+    },
+    {
+      "name": "result copied defensively",
+      "result": "Pass"
+    },
+    {
+      "name": "strict schema for both object levels",
+      "result": "Pass"
+    }
+  ]
+}

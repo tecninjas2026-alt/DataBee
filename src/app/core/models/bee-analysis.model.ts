@@ -4,22 +4,13 @@
  * Sem porcentagem/score/confiança numérica: `rank` apenas ordena (1..3).
  */
 
-export type TaxonomicLevel = 'family' | 'genus' | 'species';
-export type BeeAnalysisStatus = 'possible_match' | 'inconclusive' | 'no_match';
-
-export interface BeeMatch {
-  taxonId: string;
-  rank: number;
-  taxonomicLevel: TaxonomicLevel;
-  visualEvidence: string[];
-}
-
-export interface BeeAnalysisV2 {
-  status: BeeAnalysisStatus;
-  matches: BeeMatch[];
-  imageQuality: 'adequate' | 'poor';
-  limitations: string[];
-}
+import type { BeeAnalysisV2, TaxonomicLevel } from '../../../../supabase/functions/_shared/bee-analysis';
+export type {
+  BeeAnalysisV2,
+  BeeAnalysisStatus,
+  BeeMatch,
+  TaxonomicLevel,
+} from '../../../../supabase/functions/_shared/bee-analysis';
 
 /** Envelope de sucesso de POST analyze-observation. */
 export interface AnalyzeObservationResponse {

@@ -1,0 +1,134 @@
+{
+  "date": "2026-10-27T22:35:16.149Z",
+  "scope": "Synthetic local orchestration checks only. No real atomic SQL, provider, external image transmission, accuracy evaluation or Android execution.",
+  "results": [
+    {
+      "name": "absent provider never reserves quota or loads photo",
+      "result": "Pass"
+    },
+    {
+      "name": "unapproved catalog never reads storage",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid reference never touches store",
+      "result": "Pass"
+    },
+    {
+      "name": "existing result returned without provider, reservation or image",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid cached schema fails without automatic reanalysis",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid cached prompt fails without automatic reanalysis",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid cached catalog fails without automatic reanalysis",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid cached fixture fails without automatic reanalysis",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid cached simulation fails without automatic reanalysis",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid cached status fails without automatic reanalysis",
+      "result": "Pass"
+    },
+    {
+      "name": "cached invalid candidate rejected",
+      "result": "Pass"
+    },
+    {
+      "name": "busy does not call provider or load image",
+      "result": "Pass"
+    },
+    {
+      "name": "limited does not call provider or load image",
+      "result": "Pass"
+    },
+    {
+      "name": "cache created by competing request returned under acquisition",
+      "result": "Pass"
+    },
+    {
+      "name": "valid no_match commits completed and sanitized record",
+      "result": "Pass"
+    },
+    {
+      "name": "valid inconclusive commits inconclusive",
+      "result": "Pass"
+    },
+    {
+      "name": "valid possible_match uses approved ID and stores completed",
+      "result": "Pass"
+    },
+    {
+      "name": "reopen uses cache, never a second provider call",
+      "result": "Pass"
+    },
+    {
+      "name": "two concurrent requests simulate exclusive acquisition",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid JSON shape fails technically, not scientific inconclusive",
+      "result": "Pass"
+    },
+    {
+      "name": "bad JPEG prevents provider call",
+      "result": "Pass"
+    },
+    {
+      "name": "peekError sanitized without automatic retry",
+      "result": "Pass"
+    },
+    {
+      "name": "acquireError sanitized without automatic retry",
+      "result": "Pass"
+    },
+    {
+      "name": "providerError sanitized without automatic retry",
+      "result": "Pass"
+    },
+    {
+      "name": "imageError sanitized without automatic retry",
+      "result": "Pass"
+    },
+    {
+      "name": "completeError sanitized without automatic retry",
+      "result": "Pass"
+    },
+    {
+      "name": "failed error bookkeeping does not expose details",
+      "result": "Pass"
+    },
+    {
+      "name": "superseded attempt does not claim success",
+      "result": "Pass"
+    },
+    {
+      "name": "fixture provider metadata blocked before reservation",
+      "result": "Pass"
+    },
+    {
+      "name": "already cancelled does not read storage",
+      "result": "Pass"
+    },
+    {
+      "name": "cancellation ignores late provider response",
+      "result": "Pass"
+    },
+    {
+      "name": "45-second timeout boundary simulated with shortened timer, late reply ignored",
+      "result": "Pass"
+    }
+  ]
+}

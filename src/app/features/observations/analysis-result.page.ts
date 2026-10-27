@@ -18,6 +18,7 @@ import { AuthService } from '../../core/auth/auth.service';
 import { toUserMessage } from '../../core/errors/app-error';
 import { EmptyStateComponent } from '../../shared/components/empty-state.component';
 import { AnalysisResultsService, SavedAnalysisView } from './analysis-results.service';
+import { EducationalContentComponent } from './educational-content.component';
 
 /** IMP-030 preparation: reads the saved result, without a new analysis on entry or retry. */
 @Component({
@@ -38,6 +39,7 @@ import { AnalysisResultsService, SavedAnalysisView } from './analysis-results.se
     IonSpinner,
     IonText,
     EmptyStateComponent,
+    EducationalContentComponent,
   ],
   templateUrl: 'analysis-result.page.html',
   styleUrls: ['observations.page.scss'],

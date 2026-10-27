@@ -2,6 +2,8 @@
 
 Levantamento em 27/10/2026. Fontes indicadas pela professora; **fonte localizada não significa texto aprovado para o app**. Propostas em [cartões para revisão](educational-cards.draft.md). Nenhuma taxonomia, catálogo aprovado ou tela foi alterada.
 
+**Decisão posterior em 27/10:** professora liberou os quatro textos gerais para o protótipo com aviso de revisão científica pendente e fontes visíveis. [D24 do protótipo](decisions/2026-10-27-preliminary-education.md). A revisão continua pendente; a existência de referência não garante ausência de erros na adaptação.
+
 | ID | Referência | Conteúdo consultado | Uso proposto / limites |
 |---|---|---|---|
 | EDU-S01 | Santos, A. B. (2010). *Abelhas nativas: polinizadores em declínio*. Natureza Online, 8(3), 103–106. [Artigo](https://www.naturezaonline.emnuvens.com.br/revista/article/view/387) | PDF completo obtido; texto extraído e página 103 conferida visualmente. Arquivo tem 4 páginas | Polinização e conservação em geral. Não transformar percentuais/estimativas antigos em números atuais ou identificar espécie por esse texto. |

@@ -1,6 +1,6 @@
 # Cartões educativos — rascunhos para revisão
 
-**Estado: não aprovados e não publicados no aplicativo.** Preparados em 27/10/2026 a partir das fontes indicadas pela professora. Redação própria e referências específicas; não são texto gerado pelo identificador de imagens.
+**Estado: liberados pela professora para o protótipo, com revisão científica pendente.** Decisão posterior de 27/10/2026 autoriza estes quatro cartões gerais com aviso preliminar e fontes visíveis. Não é aprovação científica. Preparados a partir das fontes indicadas pela professora; redação própria, sem texto gerado pelo identificador de imagens. Ver [decisão D24 do protótipo](decisions/2026-10-27-preliminary-education.md).
 
 São quatro propostas de conteúdo **geral** para o cartão “Sobre as abelhas” previsto em D24. Não preenchem automaticamente `educational_*` de nenhuma das 12 espécies, não resolvem C05 e não comprovam a identificação de uma foto. Fontes e limites em [registro de referências](educational-sources.md).
 
@@ -38,4 +38,4 @@ As flores oferecem recursos importantes para muitas abelhas. O pólen fornece nu
 
 ## Critério para entrar no app
 
-Cada cartão deve receber revisão científica do texto final, fonte/localização confirmadas, responsável, data e versão. Depois integrar conteúdo curado e referências visíveis à interface. Até lá, preservar os campos pendentes do catálogo e o estado atual do aplicativo. Não há novo APK nesta etapa.
+Para este protótipo, os quatro cartões podem aparecer com o aviso de conteúdo preliminar/revisão pendente e suas fontes, conforme autorização posterior da professora. A revisão científica do texto final, responsável/data/versão, continua pendente para a etapa seguinte. Preservar os campos pendentes do catálogo; essa liberação não aprova nomes/candidatos da IA nem taxonomia. APK 1.0.3-test/código 4 em preparação.

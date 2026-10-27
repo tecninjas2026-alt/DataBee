@@ -6,7 +6,7 @@ Cada versão terá APK acessível, data, código de origem, estado e descrição
 
 | Versão | Estado | Permite testar | Falta | Arquivo |
 |---|---|---|---|---|
-| 27/10/2026 · 4c30e48 · 1.0.2-test / código 3 | Disponível para teste — compilação/assinatura e navegador conferidos; teste físico pendente | Salvar/reabrir e consultar Resultado da análise sem nova chamada; estados, erros e simulação explícita | Identificação real, catálogo/nomes/candidatos, conteúdo educativo, feed/publicação e descarte remoto | [Baixar APK — 9,1 MB](https://github.com/tecninjas2026-alt/DataBee/releases/download/android-test-2026-10-27-4c30e48/DataBee-2026-10-27-4c30e48-debug.apk) |
+| 27/10/2026 · 4c30e48 · 1.0.2-test / código 3 | Em teste — professora confirmou salvar primeiro registro e reencontrar foto/dados após reabrir; número instalado não lido pelo agente | Salvar/reabrir e consultar Resultado da análise sem nova chamada; estados, erros e simulação explícita | Consulta específica do resultado no celular, identificação real, catálogo/nomes/candidatos, conteúdo educativo, feed/publicação e descarte remoto | [Baixar APK — 9,1 MB](https://github.com/tecninjas2026-alt/DataBee/releases/download/android-test-2026-10-27-4c30e48/DataBee-2026-10-27-4c30e48-debug.apk) |
 | 23/10/2026 · ba10fcf · 1.0.1-test / código 2 | Disponível para teste — validação técnica aprovada, nova interface no celular pendente | Salvar foto/dados privados, GPS opcional na câmera, histórico, reabertura e recuperação | IA, publicação/feed, descarte remoto e validação humana do novo fluxo | [Baixar APK — 9,1 MB](https://github.com/tecninjas2026-alt/DataBee/releases/download/android-test-2026-10-23-ba10fcf/DataBee-2026-10-23-ba10fcf-debug.apk) |
 | 22/10/2026 · 08ab799 | Em teste — básicos e roteiro adicional de interrupção/GPS/sessão confirmados no Galaxy S24 Ultra / Android 16 | Foto, localização e acesso com conta confirmada | Casos de interrupção/permissão e sessão; cadastro/confirmação completos; salvar e IA ainda não disponíveis | [Baixar APK — 9,4 MB](https://github.com/tecninjas2026-alt/DataBee/releases/download/android-test-2026-10-22-08ab799/DataBee-2026-10-22-08ab799-debug.apk) |
 
@@ -14,7 +14,7 @@ Mais recente: `.tmp/DataBee-2026-10-27-4c30e48-debug.apk`. Mesma assinatura das 
 
 Roteiro novo: Minhas observações → uma observação salva → Ver resultado da análise → Não analisada → voltar/reabrir. A consulta não envia foto a provedor. Não há identificação real nesta versão.
 
-Próximo checkpoint: no novo APK, Registrar → foto → Continuar → Salvar → fechar/reabrir → Minhas observações → Abrir observação. Conferir foto/dados/localização escolhida. Cadastro novo e confirmação de e-mail continuam pendentes; os testes confirmados em 22/10 não precisam ser repetidos como se fossem desconhecidos. Usar estados Em preparação, Disponível para teste, Em teste, Aprovada pela equipe e Substituída; preservar o histórico.
+Salvamento do primeiro registro e reabertura com foto/dados confirmados pela professora em 27/10; ver [relato humano](verification/2026-10-27-android-save-device.md). Não repetir esse roteiro como pendência. Consulta específica da tela de resultado, cadastro novo e confirmação de e-mail continuam pendentes. Usar estados Em preparação, Disponível para teste, Em teste, Aprovada pela equipe e Substituída; preservar o histórico.
 
 Instalar: baixar o APK da versão escolhida no Notion, abrir no Android e instalar/atualizar. Login exige internet. Se houver erro na atualização, registrar a mensagem e conferir a assinatura antes de sugerir desinstalação.
 

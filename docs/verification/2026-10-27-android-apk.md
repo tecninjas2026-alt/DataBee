@@ -15,6 +15,8 @@ Detalhe → Ver resultado da análise: consulta dados guardados sem chamar IA. E
 
 Serviço 18/18 (SDK real e fronteiras locais), contrato 37/37, prompt 16/16 e navegador autenticado em 395 px aprovados. Não medem acurácia da IA. Ver `2026-10-27-analysis-read.md`. Teste Android da nova versão ainda não executado.
 
+**Atualização posterior em 27/10:** a professora confirmou salvar o primeiro registro e reencontrar foto/dados após reabrir no celular. Estado atualizado no Notion para Em teste. Consulta específica de resultado não confirmada; não extrapolar aprovação integral. Detalhes em [relato humano](2026-10-27-android-save-device.md).
+
 ## Roteiro da equipe
 
 1. Baixar pelo Notion e atualizar o aplicativo.

@@ -1,0 +1,196 @@
+{
+  "date": "2026-10-27T22:23:07.653Z",
+  "scope": "IMP-027 local preparation; not deployed; no Android/AI execution; remote Auth/RLS reads only",
+  "results": [
+    {
+      "name": "OPTIONS CORS works without authentication",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "GET rejected",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "missing JWT denied",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid JWT denied",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "configuration absence safe",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "read failures sanitized",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid UUID rejected",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "URL injection rejected",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "forged catalog rejected",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "forged owner rejected",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "array rejected",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid JSON rejected",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "oversize actual body rejected",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "unknown observation hidden",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "foreign owner hidden",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "draft denied",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "processing denied",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "published observation denied in private stub",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "missing catalog stops before image/download",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "draft catalog rejected",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "empty catalog rejected",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid image path denied",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid image MIME denied",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid image oversize denied",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid image position denied",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid image owner denied",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid image source denied",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "missing metadata denied",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "missing storage object safe",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "file size mismatch rejected",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid JPEG rejected",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "EXIF rejected",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "valid synthetic photo yields explicit non-persisted simulation only",
+      "scope": "synthetic-local",
+      "result": "Pass"
+    },
+    {
+      "name": "real A: authenticated own saved observation, catalog absent controlled 503",
+      "scope": "local-handler-real-SDK",
+      "result": "Pass"
+    },
+    {
+      "name": "real B: A observation hidden by RLS and ownership",
+      "scope": "local-handler-real-SDK",
+      "result": "Pass"
+    },
+    {
+      "name": "real Auth: forged JWT denied",
+      "scope": "local-handler-real-SDK",
+      "result": "Pass"
+    },
+    {
+      "name": "real A: invalid request rejected after authentication",
+      "scope": "local-handler-real-SDK",
+      "result": "Pass"
+    },
+    {
+      "name": "real A: observation state preserved",
+      "scope": "local-handler-real-SDK",
+      "result": "Pass"
+    }
+  ]
+}

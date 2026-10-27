@@ -1,0 +1,180 @@
+{
+  "task": "IMP-026",
+  "project_ref": "uqfuuahziwgxwjymtwil",
+  "migration_version": "20261027143000",
+  "migration_sha256": "b25a258d1b4b4726d0bbd6209185fd3ed9cfe290c330ad041e9ba1dddde2bb07",
+  "executed_at": "2026-10-27T18:11:11.881Z",
+  "scope": "Real remote SDK A/B/anonymous permissions and SQL constraints against a simulated fixture. No photo, VLM, scientific evaluation or deletion. Existing synthetic users reused; fixture IDs preserved privately.",
+  "cases": 42,
+  "passed": 42,
+  "tests": [
+    {
+      "name": "A reads own simulated result",
+      "result": "Pass"
+    },
+    {
+      "name": "B cannot read A result",
+      "result": "Pass"
+    },
+    {
+      "name": "anonymous cannot read result",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot insert AI result",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot update AI result",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot delete AI result",
+      "result": "Pass"
+    },
+    {
+      "name": "B cannot insert AI result",
+      "result": "Pass"
+    },
+    {
+      "name": "B cannot update AI result",
+      "result": "Pass"
+    },
+    {
+      "name": "B cannot delete AI result",
+      "result": "Pass"
+    },
+    {
+      "name": "anon cannot insert AI result",
+      "result": "Pass"
+    },
+    {
+      "name": "anon cannot update AI result",
+      "result": "Pass"
+    },
+    {
+      "name": "anon cannot delete AI result",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot upsert result",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot update protected analysis_status",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot forge INSERT analysis_status",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot update protected analysis_started_at",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot forge INSERT analysis_started_at",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot update protected curation_status",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot forge INSERT curation_status",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot update protected publication",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot forge INSERT publication",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot update protected public_region_label",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot forge INSERT public_region_label",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot update protected lifecycle",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot forge INSERT lifecycle",
+      "result": "Pass"
+    },
+    {
+      "name": "one result per observation",
+      "result": "Pass"
+    },
+    {
+      "name": "unknown observation rejected",
+      "result": "Pass"
+    },
+    {
+      "name": "DB rejects empty object",
+      "result": "Pass"
+    },
+    {
+      "name": "DB rejects null",
+      "result": "Pass"
+    },
+    {
+      "name": "DB rejects array",
+      "result": "Pass"
+    },
+    {
+      "name": "DB rejects missing field",
+      "result": "Pass"
+    },
+    {
+      "name": "DB rejects extra location field",
+      "result": "Pass"
+    },
+    {
+      "name": "DB rejects wrong version",
+      "result": "Pass"
+    },
+    {
+      "name": "DB rejects four candidates",
+      "result": "Pass"
+    },
+    {
+      "name": "DB rejects no match with candidate",
+      "result": "Pass"
+    },
+    {
+      "name": "DB rejects possible match without candidate",
+      "result": "Pass"
+    },
+    {
+      "name": "DB rejects wrong matches type",
+      "result": "Pass"
+    },
+    {
+      "name": "DB rejects missing abstention explanation",
+      "result": "Pass"
+    },
+    {
+      "name": "DB rejects oversized text",
+      "result": "Pass"
+    },
+    {
+      "name": "unknown schema version rejected",
+      "result": "Pass"
+    },
+    {
+      "name": "provider metadata cannot be blank",
+      "result": "Pass"
+    },
+    {
+      "name": "fixture and observation unchanged after denied writes",
+      "result": "Pass"
+    }
+  ]
+}

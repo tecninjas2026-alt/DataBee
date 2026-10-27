@@ -6,6 +6,8 @@ Fonte oficial: Notion → "Data Model e BeeAnalysisV2" e "Bee Identification AI 
 
 **Preparação já no código:** contrato/validador em `supabase/functions/_shared/bee-analysis.ts`; prompt oficial bee-v2 e projeção de campos permitidos em `bee-prompt.ts`. Contexto exige catálogo aprovado (não o draft IMP-070), versão, IDs/níveis/nomes e características revisadas quando disponíveis; região D10 opcional. Não é endpoint, não chama IA nem grava resultado. A futura function autenticada deverá carregar catálogo mantido no servidor, verificar a imagem e adaptar a chamada ao provedor aprovado.
 
+**IMP-026 aplicada em 27/10:** tabela ai_identifications, modelo de leitura em `core/models/ai-identification.model.ts`. Apenas o dono lê; cliente sem INSERT/UPDATE/DELETE. O CHECK do banco protege o envelope básico, não substitui validação completa de candidatos/catálogo da IMP-023. Persistência real/atômica + status/attempt_id ainda são IMP-029. Evidência SDK real 42/42 em `docs/verification/2026-10-27-imp026-ai-storage.md`; fixture SIMULATED preservada sem análise de foto.
+
 ## 1. Fluxo
 ```
 App (observação saved, idle) --POST {observation_id} + JWT--> Edge analyze-observation

@@ -38,4 +38,4 @@ As flores oferecem recursos importantes para muitas abelhas. O pólen fornece nu
 
 ## Critério para entrar no app
 
-Para este protótipo, os quatro cartões podem aparecer com o aviso de conteúdo preliminar/revisão pendente e suas fontes, conforme autorização posterior da professora. A revisão científica do texto final, responsável/data/versão, continua pendente para a etapa seguinte. Preservar os campos pendentes do catálogo; essa liberação não aprova nomes/candidatos da IA nem taxonomia. APK 1.0.3-test/código 4 em preparação.
+Para este protótipo, os quatro cartões podem aparecer com o aviso de conteúdo preliminar/revisão pendente e suas fontes, conforme autorização posterior da professora. A revisão científica do texto final, responsável/data/versão, continua pendente para a etapa seguinte. Preservar os campos pendentes do catálogo; essa liberação não aprova nomes/candidatos da IA nem taxonomia. APK 1.0.3-test/código 4 publicado no GitHub Releases e Notion; teste físico da atualização pendente.

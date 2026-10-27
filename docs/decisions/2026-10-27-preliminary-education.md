@@ -17,3 +17,5 @@ Em 27/10/2026, a professora perguntou se poderia lançar o protótipo sem revis�
 A liberação é editorial, limitada a esse protótipo. Revisão científica continua pendente e será registrada com responsável/data/versão quando realizada. D24 não está integralmente concluída: revisão, conteúdo específico de espécie e orientação segura permanecem pendentes. A identificação automática ainda não está integrada; essa decisão não altera custo zero, privacidade, permissões ou critérios científicos de identificação.
 
 Implementação: `src/app/features/observations/educational-content.component.ts` e inclusão em `analysis-result.page.*`. Próxima entrega Android: 1.0.3-test/código 4, mantendo assinatura e instalação por atualização. Não considerar entregue até publicar/conferir o APK e o Notion.
+
+**Entrega conferida:** fonte 20442f0, APK 1.0.3-test/código 4 publicado e verificado no GitHub Releases e na página oficial de versões do Notion. Teste físico desta atualização pendente. Evidência: `docs/verification/2026-10-27-android-education-apk.md`.

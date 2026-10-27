@@ -33,3 +33,7 @@ Antes de qualquer foto, o responsável deve abrir o painel administrativo → Pr
 Os termos institucionais exigem autoridade do responsável e impõem condições sobre dados de crianças/adolescentes. Não considerar uma conta adulta como comprovação de elegibilidade do aplicativo escolar. Conferir público, dados e consentimentos aplicáveis antes da ativação. [Termos comerciais vigentes](https://legal.mistral.ai/terms/commercial-terms-of-service/).
 
 Preparado `mistral-vision.ts`, sem ativação ou integração remota, com condições explícitas mantidas no servidor e modelo estável versionado, sem aliases/preview. Relatório local: `docs/verification/2026-10-27-mistral-adapter.md` (37/37 cenários sintéticos). Sem conta/chave real, aceite, chamada externa ou gasto. D15 continua parcial; catálogo e persistência atômica ainda pendentes.
+
+### Atualização posterior — conta criada pela professora
+
+Conta autenticada conferida. Assinatura Gratuito, cobrança adicional não ativada; treinamento da API desativado com autorização expressa e persistência conferida após reload. Modelos Labs desligados. Studio pede upgrade; chave criada com autorização na interface Admin regular (30 dias, somente conectores compartilhados), sem upgrade/pagamento. Uso efetivo da API ainda não comprovado. Cadastro autorizado do secret Supabase aguarda login humano no Dashboard; nenhuma foto/chamada/custo. Ver `docs/verification/2026-10-27-mistral-account.md`. O relato anterior de ausência de conta é histórico, superado por esta confirmação.

@@ -1,37 +1,102 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { IonBackButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
-
+import { DatePipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, inject, input, OnChanges, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import {
+  IonBackButton,
+  IonButton,
+  IonButtons,
+  IonCard,
+  IonCardContent,
+  IonContent,
+  IonHeader,
+  IonSpinner,
+  IonText,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular';
+import { AuthService } from '../../core/auth/auth.service';
+import { toUserMessage } from '../../core/errors/app-error';
 import { EmptyStateComponent } from '../../shared/components/empty-state.component';
+import { AnalysisResultsService, SavedAnalysisView } from './analysis-results.service';
 
-/**
- * Tela 5 — Resultado + Aprender (IMP-030, D22/D24).
- * Regras: até 3 candidatos por rank (sem %), nível taxonômico, status "Sugerido", limitações da IA,
- * inconclusivo/no_match ≠ erro técnico, cartão educativo vindo do catálogo curado (nunca gerado pela IA).
- * Reabrir esta tela lê ai_identifications (cache) e NUNCA chama o provedor.
- */
+/** IMP-030 preparation: reads the saved result, without a new analysis on entry or retry. */
 @Component({
   selector: 'app-analysis-result',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, EmptyStateComponent],
-  template: `
-    <ion-header>
-      <ion-toolbar color="primary">
-        <ion-buttons slot="start">
-          <ion-back-button [defaultHref]="'/observacao/' + id()" text="" />
-        </ion-buttons>
-        <ion-title>Resultado</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <!-- TODO(IMP-030): renderizar BeeAnalysisV2 salvo + cartão "Sobre esta abelha"/"Sobre as abelhas" (D24). -->
-      <app-empty-state
-        emoji="🤖"
-        title="Não analisada"
-        message="A identificação assistida chega na semana 3 (IMP-023 a IMP-031). Sugestão de IA não é validação científica."
-      />
-    </ion-content>
-  `,
+  imports: [
+    DatePipe,
+    RouterLink,
+    IonHeader,
+    IonToolbar,
+    IonButtons,
+    IonBackButton,
+    IonTitle,
+    IonContent,
+    IonButton,
+    IonCard,
+    IonCardContent,
+    IonSpinner,
+    IonText,
+    EmptyStateComponent,
+  ],
+  templateUrl: 'analysis-result.page.html',
+  styleUrls: ['observations.page.scss'],
 })
-export class AnalysisResultPage {
+export class AnalysisResultPage implements OnChanges {
   readonly id = input.required<string>();
+  private readonly auth = inject(AuthService);
+  private readonly results = inject(AnalysisResultsService);
+  private readonly record = signal<SavedAnalysisView | null>(null);
+  private controller: AbortController | null = null;
+  protected readonly view = computed(() =>
+    this.record()?.observation.user_id === this.auth.user()?.id && this.record()?.observation.id === this.id()
+      ? this.record()
+      : null,
+  );
+  protected readonly loading = signal(false);
+  protected readonly error = signal<string | null>(null);
+
+  ionViewWillEnter(): void {
+    void this.load();
+  }
+  ngOnChanges(): void {
+    if (this.controller) void this.load();
+  }
+  ionViewDidLeave(): void {
+    this.controller?.abort();
+    this.controller = null;
+    this.record.set(null);
+    this.error.set(null);
+    this.loading.set(false);
+  }
+  protected async load(): Promise<void> {
+    this.controller?.abort();
+    const controller = new AbortController();
+    this.controller = controller;
+    const owner = this.auth.user()?.id;
+    const id = this.id();
+    this.record.set(null);
+    this.error.set(null);
+    this.loading.set(true);
+    try {
+      const record = await this.results.read(id, controller.signal);
+      if (
+        this.controller === controller &&
+        owner === this.auth.user()?.id &&
+        id === this.id() &&
+        !controller.signal.aborted
+      )
+        this.record.set(record);
+    } catch (error) {
+      if (
+        this.controller === controller &&
+        owner === this.auth.user()?.id &&
+        id === this.id() &&
+        !controller.signal.aborted
+      )
+        this.error.set(toUserMessage(error));
+    } finally {
+      if (this.controller === controller) this.loading.set(false);
+    }
+  }
 }

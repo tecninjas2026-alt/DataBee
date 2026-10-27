@@ -113,33 +113,47 @@ export function validateBeeAnalysis(value: unknown, taxa: readonly AllowedTaxon[
     }
     catalog.set(taxon.id, taxon.taxonomicLevel);
   }
+  const analysis = validateBeeAnalysisStructure(value);
+  for (const match of analysis.matches) {
+    if (catalog.get(match['taxonId']) !== match['taxonomicLevel']) return invalid();
+  }
+  return analysis;
+}
+
+/** Shape validation for reading saved results; backend writes must also validate catalog membership. */
+export function validateBeeAnalysisStructure(value: unknown): BeeAnalysisV2 {
   const root = record(value, ['status', 'matches', 'imageQuality', 'limitations']);
-  if (root.status !== 'possible_match' && root.status !== 'inconclusive' && root.status !== 'no_match')
+  if (root['status'] !== 'possible_match' && root['status'] !== 'inconclusive' && root['status'] !== 'no_match')
     return invalid();
-  if (root.imageQuality !== 'adequate' && root.imageQuality !== 'poor') return invalid();
-  if (!Array.isArray(root.matches) || root.matches.length > BEE_ANALYSIS_LIMITS.matches) return invalid();
-  if (root.status === 'possible_match' && !root.matches.length) return invalid();
-  if (root.status === 'no_match' && root.matches.length) return invalid();
+  if (root['imageQuality'] !== 'adequate' && root['imageQuality'] !== 'poor') return invalid();
+  if (!Array.isArray(root['matches']) || root['matches'].length > BEE_ANALYSIS_LIMITS.matches) return invalid();
+  if (root['status'] === 'possible_match' && !root['matches'].length) return invalid();
+  if (root['status'] === 'no_match' && root['matches'].length) return invalid();
   const limitations = texts(
-    root.limitations,
+    root['limitations'],
     BEE_ANALYSIS_LIMITS.limitationItems,
-    root.status === 'inconclusive' || root.imageQuality === 'poor',
+    root['status'] === 'inconclusive' || root['imageQuality'] === 'poor',
   );
   const seen = new Set<string>();
-  const matches = root.matches.map((item, index): BeeMatch => {
+  const matches = root['matches'].map((item, index): BeeMatch => {
     const match = record(item, ['taxonId', 'rank', 'taxonomicLevel', 'visualEvidence']);
-    const taxonId = text(match.taxonId, BEE_ANALYSIS_LIMITS.taxonIdCharacters);
-    const level = catalog.get(taxonId);
-    if (!level || level !== match.taxonomicLevel || seen.has(taxonId) || match.rank !== index + 1) return invalid();
+    const taxonId = text(match['taxonId'], BEE_ANALYSIS_LIMITS.taxonIdCharacters);
+    const level = match['taxonomicLevel'];
+    if (
+      (level !== 'family' && level !== 'genus' && level !== 'species') ||
+      seen.has(taxonId) ||
+      match['rank'] !== index + 1
+    )
+      return invalid();
     seen.add(taxonId);
     return {
       taxonId,
       rank: index + 1,
       taxonomicLevel: level,
-      visualEvidence: texts(match.visualEvidence, BEE_ANALYSIS_LIMITS.evidenceItems, true),
+      visualEvidence: texts(match['visualEvidence'], BEE_ANALYSIS_LIMITS.evidenceItems, true),
     };
   });
-  return { status: root.status, matches, imageQuality: root.imageQuality, limitations };
+  return { status: root['status'], matches, imageQuality: root['imageQuality'], limitations };
 }
 
 /** Parses only the model JSON, after the adapter has checked refusal/incomplete. */

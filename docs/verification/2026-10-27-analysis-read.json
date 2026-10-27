@@ -1,0 +1,79 @@
+{
+  "scope": "Angular read service with real SDK A/B/anonymous for access/cache; focused synthetic boundaries for cancellation and malformed results. No provider or remote mutations.",
+  "cases": 18,
+  "passed": 18,
+  "tests": [
+    {
+      "name": "real Angular service reads own stored fixture and labels simulation",
+      "result": "Pass"
+    },
+    {
+      "name": "reopen only reads persisted result",
+      "result": "Pass"
+    },
+    {
+      "name": "B cannot open A result through Angular service",
+      "result": "Pass"
+    },
+    {
+      "name": "anonymous database access is denied despite forged local owner",
+      "result": "Pass"
+    },
+    {
+      "name": "no session is denied",
+      "result": "Pass"
+    },
+    {
+      "name": "unknown observation unavailable",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid id rejected without result",
+      "result": "Pass"
+    },
+    {
+      "name": "own saved idle observation does not pretend analysis",
+      "result": "Pass"
+    },
+    {
+      "name": "cancelled load cannot return a result",
+      "result": "Pass"
+    },
+    {
+      "name": "account switch ignores delayed response",
+      "result": "Pass"
+    },
+    {
+      "name": "missing result is technical error, not inconclusive",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid saved structure is rejected",
+      "result": "Pass"
+    },
+    {
+      "name": "schema version mismatch is rejected",
+      "result": "Pass"
+    },
+    {
+      "name": "status mismatch is rejected",
+      "result": "Pass"
+    },
+    {
+      "name": "processing never shows stale cache",
+      "result": "Pass"
+    },
+    {
+      "name": "failed never shows stale cache",
+      "result": "Pass"
+    },
+    {
+      "name": "idle never shows stale cache",
+      "result": "Pass"
+    },
+    {
+      "name": "reads made zero provider calls",
+      "result": "Pass"
+    }
+  ]
+}

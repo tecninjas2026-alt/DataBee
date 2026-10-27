@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start"><ion-back-button [defaultHref]="'/observacao/' + id()" text="" /></ion-buttons>
+    <ion-title>Resultado da análise</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="observations ion-padding">
+    @if (loading()) {
+      <p role="status">
+        <ion-spinner name="crescent" />
+        Carregando resultado…
+      </p>
+    }
+    @if (error(); as message) {
+      <ion-text color="danger" role="alert">
+        <p>{{ message }}</p>
+      </ion-text>
+      <ion-button (click)="load()" [disabled]="loading()">Tentar novamente</ion-button>
+    } @else if (view(); as data) {
+      <ion-card>
+        <ion-card-content>
+          @if (data.simulated) {
+            <ion-text color="warning"><h2>Simulação de teste</h2></ion-text>
+            <p>Este registro é artificial. Nenhuma foto foi analisada e não há identificação científica.</p>
+          } @else {
+            @switch (data.observation.analysis_status) {
+              @case ('idle') {
+                <h2>Não analisada</h2>
+                <p>Sua observação está salva. A identificação por IA ainda não está disponível nesta versão.</p>
+              }
+              @case ('processing') {
+                <h2>Análise em andamento</h2>
+                <p>O resultado ainda não está pronto. Você pode voltar à sua observação e consultar mais tarde.</p>
+                <ion-button fill="outline" (click)="load()">Consultar resultado</ion-button>
+              }
+              @case ('failed') {
+                <h2>Análise não concluída</h2>
+                <p>Houve uma falha técnica. A foto e os dados da observação continuam salvos.</p>
+              }
+              @case ('inconclusive') {
+                <h2>Análise inconclusiva</h2>
+                <p>A sugestão não permite uma identificação suficiente. Consulte as limitações abaixo.</p>
+              }
+              @case ('completed') {
+                <h2>Sugestão da IA</h2>
+                @if (data.identification?.result?.status === 'no_match') {
+                  <p>
+                    Nenhum candidato do catálogo foi sustentado nesta análise. Isso não comprova ausência de abelha.
+                  </p>
+                }
+              }
+            }
+          }
+          @if (data.identification; as identification) {
+            @if (!data.simulated) {
+              <p>Sugestão automática · não equivale à validação de um especialista.</p>
+              @if (identification.result.matches.length > 0) {
+                <p>Os nomes dos candidatos ainda não estão disponíveis para consulta. A sugestão permanece salva.</p>
+              }
+            }
+            <p>Resultado salvo em {{ identification.created_at | date: 'dd/MM/yyyy HH:mm' }}</p>
+            @if (identification.result.limitations.length > 0) {
+              <h2>Limitações da análise</h2>
+              <ul>
+                @for (limitation of identification.result.limitations; track $index) {
+                  <li>{{ limitation }}</li>
+                }
+              </ul>
+            }
+            @if (!data.simulated && identification.result.imageQuality === 'poor') {
+              <p>Uma nova fotografia mais nítida pode ajudar na análise.</p>
+            }
+          }
+        </ion-card-content>
+      </ion-card>
+      <ion-button [routerLink]="['/observacao', id()]" expand="block">Voltar à observação</ion-button>
+      <ion-button routerLink="/tabs/minhas" expand="block" fill="outline">Minhas observações</ion-button>
+    } @else if (!loading()) {
+      <app-empty-state
+        emoji="🔎"
+        title="Resultado indisponível"
+        message="A observação não foi encontrada ou você não tem acesso."
+      >
+        <ion-button routerLink="/tabs/minhas">Minhas observações</ion-button>
+      </app-empty-state>
+    }
+  </div>
+</ion-content>

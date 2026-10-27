@@ -79,6 +79,9 @@
         </ion-card-content>
       </ion-card>
       <ion-button routerLink="/tabs/minhas" expand="block">Minhas observações</ion-button>
+      <ion-button [routerLink]="['/observacao', data.observation.id, 'resultado']" expand="block" fill="outline">
+        Ver resultado da análise
+      </ion-button>
       <ion-button routerLink="/tabs/registrar" expand="block" fill="outline">Registrar outra abelha</ion-button>
     } @else if (!loading()) {
       <app-empty-state

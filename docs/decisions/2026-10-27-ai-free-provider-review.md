@@ -21,3 +21,15 @@ O modelo Llama 3.2 11B Vision está documentado, mas exige aceite específico da
 ## Próximo critério de decisão
 
 Confirmar um modelo que reúna imagem, saída estruturada compatível, uso do público escolar, conta disponível e bloqueio efetivo no plano gratuito. Revisar termos aplicáveis ao serviço/modelo com o responsável, sem aceitá-los automaticamente; documentação de preço isolada não resolve elegibilidade. Depois inserir segredo apenas no servidor e avaliar fotos DEV autorizadas. Nenhuma escolha científica nem promessa de qualidade deriva desta pesquisa.
+
+## Complemento — candidato Mistral, preparação sem ativação
+
+A professora confirmou que **a equipe ainda não tem conta**. A documentação descreve Free mode com API sem cartão, sujeito a limites; disponibilidade e limites de um modelo específico precisam ser conferidos na conta. [Ativação oficial](https://docs.mistral.ai/getting-started/quickstarts/studio/activate-and-generate-api-key).
+
+Há documentação de entrada JPEG em base64 e saída por JSON Schema. Isso permite preparar um adaptador, mas não comprova combinação modelo/schema/quota nem qualidade com abelhas. Nenhum modelo foi definido para produção. [Visão](https://docs.mistral.ai/studio/conversations/vision), [saída estruturada](https://docs.mistral.ai/studio/conversations/structured-output/custom), [API](https://docs.mistral.ai/api).
+
+Antes de qualquer foto, o responsável deve abrir o painel administrativo → Privacy → Anonymous improvement data e desabilitar a utilização dos dados da API para melhoria. A opção de Vibe é separada e não resolve a API. Não confundir opt-out de treinamento com ausência de qualquer retenção. [Procedimento oficial](https://help.mistral.ai/en/articles/455207-can-i-opt-out-of-my-input-or-output-data-being-used-for-training).
+
+Os termos institucionais exigem autoridade do responsável e impõem condições sobre dados de crianças/adolescentes. Não considerar uma conta adulta como comprovação de elegibilidade do aplicativo escolar. Conferir público, dados e consentimentos aplicáveis antes da ativação. [Termos comerciais vigentes](https://legal.mistral.ai/terms/commercial-terms-of-service/).
+
+Preparado `mistral-vision.ts`, sem ativação ou integração remota, com condições explícitas mantidas no servidor e modelo estável versionado, sem aliases/preview. Relatório local: `docs/verification/2026-10-27-mistral-adapter.md` (37/37 cenários sintéticos). Sem conta/chave real, aceite, chamada externa ou gasto. D15 continua parcial; catálogo e persistência atômica ainda pendentes.

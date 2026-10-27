@@ -58,3 +58,11 @@ Tipos no front: `src/app/core/models/bee-analysis.model.ts`. JSON Schema (Struct
 
 ## 8. Avaliação (IMP-048/049 — humano)
 Métricas reais (Top-1, Top-3, gênero, inconclusivo correto, erro grave) por execução registrada em "AI Experiments" no Notion. Nenhuma métrica inventada; fixtures validam contrato, não biologia.
+
+## 9. Candidato gratuito Mistral (27/10, não ativado)
+
+`_shared/mistral-vision.ts` implementa a porta de visão da orquestração, sem nova dependência, variável de ambiente conectada ou chamada pelo endpoint atual. Modelo estável versionado e segredo são fornecidos pelo servidor após verificações de conta; nenhum modelo padrão. O catálogo draft não habilita o adaptador.
+
+Exigir conferência efetiva de Free mode/limites, público/termos/consentimentos, opt-out de treinamento específico da API e capacidade de imagem + JSON Schema do modelo disponível. Os booleanos de configuração só registram essa conferência: não inspecionam a conta nem substituem consentimento. Sem cobrança/recarga/fallback; segredo nunca no cliente, chat ou Notion. Professora ainda sem conta; revisão e procedimento em `docs/decisions/2026-10-27-ai-free-provider-review.md`.
+
+Uma chamada a host fixo, JPEG base64, prompt/catalog projection exatos, sem identidade/GPS/URL privada. Deadline 35 s; validação integral da resposta e erros sanitizados. 37/37 cenários HTTP locais; isso não é teste do modelo nem identificação científica. Não ativar antes de catálogo aprovado, persistência atômica/quotas e avaliação DEV autorizada.

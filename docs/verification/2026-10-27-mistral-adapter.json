@@ -1,0 +1,154 @@
+{
+  "date": "2026-10-27T23:21:47.059Z",
+  "scope": "Local synthetic HTTP only; no account, actual credentials, external photo transmission, live model, billing verification, quality evaluation, deployed endpoint or Android execution.",
+  "results": [
+    {
+      "name": "requires enabled",
+      "result": "Pass"
+    },
+    {
+      "name": "requires freeModeVerified",
+      "result": "Pass"
+    },
+    {
+      "name": "requires apiTrainingDisabled",
+      "result": "Pass"
+    },
+    {
+      "name": "requires audienceAndTermsReviewed",
+      "result": "Pass"
+    },
+    {
+      "name": "requires modelCapabilitiesVerified",
+      "result": "Pass"
+    },
+    {
+      "name": "refuses model unit-latest",
+      "result": "Pass"
+    },
+    {
+      "name": "refuses model unit-preview-2601",
+      "result": "Pass"
+    },
+    {
+      "name": "refuses model unit-labs-2601",
+      "result": "Pass"
+    },
+    {
+      "name": "refuses model unit-experimental-2601",
+      "result": "Pass"
+    },
+    {
+      "name": "refuses model empty",
+      "result": "Pass"
+    },
+    {
+      "name": "refuses missing or malformed key 0",
+      "result": "Pass"
+    },
+    {
+      "name": "refuses missing or malformed key 19",
+      "result": "Pass"
+    },
+    {
+      "name": "draft catalog cannot enable provider",
+      "result": "Pass"
+    },
+    {
+      "name": "valid one-call request has fixed host, no redirects and minimized payload",
+      "result": "Pass"
+    },
+    {
+      "name": "HTTP 429 sanitized, no retries",
+      "result": "Pass"
+    },
+    {
+      "name": "HTTP 401 sanitized, no retries",
+      "result": "Pass"
+    },
+    {
+      "name": "HTTP 403 sanitized, no retries",
+      "result": "Pass"
+    },
+    {
+      "name": "HTTP 408 sanitized, no retries",
+      "result": "Pass"
+    },
+    {
+      "name": "HTTP 504 sanitized, no retries",
+      "result": "Pass"
+    },
+    {
+      "name": "HTTP 500 sanitized, no retries",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid JPEG never calls HTTP",
+      "result": "Pass"
+    },
+    {
+      "name": "altered prompt context rejected before HTTP systemPrompt",
+      "result": "Pass"
+    },
+    {
+      "name": "altered prompt context rejected before HTTP catalogContext",
+      "result": "Pass"
+    },
+    {
+      "name": "pre-cancelled request never calls HTTP",
+      "result": "Pass"
+    },
+    {
+      "name": "cancellation during fetch sanitized",
+      "result": "Pass"
+    },
+    {
+      "name": "network errors omit secret details",
+      "result": "Pass"
+    },
+    {
+      "name": "model mismatch rejected",
+      "result": "Pass"
+    },
+    {
+      "name": "multiple choices rejected",
+      "result": "Pass"
+    },
+    {
+      "name": "truncated rejected",
+      "result": "Pass"
+    },
+    {
+      "name": "refusal rejected",
+      "result": "Pass"
+    },
+    {
+      "name": "tool call rejected",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid contract rejected",
+      "result": "Pass"
+    },
+    {
+      "name": "invented taxon rejected",
+      "result": "Pass"
+    },
+    {
+      "name": "malformed JSON rejected",
+      "result": "Pass"
+    },
+    {
+      "name": "oversized HTTP body rejected",
+      "result": "Pass"
+    },
+    {
+      "name": "valid inconclusive remains scientific inconclusive",
+      "result": "Pass"
+    },
+    {
+      "name": "35-second abort boundary simulated with shortened timer",
+      "result": "Pass"
+    }
+  ]
+}

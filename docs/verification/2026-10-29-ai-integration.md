@@ -32,6 +32,10 @@ Privacidade da API conferida novamente no painel: treinamento desligado, Labs de
 
 Browser autenticado da professora: tela de resultado e botão/disclosure conferidos em 360 × 800, conteúdo sem overflow horizontal; nenhuma foto pessoal enviada. Botões com área mínima de 44 px. Reabertura permaneceu leitura, sem disparo automático. Estado com candidatos/qualidade em fotos pessoais e teste físico continuam pendentes.
 
-Teste físico do novo APK, fotos DEV autorizadas de abelhas com avaliação humana, demais critérios de Gate 2/SMTP e liberação mais ampla. C05, revisão científica educativa, imagens de referência pendentes, feed/publicação e descarte remoto continuam separados. Preparar APK 1.0.4-test/código 5 e publicar no Notion pelo padrão existente. Nenhuma task inteira marcada Done por estas verificações.
+Teste físico do novo APK, fotos DEV autorizadas de abelhas com avaliação humana, demais critérios de Gate 2/SMTP e liberação mais ampla. C05, revisão científica educativa, imagens de referência pendentes, feed/publicação e descarte remoto continuam separados. APK 1.0.4-test/código 5 publicado em GitHub Releases/Notion, assinatura/44 assets/download conferidos. Ver `2026-10-29-android-ai-apk.md`. Nenhuma task inteira marcada Done por estas verificações.
 
 Referências oficiais: [Mistral — condições institucionais, seções 1.4 e 2.2(c)](https://legal.mistral.ai/terms/commercial-terms-of-service/), [opt-out separado da API](https://help.mistral.ai/en/articles/455207-can-i-opt-out-of-my-input-or-output-data-being-used-for-training), [modelo e capacidades](https://docs.mistral.ai/models/ministral-3-8b-25-12).
+
+## Registro compartilhado
+
+Notion atualizado em 29/10: versões Android com acesso rápido/download 1.0.4 e seção hierárquica; histórico 1.0.3/1.0.2/1.0.1/22-10 conferido após edição. IMP-028/029/030 em Review com evidências e explicações; IMP-070 permanece In progress para catálogo completo. IMP-025 e Project Decisions receberam adendo operacional do piloto/custo zero. Nenhum Done, aceite científico ou teste físico novo presumido.

@@ -1,0 +1,12 @@
+{
+  "source": "82785565c108c887bd2f67572ba7d85c97f1c18d",
+  "bytes": 9127288,
+  "sha256": "964b290d65bbfee06d2557fefe7f69ad14297efe0b749080fb64afba36d3c1ac",
+  "webAssets": 44,
+  "serverUrl": false,
+  "sameSigningCertificate": true,
+  "certificateSha256": "6057817ca356a35baa87de581492ab2a0ff93c354cda93adb14e85b0a50d8043",
+  "package": "package: name='com.tecninjas.databee' versionCode='5' versionName='1.0.4-test' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+  "minSdk": "sdkVersion:'24'",
+  "targetSdk": "targetSdkVersion:'36'"
+}

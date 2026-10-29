@@ -1,5 +1,7 @@
 # Mistral — conferência da conta e privacidade
 
+> **Correção posterior, 29/10:** a conferência de presença/digest abaixo não comprovava que o valor era uma chave válida. A consulta real detectou valor malformado; o cadastro foi substituído por DataBee-dev-2026-10-29, com mesmo escopo e vencimento 26/11/2026, e a API de metadados respondeu HTTP 200. A chave antiga não foi revogada. Estado atual/evidências: `2026-10-29-provider-readiness.md`. Não interpretar o registro histórico de 27/10 como teste de funcionamento do provedor.
+
 Data: 27/10/2026 (America/Sao_Paulo). Conferência por interface autenticada, sem exposição de credenciais.
 
 ## Confirmado

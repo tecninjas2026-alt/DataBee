@@ -66,3 +66,11 @@ Métricas reais (Top-1, Top-3, gênero, inconclusivo correto, erro grave) por ex
 Exigir conferência efetiva de Free mode/limites, público/termos/consentimentos, opt-out de treinamento específico da API e capacidade de imagem + JSON Schema do modelo disponível. Os booleanos de configuração só registram essa conferência: não inspecionam a conta nem substituem consentimento. Sem cobrança/recarga/fallback; segredo nunca no cliente, chat ou Notion. Professora ainda sem conta; revisão e procedimento em `docs/decisions/2026-10-27-ai-free-provider-review.md`.
 
 Uma chamada a host fixo, JPEG base64, prompt/catalog projection exatos, sem identidade/GPS/URL privada. Deadline 35 s; validação integral da resposta e erros sanitizados. 37/37 cenários HTTP locais; isso não é teste do modelo nem identificação científica. Não ativar antes de catálogo aprovado, persistência atômica/quotas e avaliação DEV autorizada.
+
+## 10. Consulta administrativa implantada (29/10)
+
+`GET analyze-observation/provider-readiness` inspeciona somente os metadados do candidato `ministral-8b-2512`, com credencial privada do servidor e JWT ligado. Chave atual obtida pela CLI em memória pode ser enviada em `x-databee-operator-key`; nunca integrar esse header/credencial ao app. Chave pública e sessão normal não autorizam a rota. Não gera saída de IA nem envia imagens, identidade, GPS ou observações; sem retries/fallback. Modelo dessa inspeção não define o modelo da futura análise.
+
+A consulta real retornou 200 e capacidades visão/chat; 34/34 casos locais e 8/8 remotos aprovados. Foi necessário corrigir valor malformado salvo no cofre: a conferência anterior de presença/digest não comprovava validade. Nova chave mantém escopo/vencimento anterior (26/11/2026); valor confirmado na tela de criação antes da transferência e depois validado pela API. A antiga não foi revogada. Ver `docs/verification/2026-10-29-provider-readiness.md`.
+
+O POST da análise continua sem catálogo e responde 503 antes de baixar foto. Não habilitar geração ou atualizar D15 para completo só porque a consulta de metadados funcionou. Próximo: persistência atômica/quotas e catálogo, depois foto DEV autorizada e schema real.

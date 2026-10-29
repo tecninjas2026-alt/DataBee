@@ -1,0 +1,64 @@
+{
+  "date": "2026-10-29",
+  "project": "uqfuuahziwgxwjymtwil",
+  "scope": "Deployed metadata-only route and authentication checks. One operator model-metadata GET; no completion, photo, observation write, deletion, schema change or scientific accuracy test.",
+  "liveMetadata": {
+    "status": 200,
+    "check": "metadata_only",
+    "error": null,
+    "reason": null,
+    "model": "ministral-8b-2512",
+    "capabilities": {
+      "vision": true,
+      "completion_chat": true
+    }
+  },
+  "results": [
+    {
+      "name": "operator reads actual Mistral model metadata without generation",
+      "result": "Pass",
+      "status": 200,
+      "model": "ministral-8b-2512",
+      "capabilities": {
+        "vision": true,
+        "completion_chat": true
+      }
+    },
+    {
+      "name": "anonymous cannot query provider metadata",
+      "result": "Pass",
+      "status": 401
+    },
+    {
+      "name": "operator POST refused without generation",
+      "result": "Pass",
+      "status": 405
+    },
+    {
+      "name": "authenticated A cannot use operator route",
+      "result": "Pass",
+      "status": 401
+    },
+    {
+      "name": "authenticated B cannot use operator route",
+      "result": "Pass",
+      "status": 401
+    },
+    {
+      "name": "owner analysis remains disabled with absent approved catalog",
+      "result": "Pass",
+      "status": 503
+    },
+    {
+      "name": "B cannot request A observation analysis",
+      "result": "Pass",
+      "status": 404
+    },
+    {
+      "name": "anonymous analysis refused",
+      "result": "Pass",
+      "status": 401
+    }
+  ],
+  "executedAt": "2026-10-29T18:27:16.473Z"
+}

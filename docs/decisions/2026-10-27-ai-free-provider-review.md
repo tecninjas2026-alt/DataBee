@@ -37,3 +37,9 @@ Preparado `mistral-vision.ts`, sem ativação ou integração remota, com condi�
 ### Atualização posterior — conta criada pela professora
 
 Conta autenticada conferida. Assinatura Gratuito, cobrança adicional não ativada; treinamento da API desativado com autorização expressa e persistência conferida após reload. Modelos Labs desligados. Studio pede upgrade; chave criada com autorização na interface Admin regular (30 dias, somente conectores compartilhados), sem upgrade/pagamento. Uso efetivo da API ainda não comprovado. Após login humano, MISTRAL_API_KEY cadastrado com autorização no cofre Supabase, digest igual e persistência após reload conferidos; nenhuma foto/chamada/custo. Cadastro não ativa o adaptador ou comprova acesso ao modelo. Ver `docs/verification/2026-10-27-mistral-account.md`. O relato anterior de ausência de conta é histórico, superado por esta confirmação.
+
+### Atualização operacional de 29/10 — metadados confirmados, fotos ainda não
+
+O valor anterior era malformado; presença/digest não comprovavam chave válida. Cadastro refeito com mesmo escopo e vencimento 26/11, chave DataBee-dev-2026-10-29 transferida após conferência contra a confirmação atual. Consulta administrativa implantada retornou HTTP 200 do endpoint Mistral de metadados de ministral-8b-2512 e informou visão/chat. 34/34 verificações locais e 8/8 remotas aprovadas; sem foto/geração, migração, pagamento ou APK novo. A chave antiga está preservada. Ver `docs/verification/2026-10-29-provider-readiness.md`.
+
+D15 permanece parcial: o candidato da inspeção não é configuração do modelo de análise; faltam elegibilidade/consentimentos, catálogo, persistência atômica/quotas e ensaio real de imagem/schema/qualidade. Não interpretar HTTP 200 de metadados como identificação funcional, quota de geração comprovada ou autorização de custo.

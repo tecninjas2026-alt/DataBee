@@ -1,0 +1,143 @@
+{
+  "date": "2026-10-29",
+  "executedAt": "2026-10-29T18:26:26.772Z",
+  "scope": "Local synthetic checks of operator-only model metadata route. No deployment, actual API key, generation, image, observation, model quality or billing proof.",
+  "results": [
+    {
+      "name": "missing operator configuration denies before network",
+      "result": "Pass"
+    },
+    {
+      "name": "missing bearer denies before network",
+      "result": "Pass"
+    },
+    {
+      "name": "regular user bearer denied before network",
+      "result": "Pass"
+    },
+    {
+      "name": "public apikey plus user JWT denied",
+      "result": "Pass"
+    },
+    {
+      "name": "translated bearer plus configured secret apikey accepted",
+      "result": "Pass"
+    },
+    {
+      "name": "configured additional key in bearer accepted",
+      "result": "Pass"
+    },
+    {
+      "name": "empty additional key cannot authorize empty bearer",
+      "result": "Pass"
+    },
+    {
+      "name": "operator key in explicit server header accepted",
+      "result": "Pass"
+    },
+    {
+      "name": "untrusted explicit operator header refused",
+      "result": "Pass"
+    },
+    {
+      "name": "oversized explicit operator header refused",
+      "result": "Pass"
+    },
+    {
+      "name": "wrong bearer denied before network",
+      "result": "Pass"
+    },
+    {
+      "name": "oversized bearer denied before network",
+      "result": "Pass"
+    },
+    {
+      "name": "POST denied without network",
+      "result": "Pass"
+    },
+    {
+      "name": "OPTIONS denied without network",
+      "result": "Pass"
+    },
+    {
+      "name": "DELETE denied without network",
+      "result": "Pass"
+    },
+    {
+      "name": "query input refused without network",
+      "result": "Pass"
+    },
+    {
+      "name": "missing provider key controlled without network",
+      "result": "Pass"
+    },
+    {
+      "name": "malformed provider key controlled without network",
+      "result": "Pass"
+    },
+    {
+      "name": "outer transport whitespace stripped from provider credential only",
+      "result": "Pass"
+    },
+    {
+      "name": "already cancelled makes no request",
+      "result": "Pass"
+    },
+    {
+      "name": "one fixed GET, no body, no redirects, sanitized metadata projection",
+      "result": "Pass"
+    },
+    {
+      "name": "upstream 401 sanitized, no retries",
+      "result": "Pass"
+    },
+    {
+      "name": "upstream 403 sanitized, no retries",
+      "result": "Pass"
+    },
+    {
+      "name": "upstream 429 sanitized, no retries",
+      "result": "Pass"
+    },
+    {
+      "name": "upstream 500 sanitized, no retries",
+      "result": "Pass"
+    },
+    {
+      "name": "model mismatch refused",
+      "result": "Pass"
+    },
+    {
+      "name": "vision absent refused",
+      "result": "Pass"
+    },
+    {
+      "name": "chat absent refused",
+      "result": "Pass"
+    },
+    {
+      "name": "empty refused",
+      "result": "Pass"
+    },
+    {
+      "name": "oversized metadata rejected",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid JSON controlled",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid UTF8 controlled",
+      "result": "Pass"
+    },
+    {
+      "name": "network diagnostic omitted",
+      "result": "Pass"
+    },
+    {
+      "name": "deadline abort controlled with shortened timer",
+      "result": "Pass"
+    }
+  ]
+}

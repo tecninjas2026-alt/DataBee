@@ -1,6 +1,10 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.117.3';
-import { createAnalysisStubHandler } from './handler.ts';
+import { createAnalysisStubHandler, createLiveAnalysisHandler, type AnalysisStubReads } from './handler.ts';
 import { createProviderReadinessHandler } from '../_shared/provider-readiness.ts';
+import { createMistralVisionProvider } from '../_shared/mistral-vision.ts';
+import { createSqlBeeAttemptStore } from '../_shared/bee-attempt-store.ts';
+import { executeBeeAnalysis } from '../_shared/bee-execution.ts';
+import { PROTOTYPE_SPECIES_CATALOG } from '../../catalog/prototype-species.ts';
 
 const url = Deno.env.get('SUPABASE_URL') ?? '';
 const key = publishableKey() || Deno.env.get('SUPABASE_ANON_KEY') || '';
@@ -27,10 +31,9 @@ function serverSecretKey(): string {
   }
 }
 
-// Analysis remains disabled: IMP-070 catalog and Gate 2 review are pending.
-// This handler has no draft catalog, provider key, service_role or writes.
-// Keep the catalog absent until its human-reviewed source is implemented.
-const analysisHandler = createAnalysisStubHandler((authorization) => {
+// Participant reads remain RLS-bound; privileged writes use the narrow SQL RPCs below.
+// Live analysis requires the explicitly approved catalog and restricted pilot configuration.
+const readsFor = (authorization: string): AnalysisStubReads | null => {
   if (!url || !key) return null;
   const client = createClient(url, key, {
     global: {
@@ -81,7 +84,46 @@ const analysisHandler = createAnalysisStubHandler((authorization) => {
       return data;
     },
   };
-}, null);
+};
+
+const reviewed = Deno.env.get('BEE_AI_REVIEWED_SCOPE') === 'restricted-prototype-2026-10-29';
+const allowedOwners = new Set(
+  (Deno.env.get('BEE_AI_ALLOWED_USERS') ?? '').split(',').filter((value) => /^[0-9a-f-]{36}$/i.test(value)),
+);
+const enabled = Deno.env.get('BEE_AI_ENABLED') === 'true' && reviewed && allowedOwners.size > 0;
+const provider = createMistralVisionProvider(
+  {
+    enabled,
+    freeModeVerified: Deno.env.get('BEE_AI_FREE_MODE_VERIFIED') === 'true',
+    apiTrainingDisabled: Deno.env.get('BEE_AI_TRAINING_DISABLED') === 'true',
+    audienceAndTermsReviewed: reviewed,
+    modelCapabilitiesVerified: Deno.env.get('BEE_AI_MODEL_VERIFIED') === 'true',
+    apiKey: (Deno.env.get('MISTRAL_API_KEY') ?? '').trim(),
+    model: Deno.env.get('MISTRAL_MODEL') ?? '',
+  },
+  PROTOTYPE_SPECIES_CATALOG,
+);
+const serverKey = serverSecretKey() || Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
+const privileged =
+  enabled && url && serverKey
+    ? createClient(url, serverKey, { auth: { persistSession: false, autoRefreshToken: false } })
+    : null;
+const store = privileged
+  ? createSqlBeeAttemptStore(async (name, args) => {
+      const { data, error } = await privileged.rpc(name, args).abortSignal(AbortSignal.timeout(12000));
+      if (error) throw new Error('analysis_store_unavailable');
+      return data as unknown;
+    }, PROTOTYPE_SPECIES_CATALOG)
+  : null;
+const analysisHandler =
+  enabled && store
+    ? createLiveAnalysisHandler(
+        readsFor,
+        PROTOTYPE_SPECIES_CATALOG,
+        (input) => executeBeeAnalysis({ ...input, provider, store, catalog: PROTOTYPE_SPECIES_CATALOG }),
+        (owner) => allowedOwners.has(owner),
+      )
+    : createAnalysisStubHandler(readsFor, null);
 
 // Administrative metadata request only. No generation, photo access or writes.
 // The gateway keeps JWT verification enabled; regular users cannot use this route.

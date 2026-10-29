@@ -1,0 +1,133 @@
+{
+  "date": "2026-10-29",
+  "executedAt": "2026-10-29T18:54:55.857Z",
+  "project": "uqfuuahziwgxwjymtwil",
+  "migration": "20261029190000",
+  "scope": "Real SQL/API A/B/anonymous and concurrent transactions; synthetic observations/results only, no provider/photo/GPS/deletion/accuracy evaluation. Existing technical A daily quota intentionally reaches 20; do not reset or delete fixtures.",
+  "results": [
+    {
+      "name": "A cannot read private attempts",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot execute read_ai_analysis_cache",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot execute acquire_ai_analysis_attempt",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot execute complete_ai_analysis_attempt",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot execute fail_ai_analysis_attempt",
+      "result": "Pass"
+    },
+    {
+      "name": "B cannot read private attempts",
+      "result": "Pass"
+    },
+    {
+      "name": "B cannot execute read_ai_analysis_cache",
+      "result": "Pass"
+    },
+    {
+      "name": "B cannot execute acquire_ai_analysis_attempt",
+      "result": "Pass"
+    },
+    {
+      "name": "B cannot execute complete_ai_analysis_attempt",
+      "result": "Pass"
+    },
+    {
+      "name": "B cannot execute fail_ai_analysis_attempt",
+      "result": "Pass"
+    },
+    {
+      "name": "anonymous cannot read private attempts",
+      "result": "Pass"
+    },
+    {
+      "name": "anonymous cannot execute read_ai_analysis_cache",
+      "result": "Pass"
+    },
+    {
+      "name": "anonymous cannot execute acquire_ai_analysis_attempt",
+      "result": "Pass"
+    },
+    {
+      "name": "anonymous cannot execute complete_ai_analysis_attempt",
+      "result": "Pass"
+    },
+    {
+      "name": "anonymous cannot execute fail_ai_analysis_attempt",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot forge protected attempt token",
+      "result": "Pass"
+    },
+    {
+      "name": "server cannot reserve with wrong owner",
+      "result": "Pass"
+    },
+    {
+      "name": "draft rejected before reservation",
+      "result": "Pass"
+    },
+    {
+      "name": "concurrent same observation yields one started and one busy",
+      "result": "Pass"
+    },
+    {
+      "name": "old attempt cannot fail current reservation",
+      "result": "Pass"
+    },
+    {
+      "name": "old attempt cannot commit current reservation",
+      "result": "Pass"
+    },
+    {
+      "name": "failure preserved observation, allows new fenced attempt",
+      "result": "Pass"
+    },
+    {
+      "name": "valid complete stores result and state together",
+      "result": "Pass"
+    },
+    {
+      "name": "late fail and duplicate complete cannot erase finished result",
+      "result": "Pass"
+    },
+    {
+      "name": "cache reread and acquire never reserve again",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid result rolls back complete and can be corrected",
+      "result": "Pass"
+    },
+    {
+      "name": "expired lease recovered; old response cannot replace new attempt",
+      "result": "Pass"
+    },
+    {
+      "name": "third attempt allowed, fourth limited without state reservation",
+      "result": "Pass"
+    },
+    {
+      "name": "previous UTC day does not consume current-day quota",
+      "result": "Pass"
+    },
+    {
+      "name": "per-user quota serialized across different observations",
+      "result": "Pass"
+    },
+    {
+      "name": "quota reached still returns cached result without new attempt",
+      "result": "Pass"
+    }
+  ]
+}

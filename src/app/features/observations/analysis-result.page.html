@@ -24,15 +24,17 @@
             <ion-text color="warning"><h2>Simulação de teste</h2></ion-text>
             <p>Este registro é artificial. Nenhuma foto foi analisada e não há identificação científica.</p>
           } @else {
-            @switch (data.observation.analysis_status) {
+            @switch (analyzing() ? 'processing' : data.observation.analysis_status) {
               @case ('idle') {
                 <h2>Não analisada</h2>
-                <p>Sua observação está salva. A identificação por IA ainda não está disponível nesta versão.</p>
+                <p>Sua observação está salva. Você pode solicitar uma sugestão de identificação para a foto.</p>
               }
               @case ('processing') {
                 <h2>Análise em andamento</h2>
                 <p>O resultado ainda não está pronto. Você pode voltar à sua observação e consultar mais tarde.</p>
-                <ion-button fill="outline" (click)="load()">Consultar resultado</ion-button>
+                <ion-button fill="outline" (click)="load()" [disabled]="analyzing() || loading()">
+                  Consultar resultado
+                </ion-button>
               }
               @case ('failed') {
                 <h2>Análise não concluída</h2>
@@ -55,8 +57,25 @@
           @if (data.identification; as identification) {
             @if (!data.simulated) {
               <p>Sugestão automática · não equivale à validação de um especialista.</p>
-              @if (identification.result.matches.length > 0) {
-                <p>Os nomes dos candidatos ainda não estão disponíveis para consulta. A sugestão permanece salva.</p>
+              @if (data.observation.curation_status === 'suggested') {
+                <p>Sugerido · revisão humana pendente</p>
+              }
+              @for (candidate of candidates(); track candidate.taxonId) {
+                @if (candidate.taxon; as taxon) {
+                  <h2>{{ candidate.rank }}. {{ taxon.commonName }}</h2>
+                  <p>
+                    <i>{{ taxon.scientificName }}</i>
+                    · Espécie sugerida
+                  </p>
+                  <ul>
+                    @for (evidence of candidate.visualEvidence; track $index) {
+                      <li>{{ evidence }}</li>
+                    }
+                  </ul>
+                }
+              }
+              @if (identification.result.matches.length > 0 && candidates().length === 0) {
+                <p>Este resultado usa outra versão do catálogo. A sugestão permanece salva.</p>
               }
             }
             <p>Resultado salvo em {{ identification.created_at | date: 'dd/MM/yyyy HH:mm' }}</p>
@@ -71,6 +90,26 @@
             @if (!data.simulated && identification.result.imageQuality === 'poor') {
               <p>Uma nova fotografia mais nítida pode ajudar na análise.</p>
             }
+          }
+          @if (analysisError(); as message) {
+            <ion-text color="danger" role="alert">
+              <p>{{ message }}</p>
+            </ion-text>
+          }
+          @if (analyzing()) {
+            <p role="status">
+              <ion-spinner name="crescent" />
+              Analisando a foto… Isso pode levar alguns instantes.
+            </p>
+          } @else if (canAnalyze() && !data.simulated) {
+            <p>
+              A foto e o catálogo de abelhas serão enviados à IA Mistral. Use fotos apenas de abelhas, sem rostos ou
+              informações pessoais.
+            </p>
+            <p>Protótipo com 12 espécies. A sugestão pode estar errada ou ser inconclusiva.</p>
+            <ion-button expand="block" (click)="analyze()" [disabled]="loading() || analyzing()">
+              Analisar foto com IA
+            </ion-button>
           }
         </ion-card-content>
       </ion-card>

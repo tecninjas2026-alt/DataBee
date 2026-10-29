@@ -27,6 +27,8 @@ export interface Observation {
   analysis_status: AnalysisStatus;
   curation_status: CurationStatus | null;
   analysis_started_at: string | null;
+  /** Server-only attempt token; omitted by older/narrow projections. */
+  analysis_attempt_id?: string | null;
   public_region_label: PublicRegionLabel | null;
 }
 

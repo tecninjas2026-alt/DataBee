@@ -6,7 +6,10 @@ import type { Observation } from '../../core/models/observation.model';
 import { SupabaseService } from '../../core/supabase/supabase.service';
 import { validateBeeAnalysisStructure } from '../../../../supabase/functions/_shared/bee-analysis';
 
-export type AnalysisObservation = Pick<Observation, 'id' | 'user_id' | 'analysis_status' | 'curation_status'>;
+export type AnalysisObservation = Pick<
+  Observation,
+  'id' | 'user_id' | 'analysis_status' | 'curation_status' | 'analysis_started_at'
+>;
 export interface SavedAnalysisView {
   observation: AnalysisObservation;
   identification: AiIdentification | null;
@@ -29,7 +32,7 @@ export class AnalysisResultsService {
     };
     const { data: observation, error } = await this.supabase.client
       .from('observations')
-      .select('id,user_id,analysis_status,curation_status')
+      .select('id,user_id,analysis_status,curation_status,analysis_started_at')
       .eq('id', id)
       .eq('user_id', owner)
       .eq('lifecycle', 'saved')

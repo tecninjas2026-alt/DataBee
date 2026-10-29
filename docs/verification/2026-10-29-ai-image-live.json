@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-29",
+  "executedAt": "2026-10-29T19:01:23.984Z",
+  "scope": "Real Mistral image/schema/persistence/cache check with artificial JPEG only. No personal photo/GPS/identity or quality/accuracy evaluation. No cleanup.",
+  "firstResult": {
+    "httpStatus": 200,
+    "errorCode": null,
+    "status": "completed",
+    "cached": false
+  },
+  "results": [
+    {
+      "name": "real image request accepted, validated and persisted",
+      "result": "Pass",
+      "status": 200,
+      "analysisStatus": "no_match",
+      "cached": false
+    },
+    {
+      "name": "artificial no-bee control has no taxon candidate",
+      "result": "Pass",
+      "analysisStatus": "no_match"
+    },
+    {
+      "name": "second request returns identical cache with one reservation",
+      "result": "Pass",
+      "cached": true,
+      "reservations": 1
+    },
+    {
+      "name": "unlisted authenticated A denied by pilot gate",
+      "result": "Pass",
+      "status": 403
+    },
+    {
+      "name": "pilot B cannot request A private observation",
+      "result": "Pass",
+      "status": 404
+    },
+    {
+      "name": "anonymous image analysis denied",
+      "result": "Pass",
+      "status": 401
+    }
+  ]
+}

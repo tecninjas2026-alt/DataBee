@@ -1,0 +1,90 @@
+{
+  "date": "2026-10-29",
+  "scope": "Local validation/transport only. Real SQL proof in atomic-ai-remote report.",
+  "results": [
+    {
+      "name": "read cache null accepted",
+      "result": "Pass"
+    },
+    {
+      "name": "read valid cache accepted with minimum RPC identifiers",
+      "result": "Pass"
+    },
+    {
+      "name": "acquire busy",
+      "result": "Pass"
+    },
+    {
+      "name": "acquire limited",
+      "result": "Pass"
+    },
+    {
+      "name": "valid start nonce",
+      "result": "Pass"
+    },
+    {
+      "name": "cached acquisition validated",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid nonce refused",
+      "result": "Pass"
+    },
+    {
+      "name": "wrong requested version does not call RPC",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid schema never persisted",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid prompt never persisted",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid catalog never persisted",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid fixture never persisted",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid status never persisted",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid invalid shape never persisted",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid invented taxon never persisted",
+      "result": "Pass"
+    },
+    {
+      "name": "complete sends validated record and current fence only",
+      "result": "Pass"
+    },
+    {
+      "name": "superseded commit false preserved",
+      "result": "Pass"
+    },
+    {
+      "name": "fail fence only",
+      "result": "Pass"
+    },
+    {
+      "name": "malformed RPC boolean refused",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid reference prevents RPC",
+      "result": "Pass"
+    },
+    {
+      "name": "RPC raw diagnostic sanitized",
+      "result": "Pass"
+    }
+  ]
+}

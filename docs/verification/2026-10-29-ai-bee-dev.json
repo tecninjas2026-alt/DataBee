@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-29",
+  "executedAt": "2026-10-29T19:10:21.213Z",
+  "scope": "One licensed DEV reference: Bibafu, Tetragonisca angustula.JPG, Wikimedia Commons, CC BY-SA 3.0. Resized/reencoded without EXIF. No personal photo/GPS/identity, expert accuracy claim or cleanup.",
+  "firstResult": {
+    "httpStatus": 200,
+    "errorCode": null,
+    "status": "inconclusive",
+    "cached": false
+  },
+  "results": [
+    {
+      "name": "real image request accepted, validated and persisted",
+      "result": "Pass",
+      "status": 200,
+      "analysisStatus": "inconclusive",
+      "cached": false
+    },
+    {
+      "name": "DEV reference observation recorded without expert accuracy claim",
+      "result": "Pass",
+      "analysisStatus": "inconclusive",
+      "candidateIds": []
+    },
+    {
+      "name": "second request returns identical cache with one reservation",
+      "result": "Pass",
+      "cached": true,
+      "reservations": 1
+    },
+    {
+      "name": "unlisted authenticated A denied by pilot gate",
+      "result": "Pass",
+      "status": 403
+    },
+    {
+      "name": "pilot B cannot request A private observation",
+      "result": "Pass",
+      "status": 404
+    },
+    {
+      "name": "anonymous image analysis denied",
+      "result": "Pass",
+      "status": 401
+    }
+  ]
+}

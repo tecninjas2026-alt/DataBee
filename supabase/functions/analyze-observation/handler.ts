@@ -1,4 +1,5 @@
-import { validateBeeAnalysis } from '../_shared/bee-analysis.ts';
+import { analysisStatusFor, validateBeeAnalysis, type BeeAnalysisV2 } from '../_shared/bee-analysis.ts';
+import { BeeExecutionError } from '../_shared/bee-execution.ts';
 import { buildBeePromptContext, type ApprovedPromptCatalog } from '../_shared/bee-prompt.ts';
 import { validateJpeg } from '../_shared/validate-jpeg.ts';
 
@@ -93,9 +94,35 @@ async function observationId(request: Request): Promise<string | null> {
  * Catalog is maintainer-controlled; HTTP clients cannot supply/approve one.
  * A missing catalog fails closed, preserving the saved observation untouched.
  */
+export type AnalysisExecution = (input: {
+  observationId: string;
+  ownerId: string;
+  loadImage: (signal: AbortSignal) => Promise<Uint8Array>;
+  signal: AbortSignal;
+}) => Promise<{ cached: boolean; analysis: BeeAnalysisV2 }>;
+
+/** Explicit simulation factory retained for local contract checks only. */
 export function createAnalysisStubHandler(
   readsFor: (authorization: string) => AnalysisStubReads | null,
   catalog: ApprovedPromptCatalog | null,
+) {
+  return createHandler(readsFor, catalog, null, () => false);
+}
+/** No simulated result path: execution is mandatory, owner pilot gate defaults closed. */
+export function createLiveAnalysisHandler(
+  readsFor: (authorization: string) => AnalysisStubReads | null,
+  catalog: ApprovedPromptCatalog,
+  execute: AnalysisExecution,
+  allowOwner: (owner: string) => boolean = () => false,
+) {
+  return createHandler(readsFor, catalog, execute, allowOwner);
+}
+
+function createHandler(
+  readsFor: (authorization: string) => AnalysisStubReads | null,
+  catalog: ApprovedPromptCatalog | null,
+  execute: AnalysisExecution | null,
+  allowOwner: (owner: string) => boolean,
 ): (request: Request) => Promise<Response> {
   return async (request) => {
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
@@ -109,6 +136,8 @@ export function createAnalysisStubHandler(
       if (!reads) return failure(503, 'configuration_missing', 'Identificação ainda não disponível.');
       const owner = await reads.authenticate(AbortSignal.timeout(15000));
       if (!owner || !uuid.test(owner)) return failure(401, 'unauthorized', 'Entre novamente na sua conta.');
+      if (execute && !allowOwner(owner))
+        return failure(403, 'pilot_restricted', 'Identificação em teste orientado pela equipe.');
       const id = await observationId(request);
       if (!id) return failure(400, 'invalid_request', 'Envie apenas a referência válida da observação.');
       const observation = await reads.observation(id, owner, AbortSignal.timeout(15000));
@@ -117,8 +146,8 @@ export function createAnalysisStubHandler(
       if (
         observation.lifecycle !== 'saved' ||
         observation.publication !== 'private' ||
-        observation.analysis_status === 'processing' ||
-        !['idle', 'failed', 'completed', 'inconclusive'].includes(observation.analysis_status)
+        (observation.analysis_status === 'processing' && !execute) ||
+        !['idle', 'processing', 'failed', 'completed', 'inconclusive'].includes(observation.analysis_status)
       )
         return failure(409, 'state_conflict', 'Reabra uma observação privada já salva.');
 
@@ -144,6 +173,22 @@ export function createAnalysisStubHandler(
         image.photo_source !== observation.photo_source
       )
         return failure(409, 'image_not_ready', 'A foto salva precisa ser conferida.');
+      const loadImage = async (signal: AbortSignal): Promise<Uint8Array> => {
+        const blob = await reads.download(image.object_path, AbortSignal.any([signal, AbortSignal.timeout(20000)]));
+        if (!blob || blob.size !== image.bytes || blob.type !== 'image/jpeg') throw new Error('image_unavailable');
+        const bytes = new Uint8Array(await blob.arrayBuffer());
+        validateJpeg(bytes);
+        return bytes;
+      };
+      if (execute) {
+        const completed = await execute({ observationId: id, ownerId: owner, loadImage, signal: request.signal });
+        return reply(200, {
+          observation_id: id,
+          status: analysisStatusFor(completed.analysis),
+          analysis: completed.analysis,
+          cached: completed.cached,
+        });
+      }
       const blob = await reads.download(image.object_path, AbortSignal.timeout(20000));
       if (!blob) return failure(503, 'image_unavailable', 'Não foi possível conferir a foto. Tente mais tarde.');
       if (blob.size !== image.bytes || blob.type !== 'image/jpeg')
@@ -163,7 +208,25 @@ export function createAnalysisStubHandler(
         catalog.taxa,
       );
       return reply(200, { simulation: true, persisted: false, analysis });
-    } catch {
+    } catch (error) {
+      if (error instanceof BeeExecutionError) {
+        const statuses = {
+          configuration_missing: 503,
+          invalid_reference: 400,
+          busy: 409,
+          limited: 429,
+          invalid_result: 502,
+          timeout: 504,
+          cancelled: 408,
+          superseded: 409,
+          execution_failed: 502,
+        };
+        return failure(
+          statuses[error.code],
+          error.code,
+          'Não foi possível concluir a análise. Sua observação continua salva.',
+        );
+      }
       return failure(503, 'read_unavailable', 'Não foi possível conferir o registro. Tente mais tarde.');
     }
   };

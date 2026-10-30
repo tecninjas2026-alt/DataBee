@@ -14,8 +14,12 @@ A tela antiga mantinha Não analisada em destaque após falha anterior à reserv
 
 Seis verificações focadas do serviço Angular: cache real existente, recusa real de conta técnica excluída, 401 sem código, falha de transporte, sucesso com status inválido e resposta atrasada após troca de conta. 6/6 Pass; detalhes em 2026-10-30-analysis-feedback.json. Duas chamadas SDK reais, demais fronteiras controladas. Nenhuma chamada nova de modelo.
 
-APK 1.0.5-test/código 6 em preparação para tornar o motivo visível no aparelho. Essa atualização melhora o diagnóstico; não comprova resolução da causa do pedido recusado nem acurácia. Próximo: instalar atualização e registrar a mensagem exata exibida após um único pedido. Preservar todas as observações e a restrição de acesso atual.
+APK 1.0.5-test/código 6 publicado para tornar o motivo visível no aparelho. Essa atualização melhora o diagnóstico; não comprova resolução da causa do pedido recusado nem acurácia. Próximo: instalar atualização e registrar a mensagem exata exibida após um único pedido. Preservar todas as observações e a restrição de acesso atual.
 
 ## Conferência visual controlada
 
 Template e lógica da página exercitados em prévia Angular local de 360 × 800, com dependências de leitura/pedido substituídas por dados artificiais e recusa controlada; adaptação JIT do input de rota/lifecycle somente no harness ignorado. Toque no botão mudou Não analisada para Análise não iniciada, com a mensagem vermelha junto do título. Sem sessão real, envio de imagem ou prova da causa do telefone. Check de produção, sync e assembleDebug aprovados; teste físico pendente.
+
+## Entrega compartilhada
+
+Fonte bf5f56b47f09a816b82d7b17ad750d20a704ee33; APK 9.127.520 bytes, 44 assets web iguais por hash, sem server.url, assinatura igual à anterior. SHA-256 ac7c172b16cdd2192386f5c3864057596ed9c6d770b2a0c890e1350799af24c7. [Download público](https://github.com/tecninjas2026-alt/DataBee/releases/download/android-test-2026-10-30-bf5f56b/DataBee-2026-10-30-bf5f56b-debug.apk) com HTTP 200/tamanho/digest conferidos. Notion versões atualizado com download no topo e seção 1.0.5, mantendo histórico; IMP-030 recebeu relato, evidência, explicação e pendência em Review. Teste físico desta atualização e resolução da causa continuam pendentes.

@@ -19,3 +19,7 @@ Servidor analyze-observation atualizado com o mesmo código/autenticação para 
 Na instalação atual, abrir o mesmo registro e tocar uma vez em Analisar foto com IA. A professora decide o envio explícito da própria foto; agente não a transmitiu. Guardar o resultado ou mensagem efetivamente recebida. Não marcar Done/identificação bem-sucedida/acurácia antes dessa confirmação. Custo zero mantido.
 
 Registro de continuidade: Notion versões e IMP-030 receberam a correção posterior, causa comprovada nas capturas, limites e roteiro sem nova instalação. Tarefa permanece Review; confirmação humana da análise continua pendente. Quatro verificações de cache/403/404/401 também passaram após a atualização do serviço.
+
+## Confirmação humana posterior
+
+Professora confirmou Sugestão disponível, visualização da sugestão no resultado e preservação após fechar/reabrir. O teste pendente acima foi realizado nesse escopo; não pedir repetição. Evidência e limites em `2026-10-30-android-ai-device.md`. Não valida acerto científico nem versão instalada específica.

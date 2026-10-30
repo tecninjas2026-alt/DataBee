@@ -26,8 +26,10 @@
           } @else {
             @switch (analyzing() ? 'processing' : data.observation.analysis_status) {
               @case ('idle') {
-                <h2>Não analisada</h2>
-                <p>Sua observação está salva. Você pode solicitar uma sugestão de identificação para a foto.</p>
+                <h2>{{ analysisError() ? 'Análise não iniciada' : 'Não analisada' }}</h2>
+                @if (!analysisError()) {
+                  <p>Sua observação está salva. Você pode solicitar uma sugestão de identificação para a foto.</p>
+                }
               }
               @case ('processing') {
                 <h2>Análise em andamento</h2>
@@ -53,6 +55,11 @@
                 }
               }
             }
+          }
+          @if (analysisError(); as message) {
+            <ion-text color="danger" role="alert">
+              <p>{{ message }}</p>
+            </ion-text>
           }
           @if (data.identification; as identification) {
             @if (!data.simulated) {
@@ -90,11 +97,6 @@
             @if (!data.simulated && identification.result.imageQuality === 'poor') {
               <p>Uma nova fotografia mais nítida pode ajudar na análise.</p>
             }
-          }
-          @if (analysisError(); as message) {
-            <ion-text color="danger" role="alert">
-              <p>{{ message }}</p>
-            </ion-text>
           }
           @if (analyzing()) {
             <p role="status">

@@ -2,9 +2,10 @@
 
 > **Obrigatório:** todo agente ou pessoa que alterar o projeto atualiza este arquivo ao final (protocolo em `docs/guides/workflow.md` §4). Mantenha curto e atual; apague o que ficou velho. Histórico detalhado = `git log` + `docs/verification/` + Notion.
 
-**Atualizado em:** 2026-10-29 · **Por:** Codex · **Semana:** S4 (28–30/10) · **Meta da equipe:** app pronto em **28/10** (feature freeze) · teste final até 04/11.
+**Atualizado em:** 2026-10-30 · **Por:** Codex · **Semana:** S4 (28–30/10) · **Meta da equipe:** app pronto em **28/10** (feature freeze) · teste final até 04/11.
 
 ## Resumo em 30 segundos
+- **Retorno Android 30/10:** professora vê Analisando, depois Não analisada; causa no aparelho ainda não confirmada. Conta originalmente liberada sem tentativa; cache técnico remoto funciona e configuração confere. Corrigido destaque do erro/401/piloto no app; 6/6 verificações do serviço. APK 1.0.5-test/código 6 em preparação. Não declarar resolvido ou ampliar acesso por suposição. Ver `docs/verification/2026-10-30-analysis-feedback.md`.
 - **Entrega 29/10:** APK 1.0.4-test/código 5, fonte 8278556, disponível na página de versões do Notion e GitHub Releases. Assinatura preservada, 44 assets/hash/download público conferidos. Teste físico da análise pendente. `docs/verification/2026-10-29-android-ai-apk.md`.
 - Login, foto/galeria, GPS opcional e observações privadas funcionando; salvar/reabrir confirmado no celular. **IA agora integrada em piloto restrito** à conta da professora e conta técnica B, com botão explícito, catálogo de 12 espécies, resultado salvo/cache. Foto artificial: no_match; referência DEV licenciada: inconclusive. **Qualidade com fotos reais e teste físico da nova versão pendentes.** Publicação/feed e descarte remoto ainda ausentes.
 - Banco Supabase pronto para guardar observações: tabelas de observações, localização privada, metadados da foto, perfis e pasta privada de fotos, todas com RLS testado com contas A/B reais.

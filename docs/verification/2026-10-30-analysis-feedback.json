@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-30",
+  "scope": "Focused manual Angular action checks. Two real SDK checks: existing cache and excluded technical account; no personal photo, new provider request, mutation or cleanup.",
+  "results": [
+    {
+      "name": "Angular action accepts real cached response without another image call",
+      "result": "Pass"
+    },
+    {
+      "name": "real excluded technical A gets explicit pilot message",
+      "result": "Pass"
+    },
+    {
+      "name": "gateway 401 without handler code gets safe sign-in instruction",
+      "result": "Pass"
+    },
+    {
+      "name": "transport error explains failure and never repeats provider automatically",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid success cannot be accepted as a saved result",
+      "result": "Pass"
+    },
+    {
+      "name": "account switch rejects late successful reply",
+      "result": "Pass"
+    }
+  ]
+}

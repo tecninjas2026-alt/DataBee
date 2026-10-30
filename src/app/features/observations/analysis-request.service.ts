@@ -38,7 +38,8 @@ export class AnalysisRequestService {
       const messages: Record<string, string> = {
         busy: 'A análise já está em andamento. Consulte o resultado em instantes.',
         limited: 'Limite de tentativas atingido. Guarde este registro e tente outra foto ou volte mais tarde.',
-        pilot_restricted: 'A identificação está em teste orientado pela equipe. Seu registro continua salvo.',
+        pilot_restricted: 'Esta conta ainda não está liberada para o piloto de identificação. Seu registro continua salvo.',
+        unauthorized: 'Sua sessão precisa ser renovada. Saia e entre novamente para solicitar a análise. Seu registro continua salvo.',
         catalog_unavailable: 'A identificação está sendo preparada. Seu registro continua salvo.',
         configuration_missing: 'A identificação está sendo preparada. Seu registro continua salvo.',
         timeout: 'A análise demorou mais que o esperado. Consulte o resultado antes de tentar novamente.',
@@ -46,7 +47,10 @@ export class AnalysisRequestService {
       };
       throw new AppError(
         'unknown',
-        messages[code] ?? 'Não foi possível concluir a análise. A foto e os dados continuam salvos.',
+        messages[code] ??
+          (error.context instanceof Response && error.context.status === 401
+            ? messages['unauthorized']
+            : 'Não foi possível iniciar ou confirmar a análise. Confira a conexão e consulte o resultado salvo antes de tentar novamente.'),
       );
     }
     const result: unknown = data;

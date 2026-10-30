@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-30",
+  "cause": "User screenshot showed pilot_restricted. Unique observation metadata identified teacher current account absent from original pilot list.",
+  "configurationDigestVerified": true,
+  "previousAccountsPreserved": true,
+  "publicOrMinorRollout": false,
+  "newAllowedTeacherAccounts": 1,
+  "photoOrGpsRead": false,
+  "newProviderRequest": false,
+  "cases": [
+    {
+      "name": "Existing technical cache still works without new generation",
+      "passed": true,
+      "httpStatus": 200
+    },
+    {
+      "name": "Unlisted technical account remains denied",
+      "passed": true,
+      "httpStatus": 403
+    },
+    {
+      "name": "Allowed B cannot analyze teacher private record",
+      "passed": true,
+      "httpStatus": 404
+    },
+    {
+      "name": "Anonymous remains denied",
+      "passed": true,
+      "httpStatus": 401
+    },
+    {
+      "name": "No personal photo analyzed automatically by account correction",
+      "passed": true,
+      "status": "idle"
+    }
+  ],
+  "phoneRetest": "Pending; teacher chooses explicit analysis action on phone"
+}

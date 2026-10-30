@@ -18,7 +18,6 @@ import { AuthService } from '../../core/auth/auth.service';
 import { toUserMessage } from '../../core/errors/app-error';
 import { EmptyStateComponent } from '../../shared/components/empty-state.component';
 import { AnalysisResultsService, SavedAnalysisView } from './analysis-results.service';
-import { EducationalContentComponent } from './educational-content.component';
 import { AnalysisRequestService } from './analysis-request.service';
 import { PROTOTYPE_SPECIES_CATALOG } from '../../../../supabase/catalog/prototype-species';
 
@@ -41,7 +40,6 @@ import { PROTOTYPE_SPECIES_CATALOG } from '../../../../supabase/catalog/prototyp
     IonSpinner,
     IonText,
     EmptyStateComponent,
-    EducationalContentComponent,
   ],
   templateUrl: 'analysis-result.page.html',
   styleUrls: ['observations.page.scss'],

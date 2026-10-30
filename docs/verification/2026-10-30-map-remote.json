@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-30",
+  "scope": "TEST DATA MAP: synthetic observations/public city-center references, no photos/personal GPS/VLM; preserve records and inactivate own shares after verification",
+  "migrationSha256": "52429c2b96bd303fa6f43d06c1013855378f714bd7bba0434359ced4cb80decd",
+  "fixturesPreserved": true,
+  "sharesInactivated": true,
+  "results": [
+    {
+      "name": "own unshared saved record is private by default",
+      "result": "Pass"
+    },
+    {
+      "name": "A cannot read share backing table directly",
+      "result": "Pass"
+    },
+    {
+      "name": "B cannot read share backing table directly",
+      "result": "Pass"
+    },
+    {
+      "name": "anonymous cannot read share backing table directly",
+      "result": "Pass"
+    },
+    {
+      "name": "B cannot share A private record",
+      "result": "Pass"
+    },
+    {
+      "name": "B cannot inspect A share status",
+      "result": "Pass"
+    },
+    {
+      "name": "anonymous cannot list or share",
+      "result": "Pass"
+    },
+    {
+      "name": "first consent shares coarse cell",
+      "result": "Pass"
+    },
+    {
+      "name": "parallel duplicate requests keep one row",
+      "result": "Pass"
+    },
+    {
+      "name": "B can opt into same approximate cell",
+      "result": "Pass"
+    },
+    {
+      "name": "list exposes aggregate schema only and own contribution count",
+      "result": "Pass",
+      "columns": [
+        "cell_x",
+        "cell_y",
+        "observations_count",
+        "analyzed_count",
+        "latest_day",
+        "own_count"
+      ],
+      "count": 2
+    },
+    {
+      "name": "map sharing does not publish private observation/photo",
+      "result": "Pass"
+    },
+    {
+      "name": "exact GPS remains owner-only",
+      "result": "Pass"
+    },
+    {
+      "name": "outside RMC rejected without losing record",
+      "result": "Pass"
+    },
+    {
+      "name": "missing GPS rejected without losing record",
+      "result": "Pass"
+    },
+    {
+      "name": "low precision rejected without losing record",
+      "result": "Pass"
+    },
+    {
+      "name": "draft rejected without losing record",
+      "result": "Pass"
+    },
+    {
+      "name": "pagination after first cell moves forward without repeat",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid partial cursor and excessive page size rejected",
+      "result": "Pass"
+    },
+    {
+      "name": "B cannot withdraw A share",
+      "result": "Pass"
+    },
+    {
+      "name": "owner withdrawal preserves record and clears active share",
+      "result": "Pass"
+    }
+  ]
+}

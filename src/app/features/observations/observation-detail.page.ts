@@ -20,6 +20,7 @@ import { toUserMessage } from '../../core/errors/app-error';
 import { EmptyStateComponent } from '../../shared/components/empty-state.component';
 import { ANALYSIS_LABELS, ObservationsService, PrivateObservationDetail } from './observations.service';
 import { PrivatePhotoComponent } from './private-photo.component';
+import { MapShareComponent } from '../map/map-share.component';
 
 /**
  * Tela 7 — Detalhe da Observação (IMP-037/041/042/044).
@@ -46,6 +47,7 @@ import { PrivatePhotoComponent } from './private-photo.component';
     IonToolbar,
     EmptyStateComponent,
     PrivatePhotoComponent,
+    MapShareComponent,
   ],
   templateUrl: 'observation-detail.page.html',
   styleUrls: ['observations.page.scss'],

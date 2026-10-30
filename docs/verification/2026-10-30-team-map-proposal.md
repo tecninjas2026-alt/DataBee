@@ -1,6 +1,6 @@
 # Mapa da equipe — proposta para revisão, 30/10/2026
 
-**Preparação local. Banco NÃO alterado; mapa ainda não integrado ao APK.**
+**Atualização posterior:** a professora aprovou a proposta; migration aplicada e mapa integrado. 21/21 verificações remotas e 7/7 do serviço Angular passaram. Este documento preserva a proposta revisada. Estado atual: `2026-10-30-map-learn-integration.md`.
 
 A professora pediu mapa de Curitiba/RMC por GPS e escolheu registros da equipe com localização aproximada. Isso autoriza a preparação. A precisão de cerca de 2 km, a alteração do banco e a extensão de D10 abaixo são propostas para revisão.
 

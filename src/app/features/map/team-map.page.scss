@@ -1,0 +1,44 @@
+main {
+  max-width: 760px;
+  margin: auto;
+}
+h1 {
+  font-size: 1.55rem;
+  margin: 6px 0 12px;
+}
+h2 {
+  font-size: 1.1rem;
+}
+p {
+  line-height: 1.5;
+}
+.regional-map {
+  height: 440px;
+  width: 100%;
+  border: 1px solid #b9cbb8;
+  border-radius: 14px;
+  background: #edf3ec;
+  z-index: 0;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+.legend {
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+.area-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+ion-button {
+  min-height: 44px;
+}
+@media (max-width: 400px) {
+  .regional-map {
+    height: 400px;
+  }
+}

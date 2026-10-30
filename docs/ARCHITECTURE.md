@@ -37,10 +37,19 @@ Sem servidor próprio, sem Python, sem ML local.
 | 2 | Início | `/tabs/inicio` | `features/home/home.page.*` | UI pronta; contagem/conquistas TODO |
 | 3 | Novo Registro — Foto | `/tabs/registrar` | `features/register/register-photo.page.*` | Funcional (câmera/galeria/preview/reencode) |
 | 4 | Novo Registro — Dados | `/tabs/registrar/dados` | `features/register/register-details.page.*` | GPS opcional + upload recuperável + salvar privado sem IA |
-| 5 | Resultado + Aprender | `/observacao/:id/resultado` | `features/observations/analysis-result.page.ts` | Placeholder (IMP-030) |
+| 5 | Resultado da análise | `/observacao/:id/resultado` | `features/observations/analysis-result.page.ts` | Sugestão persistida, evidências/limites, ação explícita de análise; educativo separado em 30/10 |
 | 6 | Minhas Observações | `/tabs/minhas` | `features/observations/my-observations.page.ts` | Salvos próprios, paginação de 20, rascunhos separados e retry |
 | 7 | Detalhe | `/observacao/:id` | `features/observations/observation-detail.page.ts` | Foto/dados próprios, GPS privado e estado sem nova chamada de IA |
 | 8 | Feed/Comunidade | `/tabs/feed` | `features/feed/feed.page.ts` | Estado vazio (IMP-041/044) |
+
+Extensões autorizadas pela professora em 30/10/2026:
+
+| Tela | Rota | Implementação |
+|---|---|---|
+| Aprender (aba inferior) | `/tabs/aprender` | `features/learn/learn.page.ts`, cartões/fontes independentes da análise |
+| Mapa da equipe (acesso no Início) | `/mapa` | `features/map/team-map.page.ts`, células opt-in ~2 km; consulta sem GPS privado |
+
+Compartilhamento: `MapShareComponent` no detalhe próprio → `TeamMapService` → RPCs autenticadas. `map_observation_shares` é privada; somente agregados aproximados são retornados ao mapa. Não publica foto/observação completa. Leaflet ESM usa geometria local IBGE/AMEP, sem requests de tiles nem rastreamento.
 
 ## Peças centrais
 | Arquivo | Responsabilidade |

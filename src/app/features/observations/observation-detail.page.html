@@ -78,6 +78,7 @@
           }
         </ion-card-content>
       </ion-card>
+      <app-map-share [observationId]="data.observation.id" />
       <ion-button routerLink="/tabs/minhas" expand="block">Minhas observações</ion-button>
       <ion-button [routerLink]="['/observacao', data.observation.id, 'resultado']" expand="block" fill="outline">
         Ver resultado da análise

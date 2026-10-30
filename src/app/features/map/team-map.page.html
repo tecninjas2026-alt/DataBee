@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start"><ion-back-button defaultHref="/tabs/inicio" text="" /></ion-buttons>
+    <ion-title>Mapa da equipe</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <main class="ion-padding">
+    <h1>Registros na nossa região</h1>
+    <p>
+      Curitiba e Região Metropolitana. Áreas compartilhadas pelos participantes do DataBee, com localização aproximada.
+    </p>
+    <div class="controls">
+      <ion-button fill="outline" size="small" (click)="fitRegion()">Região Metropolitana</ion-button>
+      <ion-button fill="outline" size="small" (click)="fitCuritiba()">Curitiba</ion-button>
+    </div>
+    <div #mapHost class="regional-map" tabindex="0"></div>
+    @if (mapError()) {
+      <p role="alert">Não foi possível desenhar o mapa. As contagens continuam disponíveis abaixo.</p>
+      <ion-button fill="outline" (click)="initMap()">Tentar abrir mapa</ion-button>
+    }
+    <p class="legend">
+      Cada área tem cerca de 2 km. O ponto é o centro da área, não a localização exata de uma abelha ou ninho.
+    </p>
+    @if (loading()) {
+      <p role="status">
+        <ion-spinner name="crescent" />
+        Carregando áreas…
+      </p>
+    }
+    @if (error(); as message) {
+      <ion-text color="danger">
+        <p role="alert">{{ message }}</p>
+      </ion-text>
+    }
+    <ion-button fill="clear" (click)="load()" [disabled]="loading()">Atualizar áreas</ion-button>
+    @if (selected(); as cell) {
+      <ion-card>
+        <ion-card-content>
+          <h2>
+            {{ cell.observations_count }}
+            {{ cell.observations_count === 1 ? 'registro nesta área' : 'registros nesta área' }}
+          </h2>
+          <p>
+            {{ cell.analyzed_count }} com análise · {{ cell.own_count }} {{ cell.own_count === 1 ? 'seu' : 'seus' }}
+          </p>
+          <p>Registro mais recente: {{ cell.latest_day | date: 'dd/MM/yyyy' : 'UTC' }}</p>
+          <p>Registros e sugestões da IA não comprovam presença de ninho nem identificação científica.</p>
+        </ion-card-content>
+      </ion-card>
+    }
+    @if (!loading() && !error() && cells().length === 0) {
+      <ion-card>
+        <ion-card-content>
+          <h2>Ainda não há áreas compartilhadas</h2>
+          <p>Abra um registro salvo com GPS em Minhas observações e escolha compartilhar a área aproximada.</p>
+        </ion-card-content>
+      </ion-card>
+    }
+    @if (cells().length > 0) {
+      <h2>
+        {{ cells().length }} {{ cells().length === 1 ? 'área carregada' : 'áreas carregadas' }} · {{ total() }}
+        {{ total() === 1 ? 'registro' : 'registros' }}
+      </h2>
+      <p class="legend">Toque nas áreas do mapa ou escolha na lista.</p>
+      <div class="area-list">
+        @for (cell of cells(); track cell.cell_x + ':' + cell.cell_y; let i = $index) {
+          <ion-button fill="outline" (click)="choose(cell)">
+            Área {{ i + 1 }} · {{ cell.observations_count }}
+            {{ cell.observations_count === 1 ? 'registro' : 'registros' }}
+          </ion-button>
+        }
+      </div>
+    }
+    @if (more()) {
+      <ion-button fill="outline" (click)="load(true)" [disabled]="loading()">Carregar mais áreas</ion-button>
+    }
+    <ion-button routerLink="/tabs/minhas" expand="block">Abrir meus registros</ion-button>
+    <ion-button routerLink="/tabs/registrar" fill="outline" expand="block">Fazer registro com GPS</ion-button>
+    <p class="legend">
+      Participar é opcional. A foto e o GPS exato continuam privados. Retirar uma área do mapa não apaga seu registro. O
+      mapa não rastreia sua localização.
+    </p>
+  </main>
+</ion-content>

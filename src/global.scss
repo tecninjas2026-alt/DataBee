@@ -35,3 +35,26 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+@import 'leaflet/dist/leaflet.css';
+
+/* Counts are validated integers; map tooltips never contain participant text/identity. */
+.leaflet-tooltip.map-cell-count {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: white;
+  font-weight: 700;
+  padding: 0;
+  pointer-events: none;
+}
+.leaflet-tooltip.map-cell-count::before {
+  display: none;
+}
+.leaflet-control-attribution {
+  font-size: 12px;
+}
+.leaflet-control-zoom a {
+  min-width: 44px;
+  min-height: 44px;
+  line-height: 44px;
+}

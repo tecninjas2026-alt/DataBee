@@ -1,4 +1,4 @@
-/** Contract proposed by IMP-066. RPCs remain unavailable until migration approval/application. */
+/** IMP-066 RPC projections: approximate cells only. Migration approved/applied on 2026-10-30. */
 export interface TeamMapCell {
   cell_x: number;
   cell_y: number;

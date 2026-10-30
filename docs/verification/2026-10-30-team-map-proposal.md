@@ -40,3 +40,5 @@ Arquivo: `supabase/migrations/20261030140000_imp066_approximate_team_map.sql`.
 Aplicar somente a migration revisada e provar com clientes reais A/B/anônimo: agregados autenticados; acesso direto proibido; compartilhar/retirar somente do dono; sem GPS exato; recusa de rascunho/sem GPS/fora da região; paginação, concorrência e fronteiras. Erro após aplicação exige nova migration, preservando as aplicadas.
 
 Depois integrar o mapa e o botão explícito, verificar navegador/Android e entregar APK no Notion. IMP-066/D06 era Stretch com dependências IMP-056/039; pedido atual prioriza a preparação, sem presumir gates/Done ou remover Core pendente. Diferença proposta: áreas agregadas consentidas, sem abrir detalhe/foto publicados nesta primeira entrega.
+
+Registro compartilhado: IMP-066 no Notion recebeu proposta, fontes, limites e explicação para a equipe; estado In progress refere-se à preparação, sem marcar critérios de aceite/Done. A prévia permite consultar a contagem fictícia por área e alternar recortes; não representa registros reais nem o aplicativo já entregue.

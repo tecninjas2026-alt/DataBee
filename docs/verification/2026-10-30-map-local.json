@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-30",
+  "scope": "Public cartography and local grid checks only. No participant/GPS/provider or remote mutation. SQL execution/RLS not yet tested: migration remains unapproved.",
+  "cases": [
+    {
+      "name": "exactly 29 unique official municipality codes and Curitiba present",
+      "result": "Pass"
+    },
+    {
+      "name": "known public Curitiba city-center reference is inside region",
+      "result": "Pass"
+    },
+    {
+      "name": "known public Pinhais city-center reference is inside region",
+      "result": "Pass"
+    },
+    {
+      "name": "outside-region and invalid references rejected",
+      "result": "Pass"
+    },
+    {
+      "name": "cell decoding matches frozen server projection and 2km square",
+      "result": "Pass"
+    }
+  ]
+}

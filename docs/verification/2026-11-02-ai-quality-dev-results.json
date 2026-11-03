@@ -1,0 +1,85 @@
+{
+  "date": "2026-11-02",
+  "model": "ministral-8b-2512",
+  "catalog": "v2-species-2026-11-02",
+  "authorization": "User explicitly authorized only the bee-on-flower photo without metadata to the same Mistral API at zero cost.",
+  "scope": "DEV comparison only, not TEST or scientific validation. No photo, identity, GPS or observation ID published. No DB writes, no reanalysis of user records. Production prompt bee-v2 unchanged.",
+  "inputLabels": {
+    "reported-flower": "Apis mellifera supplied by user; not independently verified",
+    "reference-jatai": "Tetragonisca angustula.JPG, Bibafu, Wikimedia Commons, CC BY-SA 3.0; previously documented DEV reference",
+    "no-bee-control": "synthetic JPEG"
+  },
+  "results": [
+    {
+      "name": "anonymous denied",
+      "http": 401
+    },
+    {
+      "name": "participant denied",
+      "http": 401
+    },
+    {
+      "label": "reported-flower-baseline",
+      "variant": "baseline",
+      "http": 200,
+      "status": "possible_match",
+      "imageQuality": "poor",
+      "candidates": [
+        "sp-tetragonisca-angustula"
+      ],
+      "expectedLabel": "sp-apis-mellifera",
+      "persisted": false
+    },
+    {
+      "label": "reported-flower-conservative",
+      "variant": "conservative-v1",
+      "http": 200,
+      "status": "inconclusive",
+      "imageQuality": "poor",
+      "candidates": [],
+      "expectedLabel": "sp-apis-mellifera",
+      "persisted": false
+    },
+    {
+      "label": "reference-jatai-baseline",
+      "variant": "baseline",
+      "http": 200,
+      "status": "inconclusive",
+      "imageQuality": "poor",
+      "candidates": [],
+      "expectedLabel": "sp-tetragonisca-angustula",
+      "persisted": false
+    },
+    {
+      "label": "reference-jatai-conservative",
+      "variant": "conservative-v1",
+      "http": 200,
+      "status": "inconclusive",
+      "imageQuality": "poor",
+      "candidates": [],
+      "expectedLabel": "sp-tetragonisca-angustula",
+      "persisted": false
+    },
+    {
+      "label": "no-bee-control-conservative",
+      "variant": "conservative-v1",
+      "http": 200,
+      "status": "no_match",
+      "imageQuality": "poor",
+      "candidates": [],
+      "expectedLabel": null,
+      "persisted": false
+    }
+  ],
+  "conclusion": "Baseline repeats wrong Jatai for user-supplied Apis label. Conservative abstains for both bee photos; negative control returns no_match. Candidate not promoted: recognition not demonstrated.",
+  "framing": {
+    "scope": "Single rectangular crop retaining bee, no answer hint, no DB persistence",
+    "model": "ministral-8b-2512",
+    "variant": "baseline",
+    "status": "possible_match",
+    "candidates": [
+      "sp-tetragonisca-angustula"
+    ]
+  },
+  "evaluationEndpointDisabled": true
+}

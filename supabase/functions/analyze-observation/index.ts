@@ -1,3 +1,5 @@
+import { createProviderEvaluationHandler } from '../_shared/provider-evaluation.ts';
+import { BEE_EVALUATION_PROMPT } from '../_shared/bee-prompt.ts';
 import { createClient } from 'npm:@supabase/supabase-js@2.117.3';
 import { createAnalysisStubHandler, createLiveAnalysisHandler, type AnalysisStubReads } from './handler.ts';
 import { createProviderReadinessHandler } from '../_shared/provider-readiness.ts';
@@ -91,18 +93,28 @@ const allowedOwners = new Set(
   (Deno.env.get('BEE_AI_ALLOWED_USERS') ?? '').split(',').filter((value) => /^[0-9a-f-]{36}$/i.test(value)),
 );
 const enabled = Deno.env.get('BEE_AI_ENABLED') === 'true' && reviewed && allowedOwners.size > 0;
-const provider = createMistralVisionProvider(
-  {
-    enabled,
-    freeModeVerified: Deno.env.get('BEE_AI_FREE_MODE_VERIFIED') === 'true',
-    apiTrainingDisabled: Deno.env.get('BEE_AI_TRAINING_DISABLED') === 'true',
-    audienceAndTermsReviewed: reviewed,
-    modelCapabilitiesVerified: Deno.env.get('BEE_AI_MODEL_VERIFIED') === 'true',
-    apiKey: (Deno.env.get('MISTRAL_API_KEY') ?? '').trim(),
-    model: Deno.env.get('MISTRAL_MODEL') ?? '',
-  },
-  PROTOTYPE_SPECIES_CATALOG,
-);
+const providerConfiguration = {
+  enabled,
+  freeModeVerified: Deno.env.get('BEE_AI_FREE_MODE_VERIFIED') === 'true',
+  apiTrainingDisabled: Deno.env.get('BEE_AI_TRAINING_DISABLED') === 'true',
+  audienceAndTermsReviewed: reviewed,
+  modelCapabilitiesVerified: Deno.env.get('BEE_AI_MODEL_VERIFIED') === 'true',
+  apiKey: (Deno.env.get('MISTRAL_API_KEY') ?? '').trim(),
+  model: Deno.env.get('MISTRAL_MODEL') ?? '',
+};
+const provider = createMistralVisionProvider(providerConfiguration, PROTOTYPE_SPECIES_CATALOG);
+const evaluationHandler = createProviderEvaluationHandler({
+  enabled: enabled && Deno.env.get('BEE_AI_EVALUATION_ENABLED') === 'true',
+  operatorKeys: [Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '', serverSecretKey()],
+  catalog: PROTOTYPE_SPECIES_CATALOG,
+  baseline: provider,
+  conservative: createMistralVisionProvider(
+    providerConfiguration,
+    PROTOTYPE_SPECIES_CATALOG,
+    fetch,
+    BEE_EVALUATION_PROMPT,
+  ),
+});
 const serverKey = serverSecretKey() || Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
 const privileged =
   enabled && url && serverKey
@@ -144,7 +156,9 @@ const readinessHandler = createProviderReadinessHandler({
   providerKey: Deno.env.get('MISTRAL_API_KEY') ?? '',
 });
 Deno.serve((request) =>
-  new URL(request.url).pathname.endsWith('/analyze-observation/provider-readiness')
-    ? readinessHandler(request)
-    : analysisHandler(request),
+  new URL(request.url).pathname.endsWith('/analyze-observation/provider-evaluation')
+    ? evaluationHandler(request)
+    : new URL(request.url).pathname.endsWith('/analyze-observation/provider-readiness')
+      ? readinessHandler(request)
+      : analysisHandler(request),
 );

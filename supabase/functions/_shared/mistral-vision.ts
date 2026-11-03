@@ -70,6 +70,7 @@ export function createMistralVisionProvider(
   config: MistralVisionConfiguration,
   catalog: ApprovedPromptCatalog,
   send: typeof fetch = fetch,
+  systemPrompt: string = BEE_SYSTEM_PROMPT,
 ): BeeVisionProvider | null {
   if (
     config.enabled !== true ||
@@ -102,7 +103,7 @@ export function createMistralVisionProvider(
     modelVersion: model,
     async analyze(input) {
       if (input.signal.aborted) throw new BeeExecutionError('cancelled');
-      if (input.systemPrompt !== BEE_SYSTEM_PROMPT || input.catalogContext !== expectedContext)
+      if (input.systemPrompt !== systemPrompt || input.catalogContext !== expectedContext)
         throw new BeeExecutionError('configuration_missing');
       try {
         validateJpeg(input.image);
@@ -125,7 +126,7 @@ export function createMistralVisionProvider(
             max_tokens: 2048,
             temperature: 0,
             messages: [
-              { role: 'system', content: BEE_SYSTEM_PROMPT },
+              { role: 'system', content: systemPrompt },
               {
                 role: 'user',
                 content: [

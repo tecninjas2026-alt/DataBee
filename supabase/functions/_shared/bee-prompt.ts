@@ -90,3 +90,12 @@ export function approvedCatalogForVersion(
   buildBeePromptContext(found);
   return found;
 }
+
+/** DEV-only candidate; not the production prompt or an evaluated scientific rule. */
+export const BEE_EVALUATION_PROMPT =
+  BEE_SYSTEM_PROMPT +
+  `
+Procedimento de observação: antes de selecionar nomes, examine separadamente cabeça, tórax, abdome, pernas e asas. Descreva somente estruturas realmente visíveis. Não transfira cores ou marcas de uma estrutura para outra.
+Não estime tamanho real sem escala confiável e não conclua que uma abelha é sem ferrão só porque um candidato do catálogo é sem ferrão. Não preencha detalhes ocultos.
+Compare o conjunto observado com TODAS as candidatas da lista, sem preferência pela primeira entrada ou pelo nome popular. Elimine candidatas que contradigam características visíveis. Considere alternativas plausíveis até três; nunca complete posições sem evidência.
+Se a fotografia não permitir distinguir candidatas, explique a ambiguidade nas limitações. Se as evidências não sustentarem as espécies permitidas, use inconclusive ou no_match em vez de adivinhar.`;

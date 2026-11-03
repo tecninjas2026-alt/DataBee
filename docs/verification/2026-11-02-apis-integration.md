@@ -13,6 +13,6 @@ Após aprovação explícita, catálogo v2 com 13 espécies, Apis mellifera / Ab
 - TypeScript do servidor e npm check aprovados, sem novos warnings. Sync Android aprovado.
 - Prévia controlada com componente/template reais e dados artificiais: três nomes/evidências e limitações renderizados em 360 px, sem overflow. Modo histórico v1 preserva nome e aviso. Não é resposta real da IA nem teste biológico. Screenshot ignorado em .tmp/candidates-360-20261102.png.
 
-Deploy da função e entrega APK 1.0.7-test/código 8 em preparação. Após implantação, consultar somente cache técnico existente para conferir compatibilidade; não enviar fotos pessoais. Teste físico e qualidade em fotos identificadas continuam pendentes.
+Função analyze-observation implantada; 4/4 verificações reais de cache técnico v1 e acesso aprovadas, sem nova geração ou tentativa. CLI functions deploy não oferece dry-run (help conferido); nenhum schema alterado. APK 1.0.7-test/código 8, fonte 90a493f, entregue em GitHub Releases e Notion, 9.218.835 bytes, 51 assets e mesma assinatura conferidos; download público verificado. Ver [pacote e entrega](2026-11-02-android-apis-apk.md). Teste físico e qualidade em fotos identificadas continuam pendentes.
 
 Referência e autorização: [decisão](../decisions/2026-11-02-apis-catalog.md). Não há melhoria de acurácia comprovada nem probabilidade calibrada.

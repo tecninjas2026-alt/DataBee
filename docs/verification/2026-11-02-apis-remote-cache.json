@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-02",
+  "scope": "Real deployed function; synthetic technical existing cache only. No image load, provider call, new analysis, cleanup or personal data.",
+  "results": [
+    {
+      "name": "deployed endpoint returns existing technical v1 cache",
+      "result": "Pass"
+    },
+    {
+      "name": "cached read does not create attempt or rewrite result",
+      "result": "Pass"
+    },
+    {
+      "name": "excluded technical account remains forbidden",
+      "result": "Pass"
+    },
+    {
+      "name": "anonymous remains denied",
+      "result": "Pass"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "source": "90a493f4cad273086165b1be75867e68203caef8",
+  "bytes": 9218835,
+  "sha256": "5e8301774981e63aa00ec5e604de66665ab32b22da31fd5de90b161a866a9a98",
+  "webAssets": 51,
+  "serverUrl": false,
+  "sameSigningCertificate": true,
+  "certificateSha256": "6057817ca356a35baa87de581492ab2a0ff93c354cda93adb14e85b0a50d8043",
+  "package": "package: name='com.tecninjas.databee' versionCode='8' versionName='1.0.7-test' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+  "minSdk": "sdkVersion:'24'",
+  "targetSdk": "targetSdkVersion:'36'",
+  "release": "https://github.com/tecninjas2026-alt/DataBee/releases/tag/android-test-2026-11-02-90a493f",
+  "download": "https://github.com/tecninjas2026-alt/DataBee/releases/download/android-test-2026-11-02-90a493f/DataBee-2026-11-02-90a493f-debug.apk",
+  "assetId": 703915972,
+  "publicDownloadVerified": true,
+  "physicalTest": "pending",
+  "scientificAccuracy": "not evaluated"
+}

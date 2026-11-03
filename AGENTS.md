@@ -3,7 +3,7 @@
 Este arquivo vale para **qualquer** agente que trabalhe neste repositório. Leia-o inteiro no início de cada sessão.
 
 ## 1. O projeto em 30 segundos
-**DataBee** é um app Android de **ciência cidadã**: a pessoa encontra uma abelha, fotografa, registra a localização (privada) e recebe uma **sugestão** de identificação por IA (família, gênero, espécie ou "inconclusivo"), que depois pode ser discutida e validada por humanos. Região: Curitiba e Região Metropolitana (PR). Catálogo inicial: 12 espécies validadas pelo Prof. Rodrigo (UFPR).
+**DataBee** é um app Android de **ciência cidadã**: a pessoa encontra uma abelha, fotografa, registra a localização (privada) e recebe uma **sugestão** de identificação por IA (família, gênero, espécie ou "inconclusivo"), que depois pode ser discutida e validada por humanos. Região: Curitiba e Região Metropolitana (PR). Catálogo atual: 13 espécies — 12 nomes anteriormente validados pelo Prof. Rodrigo (UFPR) e Apis mellifera incluída por autorização da professora em 02/11, com referência ICMBio.
 Equipe **TEC_NINJAS** — estudantes do ensino médio (FIRST LEGO League, temporada BIOGLOW). Júlia (interface), Davi Z. (banco/backend), Arthur (IA), Eloisa (testes/Android), Clara (documentação), Maria (apresentação). Orientação: Prof. Rafaella; revisão técnica: Luiz Gustavo.
 Calendário: Semana 1 07–09/10 · S2 14–16/10 · S3 21–23/10 · S4 28–30/10/2026. **Feature freeze 28/10/2026. Prazo final de teste 04/11/2026.**
 Repositório oficial: https://github.com/tecninjas2026-alt/DataBee (desde 21/10/2026; o antigo `TEC-NINJAS/DataBee` foi suspenso — links antigos em `docs/verification/` são histórico)
@@ -134,3 +134,5 @@ npm run supabase -- <args>   # Supabase CLI (login, link, migration new, db push
 Particularidades do PC da equipe (Avast, caminho com acento, variáveis Java/Android): `docs/SETUP.md` e `docs/guides/capacitor-android.md` §5.
 
 **Decisão autorizada 02/11 — Apis:** professora aprovou incluir Apis mellifera como 13ª espécie e manter até três candidatas sem porcentagem. Catálogo v2-species-2026-11-02; snapshot v1 e metadados/resultados anteriores preservados, sem migração/reanálise automática. Adição referenciada ao ICMBio, não validada pelo Prof. Rodrigo por inferência. Sem mudar nomes Jataí/Tubuna, quotas, piloto, custo zero ou prompt bee-v2. Ver docs/decisions/2026-11-02-apis-catalog.md.
+
+**Entrega 02/11:** APK 1.0.7-test/código 8 (90a493f) em GitHub Releases e Notion, servidor implantado, 4/4 cache/acesso remotos, 51 assets/assinatura/download conferidos. Não presumir acurácia ou teste físico; relatos de sugestão Jataí/Tubuna informam falha qualitativa e precisam entrar na avaliação DEV com referência/autorização. Ver docs/verification/2026-11-02-android-apis-apk.md.

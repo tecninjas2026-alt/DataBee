@@ -4,7 +4,7 @@ import { createProviderReadinessHandler } from '../_shared/provider-readiness.ts
 import { createMistralVisionProvider } from '../_shared/mistral-vision.ts';
 import { createSqlBeeAttemptStore } from '../_shared/bee-attempt-store.ts';
 import { executeBeeAnalysis } from '../_shared/bee-execution.ts';
-import { PROTOTYPE_SPECIES_CATALOG } from '../../catalog/prototype-species.ts';
+import { PREVIOUS_PROTOTYPE_CATALOGS, PROTOTYPE_SPECIES_CATALOG } from '../../catalog/prototype-species.ts';
 
 const url = Deno.env.get('SUPABASE_URL') ?? '';
 const key = publishableKey() || Deno.env.get('SUPABASE_ANON_KEY') || '';
@@ -109,18 +109,29 @@ const privileged =
     ? createClient(url, serverKey, { auth: { persistSession: false, autoRefreshToken: false } })
     : null;
 const store = privileged
-  ? createSqlBeeAttemptStore(async (name, args) => {
-      const { data, error } = await privileged.rpc(name, args).abortSignal(AbortSignal.timeout(12000));
-      if (error) throw new Error('analysis_store_unavailable');
-      return data as unknown;
-    }, PROTOTYPE_SPECIES_CATALOG)
+  ? createSqlBeeAttemptStore(
+      async (name, args) => {
+        const { data, error } = await privileged.rpc(name, args).abortSignal(AbortSignal.timeout(12000));
+        if (error) throw new Error('analysis_store_unavailable');
+        return data as unknown;
+      },
+      PROTOTYPE_SPECIES_CATALOG,
+      PREVIOUS_PROTOTYPE_CATALOGS,
+    )
   : null;
 const analysisHandler =
   enabled && store
     ? createLiveAnalysisHandler(
         readsFor,
         PROTOTYPE_SPECIES_CATALOG,
-        (input) => executeBeeAnalysis({ ...input, provider, store, catalog: PROTOTYPE_SPECIES_CATALOG }),
+        (input) =>
+          executeBeeAnalysis({
+            ...input,
+            provider,
+            store,
+            catalog: PROTOTYPE_SPECIES_CATALOG,
+            previousCatalogs: PREVIOUS_PROTOTYPE_CATALOGS,
+          }),
         (owner) => allowedOwners.has(owner),
       )
     : createAnalysisStubHandler(readsFor, null);

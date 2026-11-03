@@ -64,6 +64,16 @@
           @if (data.identification; as identification) {
             @if (!data.simulated) {
               <p>Sugestão automática · não equivale à validação de um especialista.</p>
+              <p>
+                Até três candidatas, em ordem de sugestão. A ordem não é uma porcentagem de acerto. A IA pode retornar
+                menos opções ou nenhuma quando faltar evidência.
+              </p>
+              @if (identification.catalog_version !== currentCatalogVersion) {
+                <p>
+                  Resultado de uma versão anterior do catálogo. A inclusão de novas espécies não altera esta análise
+                  salva.
+                </p>
+              }
               @if (data.observation.curation_status === 'suggested') {
                 <p>Sugerido · revisão humana pendente</p>
               }
@@ -108,7 +118,7 @@
               A foto e o catálogo de abelhas serão enviados à IA Mistral. Use fotos apenas de abelhas, sem rostos ou
               informações pessoais.
             </p>
-            <p>Protótipo com 12 espécies. A sugestão pode estar errada ou ser inconclusiva.</p>
+            <p>Protótipo com {{ catalogSize }} espécies. A sugestão pode estar errada ou ser inconclusiva.</p>
             <ion-button expand="block" (click)="analyze()" [disabled]="loading() || analyzing()">
               Analisar foto com IA
             </ion-button>

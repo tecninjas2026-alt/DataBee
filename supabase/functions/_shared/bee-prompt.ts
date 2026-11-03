@@ -78,3 +78,15 @@ export function buildBeePromptContext(catalog: ApprovedPromptCatalog, region?: B
   });
   return JSON.stringify({ catalogVersion, taxa, ...(region === undefined ? {} : { broadRegion: region }) });
 }
+
+/** Explicit historical snapshots are server-maintained, never supplied by a participant. */
+export function approvedCatalogForVersion(
+  version: string,
+  current: ApprovedPromptCatalog,
+  previous: readonly ApprovedPromptCatalog[] = [],
+): ApprovedPromptCatalog {
+  const found = [current, ...previous].find((catalog) => catalog.version === version);
+  if (!found) return configurationError();
+  buildBeePromptContext(found);
+  return found;
+}

@@ -19,7 +19,7 @@ import { toUserMessage } from '../../core/errors/app-error';
 import { EmptyStateComponent } from '../../shared/components/empty-state.component';
 import { AnalysisResultsService, SavedAnalysisView } from './analysis-results.service';
 import { AnalysisRequestService } from './analysis-request.service';
-import { PROTOTYPE_SPECIES_CATALOG } from '../../../../supabase/catalog/prototype-species';
+import { PROTOTYPE_SPECIES_CATALOG, prototypeCatalogForVersion } from '../../../../supabase/catalog/prototype-species';
 
 /** IMP-030 preparation: reads the saved result, without a new analysis on entry or retry. */
 @Component({
@@ -71,17 +71,16 @@ export class AnalysisResultPage implements OnChanges {
           (!observation.analysis_started_at || Date.now() - Date.parse(observation.analysis_started_at) >= 120000)))
     );
   });
+  protected readonly catalogSize = PROTOTYPE_SPECIES_CATALOG.taxa.length;
+  protected readonly currentCatalogVersion = PROTOTYPE_SPECIES_CATALOG.version;
   protected readonly candidates = computed(() => {
     const data = this.view();
-    if (
-      !data?.identification ||
-      data.simulated ||
-      data.identification.catalog_version !== PROTOTYPE_SPECIES_CATALOG.version
-    )
-      return [];
+    if (!data?.identification || data.simulated) return [];
+    const catalog = prototypeCatalogForVersion(data.identification.catalog_version);
+    if (!catalog) return [];
     return data.identification.result.matches.map((match) => ({
       ...match,
-      taxon: PROTOTYPE_SPECIES_CATALOG.taxa.find((taxon) => taxon.id === match.taxonId),
+      taxon: catalog.taxa.find((taxon) => taxon.id === match.taxonId),
     }));
   });
 

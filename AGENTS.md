@@ -132,3 +132,5 @@ cd android && ./gradlew assembleDebug   # APK em android/app/build/outputs/apk/d
 npm run supabase -- <args>   # Supabase CLI (login, link, migration new, db push, functions deploy)
 ```
 Particularidades do PC da equipe (Avast, caminho com acento, variáveis Java/Android): `docs/SETUP.md` e `docs/guides/capacitor-android.md` §5.
+
+**Decisão autorizada 02/11 — Apis:** professora aprovou incluir Apis mellifera como 13ª espécie e manter até três candidatas sem porcentagem. Catálogo v2-species-2026-11-02; snapshot v1 e metadados/resultados anteriores preservados, sem migração/reanálise automática. Adição referenciada ao ICMBio, não validada pelo Prof. Rodrigo por inferência. Sem mudar nomes Jataí/Tubuna, quotas, piloto, custo zero ou prompt bee-v2. Ver docs/decisions/2026-11-02-apis-catalog.md.

@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-02",
+  "scope": "Controlled local contract/cache checks; no photo, provider call or biological accuracy validation.",
+  "results": [
+    {
+      "name": "current catalog has 13 unique IDs and Apis; V1 stays 12",
+      "result": "Pass"
+    },
+    {
+      "name": "three ranked candidates accepted and preserved",
+      "result": "Pass"
+    },
+    {
+      "name": "Apis allowed only in current version",
+      "result": "Pass"
+    },
+    {
+      "name": "percentage field refused",
+      "result": "Pass"
+    },
+    {
+      "name": "a fourth candidate refused",
+      "result": "Pass"
+    },
+    {
+      "name": "empty no_match remains valid",
+      "result": "Pass"
+    },
+    {
+      "name": "old catalog cache preserved without image or provider",
+      "result": "Pass"
+    },
+    {
+      "name": "unregistered historical catalog refused",
+      "result": "Pass"
+    },
+    {
+      "name": "SQL adapter reads historical record with historical metadata",
+      "result": "Pass"
+    },
+    {
+      "name": "SQL adapter refuses historical record containing new Apis ID",
+      "result": "Pass"
+    },
+    {
+      "name": "SQL completion cannot write old version under new attempt",
+      "result": "Pass"
+    },
+    {
+      "name": "current acquire and complete use new catalog unchanged schema/prompt",
+      "result": "Pass"
+    }
+  ]
+}

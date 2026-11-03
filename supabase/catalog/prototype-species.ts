@@ -1,5 +1,5 @@
 /** Names/IDs previously validated by Prof. Rodrigo (07/10). Species-only prototype use authorized by the teacher on 29/10. No family/genus hierarchy, traits, images or educational claims. */
-export const PROTOTYPE_SPECIES_CATALOG = {
+export const PROTOTYPE_SPECIES_CATALOG_V1 = {
   version: 'v1-species-2026-10-29',
   status: 'approved',
   taxa: [
@@ -89,3 +89,27 @@ export const PROTOTYPE_SPECIES_CATALOG = {
     },
   ],
 } as const;
+
+/** Addition authorized by the teacher on 02/11. Apis reference: ICMBio guide, 2023, v4.
+ * This is prototype catalog inclusion, not Prof. Rodrigo's validation of the new entry.
+ * Keep V1 immutable so saved results retain their original name/version mapping. */
+export const PROTOTYPE_SPECIES_CATALOG = {
+  version: 'v2-species-2026-11-02',
+  status: 'approved',
+  taxa: [
+    ...PROTOTYPE_SPECIES_CATALOG_V1.taxa,
+    {
+      id: 'sp-apis-mellifera',
+      taxonomicLevel: 'species',
+      scientificName: 'Apis mellifera',
+      commonName: 'Abelha-do-mel',
+      visualTraits: [],
+    },
+  ],
+} as const;
+
+export const PREVIOUS_PROTOTYPE_CATALOGS = [PROTOTYPE_SPECIES_CATALOG_V1] as const;
+
+export function prototypeCatalogForVersion(version: string) {
+  return [PROTOTYPE_SPECIES_CATALOG, ...PREVIOUS_PROTOTYPE_CATALOGS].find((catalog) => catalog.version === version);
+}

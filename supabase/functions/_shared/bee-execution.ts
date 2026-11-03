@@ -3,6 +3,7 @@ import {
   BEE_PROMPT_VERSION,
   BEE_SYSTEM_PROMPT,
   buildBeePromptContext,
+  approvedCatalogForVersion,
   type ApprovedPromptCatalog,
 } from './bee-prompt.ts';
 import { validateJpeg } from './validate-jpeg.ts';
@@ -95,17 +96,26 @@ function checkedResult(value: unknown, catalog: ApprovedPromptCatalog): BeeAnaly
   }
 }
 
-function checkedCache(saved: SavedBeeAnalysis, catalog: ApprovedPromptCatalog): BeeAnalysisV2 {
+function checkedCache(
+  saved: SavedBeeAnalysis,
+  catalog: ApprovedPromptCatalog,
+  previous: readonly ApprovedPromptCatalog[],
+): BeeAnalysisV2 {
   if (
     saved.schemaVersion !== BEE_SCHEMA_VERSION ||
     saved.promptVersion !== BEE_PROMPT_VERSION ||
-    saved.catalogVersion !== catalog.version ||
     !metadata(saved.provider) ||
     !metadata(saved.model) ||
     (saved.modelVersion !== null && !metadata(saved.modelVersion))
   )
     throw new BeeExecutionError('invalid_result');
-  const analysis = checkedResult(saved.result, catalog);
+  let savedCatalog: ApprovedPromptCatalog;
+  try {
+    savedCatalog = approvedCatalogForVersion(saved.catalogVersion, catalog, previous);
+  } catch {
+    throw new BeeExecutionError('invalid_result');
+  }
+  const analysis = checkedResult(saved.result, savedCatalog);
   if (saved.status !== analysisStatusFor(analysis)) throw new BeeExecutionError('invalid_result');
   return analysis;
 }
@@ -132,6 +142,7 @@ export async function executeBeeAnalysis(input: {
   observationId: string;
   ownerId: string;
   catalog: ApprovedPromptCatalog;
+  previousCatalogs?: readonly ApprovedPromptCatalog[];
   provider: BeeVisionProvider | null;
   store: BeeAttemptStore;
   loadImage: (signal: AbortSignal) => Promise<Uint8Array>;
@@ -152,7 +163,7 @@ export async function executeBeeAnalysis(input: {
     throw new BeeExecutionError('execution_failed');
   }
   if (input.signal?.aborted) throw new BeeExecutionError('cancelled');
-  if (saved) return { cached: true, analysis: checkedCache(saved, input.catalog) };
+  if (saved) return { cached: true, analysis: checkedCache(saved, input.catalog, input.previousCatalogs ?? []) };
   const provider = input.provider;
   // No quota/state reservation when configuration is missing. This is not cost approval.
   if (
@@ -177,7 +188,7 @@ export async function executeBeeAnalysis(input: {
   if (acquired.kind === 'busy' || acquired.kind === 'limited') throw new BeeExecutionError(acquired.kind);
   if (acquired.kind === 'cached') {
     if (input.signal?.aborted) throw new BeeExecutionError('cancelled');
-    return { cached: true, analysis: checkedCache(acquired.record, input.catalog) };
+    return { cached: true, analysis: checkedCache(acquired.record, input.catalog, input.previousCatalogs ?? []) };
   }
   // Guard even a faulty adapter: no provider call without a valid attempt reference.
   if (acquired.kind !== 'started' || !uuid.test(acquired.attemptId)) throw new BeeExecutionError('execution_failed');

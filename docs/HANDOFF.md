@@ -1,5 +1,7 @@
 # HANDOFF — estado atual do DataBee
 
+**Atualização 02/11 — IA:** professora relatou Jataí/Tubuna para fotos informadas como Apis mellifera e autorizou “Sim, incluir Apis e manter até três sem porcentagem”. Catálogo v2 com 13 espécies; v1 preservado por versão na UI/cache. Não renomear espécies nem reescrever resultados antigos. 12/12 focados, 32/32 orquestração, 38/38 handler, check/TS/sync e prévia 360 px aprovados. Deploy/APK 1.0.7-test/código 8 em preparação; fotos pessoais não enviadas, acurácia não demonstrada. Ver `docs/verification/2026-11-02-apis-integration.md`.
+
 **Entrega atual 30/10:** APK 1.0.6-test/código 7 (4fe3d72) disponível em GitHub Releases e Notion; mapa aplicado e Aprender integrado. 21/21 remotos, 7/7 Angular, navegador 360 px e pacote de 51 assets conferidos. IMP-066 Review, IMP-030 e decisões atualizados. Teste físico dos dois novos caminhos pendente. Ver `docs/verification/2026-10-30-android-map-learn-apk.md`.
 
 > **Obrigatório:** todo agente ou pessoa que alterar o projeto atualiza este arquivo ao final (protocolo em `docs/guides/workflow.md` §4). Mantenha curto e atual; apague o que ficou velho. Histórico detalhado = `git log` + `docs/verification/` + Notion.

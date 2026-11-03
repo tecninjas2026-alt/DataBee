@@ -1,6 +1,6 @@
 import { analysisStatusFor, validateBeeAnalysis } from './bee-analysis.ts';
 import { BeeExecutionError, type BeeAttemptStore, type SavedBeeAnalysis } from './bee-execution.ts';
-import { buildBeePromptContext, type ApprovedPromptCatalog } from './bee-prompt.ts';
+import { approvedCatalogForVersion, buildBeePromptContext, type ApprovedPromptCatalog } from './bee-prompt.ts';
 
 /** Caller supplies a server-only RPC transport; no client token is accepted here. */
 export type BeeAttemptRpc = (name: string, args: Record<string, unknown>) => Promise<unknown>;
@@ -29,16 +29,23 @@ function reference(observationId: string, ownerId: string, attemptId?: string): 
 }
 
 /** Full validation before persistence; SQL envelope constraints are additional guards. */
-export function createSqlBeeAttemptStore(call: BeeAttemptRpc, catalog: ApprovedPromptCatalog): BeeAttemptStore {
+export function createSqlBeeAttemptStore(
+  call: BeeAttemptRpc,
+  catalog: ApprovedPromptCatalog,
+  previousCatalogs: readonly ApprovedPromptCatalog[] = [],
+): BeeAttemptStore {
   buildBeePromptContext(catalog);
   const version = catalog.version;
-  const taxa = catalog.taxa.map(({ id, taxonomicLevel }) => ({ id, taxonomicLevel }));
+  const catalogs = [catalog, ...previousCatalogs].map((snapshot) => {
+    buildBeePromptContext(snapshot);
+    return { ...snapshot, taxa: snapshot.taxa.map((taxon) => ({ ...taxon, visualTraits: [...taxon.visualTraits] })) };
+  });
   function record(value: unknown): SavedBeeAnalysis {
     const raw = object(value);
     if (
       raw['schemaVersion'] !== '2.0' ||
       raw['promptVersion'] !== 'bee-v2' ||
-      raw['catalogVersion'] !== version ||
+      typeof raw['catalogVersion'] !== 'string' ||
       !metadata(raw['provider'], 80) ||
       !metadata(raw['model'], 160) ||
       (raw['modelVersion'] !== null && !metadata(raw['modelVersion'], 160))
@@ -46,7 +53,8 @@ export function createSqlBeeAttemptStore(call: BeeAttemptRpc, catalog: ApprovedP
       throw new BeeExecutionError('invalid_result');
     let analysis;
     try {
-      analysis = validateBeeAnalysis(raw['result'], taxa);
+      const snapshot = approvedCatalogForVersion(raw['catalogVersion'], catalogs[0], catalogs.slice(1));
+      analysis = validateBeeAnalysis(raw['result'], snapshot.taxa);
     } catch {
       throw new BeeExecutionError('invalid_result');
     }
@@ -55,7 +63,7 @@ export function createSqlBeeAttemptStore(call: BeeAttemptRpc, catalog: ApprovedP
     return {
       schemaVersion: '2.0',
       promptVersion: 'bee-v2',
-      catalogVersion: version,
+      catalogVersion: raw['catalogVersion'],
       provider: raw['provider'],
       model: raw['model'],
       modelVersion: raw['modelVersion'],
@@ -99,6 +107,7 @@ export function createSqlBeeAttemptStore(call: BeeAttemptRpc, catalog: ApprovedP
     },
     async complete(attempt, saved) {
       const args = reference(attempt.observationId, attempt.ownerId, attempt.attemptId);
+      if (saved.catalogVersion !== version) throw new BeeExecutionError('invalid_result');
       const checked = record(saved);
       return boolean('complete_ai_analysis_attempt', { ...args, p_record: checked });
     },

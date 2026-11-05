@@ -38,3 +38,14 @@ Esta atualização melhora o processamento e o fluxo da fotografia. Não comprov
 - Teste físico desta versão ainda pendente. Download, integridade e assinatura são registrados após gerar o APK.
 
 Relatórios: `2026-11-05-three-labelled-photos.json` e `2026-11-05-photo-quality-recovery.json`.
+
+## Entrega concluída
+
+Fonte 3162608cd01ca3e773257cf354cdf2d4dbc82fd6. APK gerado, 9.528.891 bytes, 51 assets comparados por hash, sem server.url/localhost, mesma assinatura anterior, minSdk 24 e alvo 36. Download público integral conferido por tamanho e SHA-256: 65e2385be88f8192b621e88b1f2ca2ebe85e1438d063cbe6f55b9550217b2b3a.
+
+- Download: https://github.com/tecninjas2026-alt/DataBee/releases/download/android-test-2026-11-05-3162608/DataBee-2026-11-05-3162608-debug.apk
+- Release: https://github.com/tecninjas2026-alt/DataBee/releases/tag/android-test-2026-11-05-3162608
+- Notion: https://app.notion.com/p/401d3425eae4800c811ffcbc7967cc6a — acesso rápido atualizado e histórico preservado, estado e limites lidos após publicação.
+- Verificação do pacote/download: `2026-11-05-photo-quality-apk.json`.
+
+Instalar como atualização, sem desinstalar. Conferir no aparelho a prévia da foto na análise, a orientação do inconclusivo e o fluxo Registrar outra foto. Teste físico pendente; a instalação não muda resultados anteriores nem libera IA para contas fora do piloto.

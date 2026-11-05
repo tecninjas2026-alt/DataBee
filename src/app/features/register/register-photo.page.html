@@ -14,6 +14,7 @@
         <li>Aproxime-se sem tocar ou capturar a abelha.</li>
         <li>Boa luz, foco nítido e a abelha ocupando boa parte da imagem.</li>
         <li>Se possível, mostre a lateral do corpo e as asas.</li>
+        <li>Para testar uma imagem existente, escolha o arquivo original da galeria em vez de fotografar uma tela.</li>
       </ul>
     </section>
 
@@ -25,6 +26,12 @@
           {{ (photo.bytes / 1024).toFixed(0) }} KB
         </figcaption>
       </figure>
+      @if (photo.width < 640 || photo.height < 480) {
+        <p role="status">
+          Esta imagem é pequena. Se você tiver o arquivo original em maior resolução, escolha-o na galeria para
+          preservar mais detalhes. Você pode continuar com esta foto.
+        </p>
+      }
     } @else {
       <div class="placeholder" aria-hidden="true">📷</div>
     }

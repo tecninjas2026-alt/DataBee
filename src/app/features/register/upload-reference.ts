@@ -1,4 +1,5 @@
 import { PhotoSource } from '../../core/models/observation.model';
+import type { PhotoEncodingVersion } from '../../core/device/photo.service';
 
 /** Só etiquetas de recuperação. Nunca guardar foto, GPS, sessão ou URL assinada aqui. */
 export interface UploadReference {
@@ -8,6 +9,7 @@ export interface UploadReference {
   imageId: string;
   sha256: string;
   bytes: number;
+  encodingVersion?: PhotoEncodingVersion;
   source: PhotoSource;
   capturedAt: string | null;
   consentAt: string | null;
@@ -41,6 +43,7 @@ export function isUploadReference(value: unknown, owner: string): value is Uploa
     Number.isInteger(item.bytes) &&
     item.bytes > 0 &&
     item.bytes <= 5242880 &&
+    (item.encodingVersion === undefined || item.encodingVersion === 'jpeg-v1' || item.encodingVersion === 'jpeg-v2') &&
     (item.source === 'camera' || item.source === 'gallery') &&
     (item.capturedAt === null || date(item.capturedAt)) &&
     (item.consentAt === null || date(item.consentAt)) &&

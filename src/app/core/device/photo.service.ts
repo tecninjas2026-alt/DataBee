@@ -6,6 +6,8 @@ import { AppError } from '../errors/app-error';
 import { PhotoSource } from '../models/observation.model';
 
 /** Foto pronta para preview/upload: sempre JPEG reencodado no cliente (sem EXIF/GPS — D10). */
+export type PhotoEncodingVersion = 'jpeg-v1' | 'jpeg-v2';
+
 export interface PickedPhoto {
   blob: Blob;
   /** object URL para <img>; quem guarda a foto deve chamar URL.revokeObjectURL ao descartar. */
@@ -17,6 +19,8 @@ export interface PickedPhoto {
   height: number;
   /** Hora do dispositivo na captura pelo app. Galeria = null: não inventar data original (D21). */
   capturedAt: string | null;
+  /** Kept in local recovery references; never includes photo contents or GPS. */
+  encodingVersion?: PhotoEncodingVersion;
 }
 
 /**
@@ -26,10 +30,14 @@ export interface PickedPhoto {
  */
 @Injectable({ providedIn: 'root' })
 export class PhotoService {
-  async pick(source: PhotoSource): Promise<PickedPhoto> {
+  async pick(source: PhotoSource, encodingVersion: PhotoEncodingVersion = 'jpeg-v2'): Promise<PickedPhoto> {
     const webPath = source === 'camera' ? await this.fromCamera() : await this.fromGallery();
     const original = await this.loadBlob(webPath);
-    const { blob, width, height } = await reencodeJpeg(original, APP_CONFIG.maxPhotoDimension);
+    const { blob, width, height } = await reencodeJpeg(
+      original,
+      APP_CONFIG.maxPhotoDimension,
+      encodingVersion === 'jpeg-v1' ? 0.85 : 0.92,
+    );
     if (blob.size === 0) throw new AppError('photo_invalid', 'A imagem selecionada está vazia ou corrompida.');
     if (blob.size > APP_CONFIG.maxPhotoBytes) {
       throw new AppError('photo_too_large', 'A foto ficou maior que 5 MB. Tente outra imagem.');
@@ -43,6 +51,7 @@ export class PhotoService {
       width,
       height,
       capturedAt: source === 'camera' ? new Date().toISOString() : null,
+      encodingVersion,
     };
   }
 

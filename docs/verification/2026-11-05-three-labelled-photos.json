@@ -1,0 +1,102 @@
+{
+  "date": "2026-11-05",
+  "authorization": "User explicitly authorized these three supplied photos to same Mistral API, sanitized and zero additional cost.",
+  "labels": "Jatai, Tubuna and Apis as supplied by user, not independently verified. No expected name or filename sent in model input.",
+  "scope": "DEV only, not TEST or global accuracy; no image files, GPS, account IDs or raw provider diagnostics published. Negative control is synthetic.",
+  "results": [
+    {
+      "model": "ministral-8b-2512",
+      "input": "jatai",
+      "http": 200,
+      "errorCode": null,
+      "status": "inconclusive",
+      "candidateIds": [],
+      "imageQuality": "poor",
+      "persisted": false
+    },
+    {
+      "model": "ministral-8b-2512",
+      "input": "tubuna",
+      "http": 200,
+      "errorCode": null,
+      "status": "inconclusive",
+      "candidateIds": [],
+      "imageQuality": "poor",
+      "persisted": false
+    },
+    {
+      "model": "ministral-8b-2512",
+      "input": "apis",
+      "http": 200,
+      "errorCode": null,
+      "status": "possible_match",
+      "candidateIds": [
+        "sp-apis-mellifera"
+      ],
+      "imageQuality": "adequate",
+      "persisted": false
+    },
+    {
+      "model": "ministral-8b-2512",
+      "input": "no-bee",
+      "http": 200,
+      "errorCode": null,
+      "status": "no_match",
+      "candidateIds": [],
+      "imageQuality": "poor",
+      "persisted": false
+    },
+    {
+      "model": "ministral-14b-2512",
+      "input": "jatai",
+      "http": 200,
+      "errorCode": null,
+      "status": "inconclusive",
+      "candidateIds": [],
+      "imageQuality": "poor",
+      "persisted": false
+    },
+    {
+      "model": "ministral-14b-2512",
+      "input": "tubuna",
+      "http": 200,
+      "errorCode": null,
+      "status": "inconclusive",
+      "candidateIds": [],
+      "imageQuality": "poor",
+      "persisted": false
+    },
+    {
+      "model": "ministral-14b-2512",
+      "input": "apis",
+      "http": 200,
+      "errorCode": null,
+      "status": "possible_match",
+      "candidateIds": [
+        "sp-apis-mellifera"
+      ],
+      "imageQuality": "adequate",
+      "persisted": false
+    },
+    {
+      "model": "ministral-14b-2512",
+      "input": "no-bee",
+      "http": 200,
+      "errorCode": null,
+      "status": "no_match",
+      "candidateIds": [],
+      "imageQuality": "poor",
+      "persisted": false
+    },
+    {
+      "model": "mistral-small-2603",
+      "input": "jatai",
+      "http": 429,
+      "errorCode": "limited",
+      "status": null,
+      "candidateIds": [],
+      "imageQuality": null,
+      "persisted": false
+    }
+  ]
+}

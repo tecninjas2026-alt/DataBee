@@ -18,6 +18,9 @@
       </ion-text>
       <ion-button (click)="load()" [disabled]="loading()">Tentar novamente</ion-button>
     } @else if (view(); as data) {
+      @if (!data.simulated) {
+        <app-private-photo [observationId]="data.observation.id" [ownerId]="data.observation.user_id" />
+      }
       <ion-card>
         <ion-card-content>
           @if (data.simulated) {
@@ -44,7 +47,14 @@
               }
               @case ('inconclusive') {
                 <h2>Análise inconclusiva</h2>
-                <p>A sugestão não permite uma identificação suficiente. Consulte as limitações abaixo.</p>
+                <p>A IA não conseguiu concluir a identificação desta foto. Sua observação continua salva.</p>
+                <p>
+                  Este é o resultado salvo. Reabrir esta tela não executa outra análise. As limitações abaixo são
+                  informações fornecidas pela IA e também podem estar incorretas.
+                </p>
+                <ion-button routerLink="/tabs/registrar" expand="block" fill="outline">
+                  Registrar outra foto
+                </ion-button>
               }
               @case ('completed') {
                 <h2>Sugestão da IA</h2>

@@ -19,6 +19,7 @@ import { toUserMessage } from '../../core/errors/app-error';
 import { EmptyStateComponent } from '../../shared/components/empty-state.component';
 import { AnalysisResultsService, SavedAnalysisView } from './analysis-results.service';
 import { AnalysisRequestService } from './analysis-request.service';
+import { PrivatePhotoComponent } from './private-photo.component';
 import { PROTOTYPE_SPECIES_CATALOG, prototypeCatalogForVersion } from '../../../../supabase/catalog/prototype-species';
 
 /** IMP-030 preparation: reads the saved result, without a new analysis on entry or retry. */
@@ -40,6 +41,7 @@ import { PROTOTYPE_SPECIES_CATALOG, prototypeCatalogForVersion } from '../../../
     IonSpinner,
     IonText,
     EmptyStateComponent,
+    PrivatePhotoComponent,
   ],
   templateUrl: 'analysis-result.page.html',
   styleUrls: ['observations.page.scss'],

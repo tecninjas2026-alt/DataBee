@@ -91,7 +91,7 @@ export class RegisterPhotoPage {
     this.busy.set(true);
     this.errorMessage.set(null);
     try {
-      const photo = await this.photos.pick(source);
+      const photo = await this.photos.pick(source, recovery ? (recovery.encodingVersion ?? 'jpeg-v1') : 'jpeg-v2');
       if (this.auth.user()?.id === owner && this.draft.revision === revision) {
         if (recovery && recovery.ownerId === owner) {
           try {

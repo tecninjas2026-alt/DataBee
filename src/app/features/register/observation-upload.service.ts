@@ -110,6 +110,7 @@ export class ObservationUploadService {
         imageId: crypto.randomUUID(),
         sha256: digest,
         bytes: photo.bytes,
+        encodingVersion: photo.encodingVersion ?? 'jpeg-v1',
         source: photo.source,
         capturedAt: photo.capturedAt,
         consentAt: this.draft.consentAt(),
@@ -181,6 +182,7 @@ export class ObservationUploadService {
         width,
         height,
         capturedAt: reference.capturedAt,
+        encodingVersion: reference.encodingVersion ?? 'jpeg-v1',
       });
       if (location) {
         this.draft.setConsent('granted', reference.consentAt);

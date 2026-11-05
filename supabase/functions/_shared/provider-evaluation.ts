@@ -1,4 +1,4 @@
-import type { BeeVisionProvider } from './bee-execution.ts';
+import { BeeExecutionError, type BeeVisionProvider } from './bee-execution.ts';
 import {
   BEE_EVALUATION_PROMPT,
   BEE_SYSTEM_PROMPT,
@@ -95,8 +95,13 @@ export function createProviderEvaluationHandler(config: {
         analysis,
         persisted: false,
       });
-    } catch {
-      return reply(signal.aborted ? 408 : 502, { error: 'evaluation_failed' });
+    } catch (error) {
+      if (signal.aborted) return reply(408, { error: 'evaluation_failed' });
+      if (error instanceof BeeExecutionError) {
+        const status = error.code === 'limited' ? 429 : error.code === 'timeout' ? 504 : 502;
+        return reply(status, { error: error.code });
+      }
+      return reply(502, { error: 'evaluation_failed' });
     } finally {
       reader.releaseLock();
     }

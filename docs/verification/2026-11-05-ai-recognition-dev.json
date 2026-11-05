@@ -1,0 +1,81 @@
+{
+  "date": "2026-11-05",
+  "scope": "Isolated DEV tests only. Authorized flower photo stripped of metadata; existing Bibafu CC BY-SA 3.0 Jatai reference; synthetic no-bee control. No new participant images sent, no identities/GPS/observation IDs published, no DB writes, no payment/PAYG.",
+  "results": [
+    {
+      "variant": "14b",
+      "input": "flower-14b",
+      "http": 200,
+      "model": "ministral-14b-2512",
+      "status": "inconclusive",
+      "imageQuality": "poor",
+      "candidateIds": [],
+      "persisted": false
+    },
+    {
+      "variant": "14b",
+      "input": "reference-jatai-14b",
+      "http": 200,
+      "model": "ministral-14b-2512",
+      "status": "inconclusive",
+      "imageQuality": "poor",
+      "candidateIds": [],
+      "persisted": false
+    },
+    {
+      "variant": "14b",
+      "input": "no-bee-14b",
+      "http": 200,
+      "model": "ministral-14b-2512",
+      "status": "no_match",
+      "imageQuality": "poor",
+      "candidateIds": [],
+      "persisted": false
+    },
+    {
+      "variant": "large",
+      "label": "flower-large",
+      "http": 502,
+      "errorCode": "configuration_missing"
+    },
+    {
+      "variant": "small4",
+      "label": "flower-small4",
+      "http": 429,
+      "errorCode": "limited"
+    },
+    {
+      "variant": "balanced8b",
+      "input": "flower-balanced8b",
+      "http": 200,
+      "model": "ministral-8b-2512",
+      "status": "possible_match",
+      "imageQuality": "adequate",
+      "candidateIds": [
+        "sp-apis-mellifera"
+      ],
+      "persisted": false
+    },
+    {
+      "variant": "balanced8b",
+      "input": "reference-jatai-balanced8b",
+      "http": 200,
+      "model": "ministral-8b-2512",
+      "status": "inconclusive",
+      "imageQuality": "poor",
+      "candidateIds": [],
+      "persisted": false
+    },
+    {
+      "variant": "balanced8b",
+      "input": "no-bee-balanced8b",
+      "http": 200,
+      "model": "ministral-8b-2512",
+      "status": "no_match",
+      "imageQuality": "poor",
+      "candidateIds": [],
+      "persisted": false
+    }
+  ],
+  "decision": "No model or prompt promoted. Balanced candidate returns supplied Apis label but invents wing bands and unsupported relative size; rejected. Jatai reference remains inconclusive. No global accuracy metric."
+}

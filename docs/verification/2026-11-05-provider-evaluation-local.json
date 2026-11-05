@@ -1,0 +1,77 @@
+{
+  "scope": "Controlled operator endpoint boundaries only; no provider or personal image transmitted.",
+  "results": [
+    {
+      "name": "authorized baseline uses exactly one provider call and never persists",
+      "result": "Pass"
+    },
+    {
+      "name": "conservative variant accepted without caller prompt/model input",
+      "result": "Pass"
+    },
+    {
+      "name": "non-operator denied before provider 0",
+      "result": "Pass"
+    },
+    {
+      "name": "non-operator denied before provider 27",
+      "result": "Pass"
+    },
+    {
+      "name": "non-operator denied before provider 30",
+      "result": "Pass"
+    },
+    {
+      "name": "operator header is accepted with gateway-translated bearer",
+      "result": "Pass"
+    },
+    {
+      "name": "disabled switch refuses even operator",
+      "result": "Pass"
+    },
+    {
+      "name": "unknown variant refused before model",
+      "result": "Pass"
+    },
+    {
+      "name": "JSON payload refused",
+      "result": "Pass"
+    },
+    {
+      "name": "invalid image refused",
+      "result": "Pass"
+    },
+    {
+      "name": "oversized image refused",
+      "result": "Pass"
+    },
+    {
+      "name": "missing provider refused",
+      "result": "Pass"
+    },
+    {
+      "name": "provider diagnostic not exposed",
+      "result": "Pass"
+    },
+    {
+      "name": "GET refused after authentication",
+      "result": "Pass"
+    },
+    {
+      "name": "no operator keys never authorizes",
+      "result": "Pass"
+    },
+    {
+      "name": "sanitized provider code limited",
+      "result": "Pass"
+    },
+    {
+      "name": "sanitized provider code timeout",
+      "result": "Pass"
+    },
+    {
+      "name": "sanitized provider code invalid_result",
+      "result": "Pass"
+    }
+  ]
+}

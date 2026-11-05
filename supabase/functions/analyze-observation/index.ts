@@ -103,13 +103,18 @@ const providerConfiguration = {
   model: Deno.env.get('MISTRAL_MODEL') ?? '',
 };
 const provider = createMistralVisionProvider(providerConfiguration, PROTOTYPE_SPECIES_CATALOG);
+// Operator-only comparisons must not change the participant model configuration.
+const evaluationConfiguration = {
+  ...providerConfiguration,
+  model: Deno.env.get('BEE_AI_EVALUATION_MODEL') ?? providerConfiguration.model,
+};
 const evaluationHandler = createProviderEvaluationHandler({
   enabled: enabled && Deno.env.get('BEE_AI_EVALUATION_ENABLED') === 'true',
   operatorKeys: [Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '', serverSecretKey()],
   catalog: PROTOTYPE_SPECIES_CATALOG,
-  baseline: provider,
+  baseline: createMistralVisionProvider(evaluationConfiguration, PROTOTYPE_SPECIES_CATALOG),
   conservative: createMistralVisionProvider(
-    providerConfiguration,
+    evaluationConfiguration,
     PROTOTYPE_SPECIES_CATALOG,
     fetch,
     BEE_EVALUATION_PROMPT,

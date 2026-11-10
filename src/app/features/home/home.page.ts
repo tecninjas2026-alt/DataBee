@@ -14,7 +14,7 @@ import {
   IonToolbar,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { camera, lockClosed, logOutOutline } from 'ionicons/icons';
+import { camera, checkmarkCircle, lockClosed, logOutOutline } from 'ionicons/icons';
 
 import { AuthService } from '../../core/auth/auth.service';
 import { ACHIEVEMENTS } from '../../core/models/achievements';
@@ -53,7 +53,7 @@ export class HomePage {
   protected readonly savedCount = computed(() =>
     this.count()?.owner === this.auth.user()?.id ? this.count()?.value : null,
   );
-  // TODO(D23): calcular conquistas desbloqueadas.
+  protected readonly firstFlightEarned = computed(() => (this.savedCount() ?? 0) > 0);
 
   ionViewWillEnter(): void {
     void this.loadCount();
@@ -81,7 +81,7 @@ export class HomePage {
   }
 
   constructor() {
-    addIcons({ camera, lockClosed, logOutOutline });
+    addIcons({ camera, checkmarkCircle, lockClosed, logOutOutline });
   }
 
   protected async logout(): Promise<void> {

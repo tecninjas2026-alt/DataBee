@@ -15,6 +15,7 @@ import {
   IonText,
   IonTitle,
   IonToolbar,
+  ToastController,
 } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { locate, saveOutline } from 'ionicons/icons';
@@ -25,6 +26,7 @@ import { PreviewBannerComponent } from '../../shared/components/preview-banner.c
 import { RegistrationDraftStore } from './registration-draft.store';
 import { ObservationUploadService } from './observation-upload.service';
 import { AuthService } from '../../core/auth/auth.service';
+import { ObservationsService } from '../observations/observations.service';
 
 /** Tela 4 — Novo Registro / Dados e localização (IMP-020; salvar = IMP-022/035). */
 @Component({
@@ -57,6 +59,8 @@ export class RegisterDetailsPage {
   private readonly auth = inject(AuthService);
   private readonly locationService = inject(LocationService);
   private readonly router = inject(Router);
+  private readonly observations = inject(ObservationsService);
+  private readonly toasts = inject(ToastController);
 
   protected readonly locating = signal(false);
   protected readonly locationError = signal<string | null>(null);
@@ -108,10 +112,29 @@ export class RegisterDetailsPage {
       const id = await this.uploadService.save();
       if (this.auth.user()?.id === owner && this.draft.photo() === photo) {
         this.draft.reset();
-        await this.router.navigateByUrl(`/observacao/${id}`, { replaceUrl: true });
+        const url = `/observacao/${id}`;
+        const navigated = await this.router.navigateByUrl(url, { replaceUrl: true });
+        if (navigated && owner) void this.showFirstFlight(owner, url);
       }
     } catch (error) {
       if (this.auth.user()?.id === owner && this.draft.photo() === photo) this.uploadError.set(toUserMessage(error));
+    }
+  }
+
+  private async showFirstFlight(owner: string, url: string): Promise<void> {
+    try {
+      if (this.auth.user()?.id !== owner || this.router.url !== url) return;
+      const savedCount = await this.observations.countSaved(AbortSignal.timeout(5_000));
+      if (savedCount !== 1 || this.auth.user()?.id !== owner || this.router.url !== url) return;
+
+      const toast = await this.toasts.create({
+        header: 'Primeiro Voo',
+        message: 'Você registrou sua primeira observação!',
+        duration: 5_000,
+      });
+      if (this.auth.user()?.id === owner && this.router.url === url) await toast.present();
+    } catch {
+      // A conquista pode ser consultada no Início mesmo se o aviso falhar.
     }
   }
 }

@@ -1,5 +1,7 @@
 # HANDOFF — estado atual do DataBee
 
+**09/11 — Primeiro Voo (D23):** a conquista privada é calculada no Início a partir de observações salvas da própria conta, inclusive anteriores. Após salvar, o app exibe um aviso se a contagem confirmar o primeiro registro. A conquista independe da IA. Lint e build aprovados, com 10 verificações no navegador a 360 px, usando respostas simuladas. Próximo teste: confirmar a exibição no Android.
+
 **Entrega 09/11 — 1.0.9-test/código 10:** fonte afcb7f3. Migration 20261109150000 aprovada e aplicada. Identificação informada exibida na lista, no detalhe e no resultado. Seis registros autorizados verificados, com resultados de IA e curadoria preservados. Quatro verificações reais de acesso com SDK passaram. APK publicado no GitHub Releases e no Notion, com assinatura, 51 arquivos e download integral conferidos. Teste físico pendente. Ver docs/android-versions.md e docs/verification/2026-11-09-jatai-identification-proposal.md.
 
 **Entrega 05/11 — 1.0.8-test/código 9:** fonte 3162608, APK em GitHub Releases e Notion; 9.528.891 bytes, 51 assets/assinatura e download integral por SHA-256 conferidos. Instalar como atualização. Mudanças de foto/resultado descritas abaixo; teste físico pendente. Reconhecimento Jataí/Tubuna ainda inconclusivo nos novos ensaios, sem modelo/prompt promovido. Relatório `docs/verification/2026-11-05-android-photo-quality.md`; download oficial em `docs/android-versions.md`.

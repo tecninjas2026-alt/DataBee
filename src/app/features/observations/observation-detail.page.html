@@ -36,7 +36,11 @@
                   : 'Data não disponível'
               }}
             </dd>
-            <dt>Análise</dt>
+            @if (data.observation.owner_reported_identification; as reportedName) {
+              <dt>Identificação informada</dt>
+              <dd>{{ reportedName }}</dd>
+            }
+            <dt>Análise da IA</dt>
             <dd>{{ labels[data.observation.analysis_status] }}</dd>
             @if (data.observation.public_region_label; as region) {
               <dt>Região</dt>

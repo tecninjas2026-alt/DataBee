@@ -8,7 +8,7 @@ import { validateBeeAnalysisStructure } from '../../../../supabase/functions/_sh
 
 export type AnalysisObservation = Pick<
   Observation,
-  'id' | 'user_id' | 'analysis_status' | 'curation_status' | 'analysis_started_at'
+  'id' | 'user_id' | 'analysis_status' | 'curation_status' | 'analysis_started_at' | 'owner_reported_identification'
 >;
 export interface SavedAnalysisView {
   observation: AnalysisObservation;
@@ -32,7 +32,7 @@ export class AnalysisResultsService {
     };
     const { data: observation, error } = await this.supabase.client
       .from('observations')
-      .select('id,user_id,analysis_status,curation_status,analysis_started_at')
+      .select('id,user_id,analysis_status,curation_status,analysis_started_at,owner_reported_identification')
       .eq('id', id)
       .eq('user_id', owner)
       .eq('lifecycle', 'saved')

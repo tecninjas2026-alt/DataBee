@@ -26,6 +26,7 @@ export interface Observation {
   publication: ObservationPublication;
   analysis_status: AnalysisStatus;
   curation_status: CurationStatus | null;
+  owner_reported_identification: string | null;
   analysis_started_at: string | null;
   /** Server-only attempt token; omitted by older/narrow projections. */
   analysis_attempt_id?: string | null;

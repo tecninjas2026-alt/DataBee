@@ -20,6 +20,14 @@
     } @else if (view(); as data) {
       @if (!data.simulated) {
         <app-private-photo [observationId]="data.observation.id" [ownerId]="data.observation.user_id" />
+        @if (data.observation.owner_reported_identification; as reportedName) {
+          <ion-card>
+            <ion-card-content>
+              <h2>{{ reportedName }}</h2>
+              <p>Identificação informada por você</p>
+            </ion-card-content>
+          </ion-card>
+        }
       }
       <ion-card>
         <ion-card-content>

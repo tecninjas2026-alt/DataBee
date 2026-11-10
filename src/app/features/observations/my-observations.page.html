@@ -39,6 +39,9 @@
         <app-private-photo [observationId]="item.id" [ownerId]="item.user_id" />
         <ion-card-content>
           <h2>{{ item.created_at | date: 'dd/MM/yyyy · HH:mm' }}</h2>
+          @if (item.owner_reported_identification; as reportedName) {
+            <p><strong>{{ reportedName }}</strong> · identificação informada</p>
+          }
           <p>{{ labels[item.analysis_status] }}</p>
           <p>{{ item.publication === 'private' ? 'Privada' : 'Publicada' }}</p>
           <ion-button [routerLink]="['/observacao', item.id]" fill="outline">Abrir observação</ion-button>

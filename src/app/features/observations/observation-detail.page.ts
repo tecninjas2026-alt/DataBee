@@ -20,6 +20,7 @@ import { toUserMessage } from '../../core/errors/app-error';
 import { EmptyStateComponent } from '../../shared/components/empty-state.component';
 import { ANALYSIS_LABELS, ObservationsService, PrivateObservationDetail } from './observations.service';
 import { PrivatePhotoComponent } from './private-photo.component';
+import { PhotoReviewComponent } from './photo-review.component';
 import { MapShareComponent } from '../map/map-share.component';
 
 /**
@@ -47,6 +48,7 @@ import { MapShareComponent } from '../map/map-share.component';
     IonToolbar,
     EmptyStateComponent,
     PrivatePhotoComponent,
+    PhotoReviewComponent,
     MapShareComponent,
   ],
   templateUrl: 'observation-detail.page.html',
@@ -65,6 +67,7 @@ export class ObservationDetailPage implements OnChanges {
       : null,
   );
   protected readonly loading = signal(false);
+  protected readonly photoReady = signal(false);
   protected readonly error = signal<string | null>(null);
   protected readonly labels = ANALYSIS_LABELS;
 
@@ -80,6 +83,7 @@ export class ObservationDetailPage implements OnChanges {
     this.controller?.abort();
     this.controller = null;
     this.record.set(null);
+    this.photoReady.set(false);
     this.loading.set(false);
   }
   protected async load(): Promise<void> {
@@ -89,6 +93,7 @@ export class ObservationDetailPage implements OnChanges {
     const owner = this.auth.user()?.id;
     const id = this.id();
     this.record.set(null);
+    this.photoReady.set(false);
     this.error.set(null);
     this.loading.set(true);
     try {

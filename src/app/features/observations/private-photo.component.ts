@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, input, signal, untracked } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input, output, signal, untracked } from '@angular/core';
 import { IonButton, IonSpinner } from '@ionic/angular';
 import { AuthService } from '../../core/auth/auth.service';
 import { ObservationsService } from './observations.service';
@@ -10,7 +10,7 @@ import { ObservationsService } from './observations.service';
   imports: [IonButton, IonSpinner],
   template: `
     @if (imageUrl(); as url) {
-      <img [src]="url" alt="Foto da observação" loading="lazy" (error)="imageFailed()" />
+      <img [src]="url" alt="Foto da observação" loading="lazy" (load)="loadedChange.emit(true)" (error)="imageFailed()" />
     } @else if (loading()) {
       <p role="status">
         <ion-spinner name="crescent" />
@@ -41,6 +41,7 @@ import { ObservationsService } from './observations.service';
 export class PrivatePhotoComponent {
   readonly observationId = input.required<string>();
   readonly ownerId = input.required<string>();
+  readonly loadedChange = output<boolean>();
   private readonly auth = inject(AuthService);
   private readonly observations = inject(ObservationsService);
   private readonly url = signal<string | null>(null);
@@ -65,6 +66,7 @@ export class PrivatePhotoComponent {
     this.attempt.update((value) => value + 1);
   }
   protected imageFailed(): void {
+    this.loadedChange.emit(false);
     this.url.set(null);
   }
   private async load(id: string, owner: string, controller: AbortController): Promise<void> {

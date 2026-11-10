@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { AuthService } from '../../core/auth/auth.service';
 import { OBSERVATION_STORAGE } from '../../core/config/observation-storage';
 import { AppError } from '../../core/errors/app-error';
+import { ObservationPhotoReviewInsert } from '../../core/models/achievements';
 import {
   AnalysisStatus,
   Observation,
@@ -39,6 +40,53 @@ export class ObservationsService {
     this.assertOwner(owner, signal);
     if (error || count === null) throw this.unavailable();
     return count;
+  }
+
+  async countPhotoReviews(signal: AbortSignal): Promise<number> {
+    const owner = this.owner();
+    const { count, error } = await this.supabase.client
+      .from('observation_photo_reviews')
+      .select('observation_id', { head: true, count: 'exact' })
+      .eq('owner_id', owner)
+      .abortSignal(AbortSignal.any([signal, AbortSignal.timeout(20_000)]));
+    this.assertOwner(owner, signal);
+    if (error || count === null) throw this.unavailable();
+    return count;
+  }
+
+  async hasPhotoReview(id: string, signal: AbortSignal): Promise<boolean> {
+    const owner = this.owner();
+    const { data, error } = await this.supabase.client
+      .from('observation_photo_reviews')
+      .select('observation_id')
+      .eq('owner_id', owner)
+      .eq('observation_id', id)
+      .abortSignal(AbortSignal.any([signal, AbortSignal.timeout(20_000)]))
+      .maybeSingle();
+    this.assertOwner(owner, signal);
+    if (error) throw this.unavailable();
+    return data !== null;
+  }
+
+  async confirmPhotoReview(id: string, signal: AbortSignal): Promise<'confirmed' | 'duplicate'> {
+    const owner = this.owner();
+    const deadline = AbortSignal.any([signal, AbortSignal.timeout(20_000)]);
+    const url = await this.imageUrl(id, deadline);
+    const response = await fetch(url, { signal: deadline });
+    if (!response.ok) throw this.unavailable();
+    const photo = await response.arrayBuffer();
+    if (!photo.byteLength || photo.byteLength > OBSERVATION_STORAGE.maxBytes) throw this.unavailable();
+    const digest = await crypto.subtle.digest('SHA-256', photo);
+    this.assertOwner(owner, deadline);
+    const review: ObservationPhotoReviewInsert = {
+      observation_id: id,
+      photo_sha256: Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join(''),
+    };
+    const { error } = await this.supabase.client.from('observation_photo_reviews').insert(review).abortSignal(deadline);
+    this.assertOwner(owner, deadline);
+    if (error?.code === '23505') return (await this.hasPhotoReview(id, deadline)) ? 'confirmed' : 'duplicate';
+    if (error) throw this.unavailable();
+    return 'confirmed';
   }
 
   async list(lifecycle: 'saved' | 'draft', offset: number, signal: AbortSignal): Promise<Observation[]> {

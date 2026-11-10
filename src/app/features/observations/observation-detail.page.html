@@ -18,7 +18,12 @@
       </ion-text>
       <ion-button (click)="load()" [disabled]="loading()">Tentar novamente</ion-button>
     } @else if (detail(); as data) {
-      <app-private-photo [observationId]="data.observation.id" [ownerId]="data.observation.user_id" />
+      <app-private-photo
+        [observationId]="data.observation.id"
+        [ownerId]="data.observation.user_id"
+        (loadedChange)="photoReady.set($event)"
+      />
+      <app-photo-review [observationId]="data.observation.id" [photoReady]="photoReady()" />
       <ion-card>
         <ion-card-content>
           <h2>Observação salva</h2>

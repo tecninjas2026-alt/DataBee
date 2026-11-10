@@ -1,5 +1,7 @@
 # HANDOFF — estado atual do DataBee
 
+**09/11 — Olhar Atento (D23):** conferência de três critérios no detalhe da observação e progresso no Início. Migration 20261109160000 aprovada e aplicada. Oito verificações no navegador com dados simulados e 24 no Supabase com contas técnicas. APK 1.0.11-test/código 12 compilado. Teste no aparelho pendente. Ver `docs/verification/2026-11-09-olhar-atento-proposal.md`.
+
 **09/11 — Primeiro Voo (D23):** a conquista privada é calculada no Início a partir de observações salvas da própria conta, inclusive anteriores. Após salvar, o app exibe um aviso se a contagem confirmar o primeiro registro. A conquista independe da IA. Lint e build aprovados, com 10 verificações no navegador a 360 px, usando respostas simuladas. APK 1.0.10-test/código 11, fonte 895f437, disponível no GitHub Releases e no Notion. Assinatura, 51 arquivos e download integral conferidos. Teste físico pendente.
 
 **Entrega 09/11 — 1.0.9-test/código 10:** fonte afcb7f3. Migration 20261109150000 aprovada e aplicada. Identificação informada exibida na lista, no detalhe e no resultado. Seis registros autorizados verificados, com resultados de IA e curadoria preservados. Quatro verificações reais de acesso com SDK passaram. APK publicado no GitHub Releases e no Notion, com assinatura, 51 arquivos e download integral conferidos. Teste físico pendente. Ver docs/android-versions.md e docs/verification/2026-11-09-jatai-identification-proposal.md.
